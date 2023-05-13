@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+	
+	
+	.container{
+	display: inline-flex;
+	float: left;
+	width:600px;
+	text-align: left;
+	/* border: 1px solid green; */
+	}
+	
+	.container2{
+	display: inline-flex;
+	align-items: stretch;
+	
+	
+	}
+	.container_item{
+	margin: 5px;
+	height:50px;
+	
+	}
+	
+	.loginInput{
+	padding-left:10px;
+	margin-left:10px;
+	height:40px;
+	width:450px;
+	background-color: #F8F8F8;
+	border-radius: 10px;
+	border:0;
+	outline: none;
+	
+	}
+	.loginButton{
+		float:right;
+		margin-top:9px;
+		width:120px;
+		height:116px;
+		border:1px solid black;
+		background-color: black;
+		color: white;
+		font-size: 20px;
+	}
+	
+	.inp{
+	font-size:15px;
+	width:800px;
+	height:50px;
+	display:inline-flex; 
+ 	justify-content: center; 
+	border-bottom: 1px solid black;
+	margin-bottom: 25px;
+	}
+	
+	.snsLogin{
+	width:800px;
+	height:100px;
+	border-bottom: 1px solid black;
+	}
+	.join{
+	width:800px;
+	height:150px;
+	padding-top:20px;
+	border-bottom: 1px solid black;
+	}
+	
+	.joinBtn{
+	background-color: white;
+	text-align: center;
+	width:200px;
+	height:50px;
+	border-radius: 5px;
+	border: 1px solid #D3D3D3;
+	}
+	
+	.joinBtn:hover{
+		border-color: black;
+	}
+	
+	.nonMemberLine{
+		margin-top: 30px;
+		
+	}
+	
+	.nonMemberOrder{
+		width:800px;
+		height:150px;
+		background-color: #F7F7F7;
+		
+	}
+	
+	
+	
+	.container3{
+		display: inline-flex;
+		float: left;
+		width:600px;
+		border:1px sold black;
+	}
+	
+	.container_item_name{
+		margin: 10px;
+		padding-top:15px;
+		width:200px;
+	}
+	
+	.container_item_input{
+		padding-top:15px;
+		width:400px;
+	}
+		
+	.nonOdOrder{
+		width:400px;
+		height:40px;
+		border-radius: 10px;
+		border:0;
+		outline: none;
+	}
+	
+	.nonMemberBtn{
+		width:800px;
+		height:50px;
+		background-color: black;
+		color: white;
+		
+	}
+	
+	.apiImg{
+	width:50px;
+	height:50px;
+	border-radius: 50%;
+	
+	}
+	

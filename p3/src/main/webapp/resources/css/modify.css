@@ -1,0 +1,175 @@
+@charset "UTF-8";
+
+.modifyContainer{
+	border-top:1px solid #E9E9E9;
+	border-bottom:1px solid #E9E9E9;
+	width:1800px;
+	display: inline-flex;
+	height:50px;
+	text-align: left;
+/* 	border: 1px solid green;  */
+	line-height: 50px;
+}
+.modifyContainerAddr{
+	border-top:1px solid #E9E9E9;
+/* 	border-bottom:1px solid #E9E9E9; */
+	width:1800px;
+	display: inline-flex;
+	height:150px;
+	text-align: left;
+/*  	border: 1px solid green;  */
+	line-height: 150px;
+}
+
+.addrContainer{
+	margin-top:10px;
+	margin-left:20px;
+	display: flex;
+	width:450px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	height:150px;
+/* 	border: 1px solid red;  */
+}
+
+.memberType{
+	background-color: #FAFAFA;
+	width:150px;
+	text-align: center;
+	
+}
+
+.modifyContainerInfo{
+	border-top:1px solid #E9E9E9;
+	width:1800px;
+	display: inline-flex;
+	height:70px;
+	text-align: left;
+	line-height: 70px;
+}
+.modifyInput{
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+	width:195px;
+	height:40px;
+	margin-left: 20px;
+	outline: none;
+	padding-left: 10px;
+	
+}
+.checkResult{
+	margin-left: 20px;
+	
+}
+.addrInput{
+	width:200px;
+	margin-left:5px;	
+	margin-right:5px;
+	height:30px;
+	border:1px solid #E8E8E8;
+	outline: none;
+	border-radius: 5px;
+
+	/* border:1px solid green; */
+	
+}
+.addrBtn{
+	margin-left:5px;	
+	height:30px;
+}
+
+.phoneInput{
+	margin-left:20px;
+	width:100px;
+	height:40px;
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+}
+.modifyContainerEmail{
+	border-top:1px solid #E9E9E9;
+/* 	border-bottom:1px solid #E9E9E9; */
+	width:1800px;
+	display: flex;
+	height:70px;
+	text-align: left;
+	/* border: 1px solid green; */ 
+	line-height: 70px;
+	
+	
+}
+
+.emailContainer{
+	margin-top:10px;
+	margin-left:20px;
+	display: inline-flex;
+	width:450px;
+	flex-flow: row wrap;
+	height:70px;
+	align-content: stretch;
+ 	/* border: 1px solid red; */
+ 	
+}
+.mailInput{
+	
+	margin-right:10px;
+	width:100px;
+	height:30px;
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+}
+
+.mailIDomain{
+	margin-left:10px;
+	width:150px;
+	height:35px;
+	
+}
+
+.mailInput2{
+	margin-right:10px;
+	width:200px;
+	height:30px;
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+}
+
+
+
+.mailBtn{
+	margin-left: 10px;
+	height:35px;
+	
+}
+
+.modifyOkBtn{
+	background-color: black;
+	color: white;
+	width:200px;
+	height:50px;
+	border-radius:5px;
+	margin-right: 5px;
+	
+}
+.modifyCancelBtn{
+	width:200px;
+	height:50px;
+	color: black;
+	background-color:#F0F0F0;
+	border: 0px;
+	border-radius:5px;
+	
+}
+
+.BtnStyle{
+	width: 1800px;
+}
+
+.deleteMember{
+	width:80px;
+	height:40px;
+	background-color: white;
+	border:1px solid #D3D3D3;
+	float: right;
+	
+	
+}
