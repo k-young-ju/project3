@@ -7,7 +7,7 @@ public class GoogleAuthentication extends Authenticator{
 	PasswordAuthentication passAuth;
 
 	public GoogleAuthentication() { 
-		passAuth = new PasswordAuthentication("pay5390@gmail.com","gpzvpibttjkrpzql");
+		passAuth = new PasswordAuthentication("메일주소","비밀번호");
 		//gmail 아이디(메일주소), 앱 비밀번호(2단계 인증) 발급받은 16자리
 	}
 
