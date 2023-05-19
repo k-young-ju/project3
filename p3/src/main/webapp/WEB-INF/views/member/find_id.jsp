@@ -69,6 +69,7 @@ function find_id_go(){
 			<span>
 				<select class="selectBox">
 					<option value="p" selected>개인회원</option>
+					<option value="s"> 판매회원</option>
 				</select>
 			</span>
 		</div>

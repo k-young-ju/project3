@@ -10,7 +10,13 @@ public interface MemberDAO {
 	public MemberVO oneMemberDAO(String m_id) throws Exception;
 	public void updateMemberDAO(MemberVO m) throws Exception;
 	public void deleteMemberDAO(String m_id) throws Exception;
+	public int findIdPhoneCountDAO(MemberVO m) throws Exception;
+	public int findIdEmailCountDAO(MemberVO m) throws Exception;
 	public MemberVO findIdPhoneDAO(MemberVO m) throws Exception;
 	public MemberVO findIdEmailDAO(MemberVO m) throws Exception;
+	public int findPassPhoneCountDAO(MemberVO m) throws Exception;
+	public int findPassEmailCountDAO(MemberVO m) throws Exception;
+	public MemberVO findPassPhoneDAO(MemberVO m) throws Exception;
+	public MemberVO findPassEmailDAO(MemberVO m) throws Exception;
 	
 }

@@ -36,11 +36,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update member set pass='',m_name='',email='',level='1',zipcode='',zipcode1='',zipcode2='',zipcode3='',zipcode4='',phone='',signdate='',delete_id='y' where m_id=#{m_id}
 </update>
 
-<select id="findIdEmail" resultType="MemberVO">
-	select * from member where m_name=#{m_name} and email=#{email}
+<select id="findIdEmailCount" resultType="int">
+	select count(*) from member where member_type=#{member_type} and m_name=#{m_name} and email=#{email}
 </select>
+
+<select id="findIdEmail" resultType="MemberVO">
+	select * from member where member_type=#{member_type} and m_name=#{m_name} and email=#{email}
+</select>
+
+<select id="findIdPhoneCount" resultType="int">
+	select count(*) from member where member_type=#{member_type} and m_name=#{m_name} and phone=#{phone}
+</select>
+
 <select id="findIdPhone" resultType="MemberVO">
-	select * from member where m_name=#{m_name} and phone=#{phone}
+	select * from member where member_type=#{member_type} and m_name=#{m_name} and phone=#{phone}
+</select>
+
+<select id="findPassEmailCount" resultType="int">
+	select count(*) from member member_type=#{member_type} and where m_id=#{m_id} and m_name=#{m_name} and email=#{email}
+</select>
+
+<select id="findPassEmail" resultType="MemberVO">
+	select * from member where member_type=#{member_type} and m_id=#{m_id} and m_name=#{m_name} and email=#{email}
+</select>
+
+<select id="findPassPhoneCount" resultType="int">
+	select count(*) from member where member_type=#{member_type} and m_id=#{m_id} and m_name=#{m_name} and phone=#{phone}
+</select>
+
+<select id="findPassPhone" resultType="MemberVO">
+	select * from member where member_type=#{member_type} and m_id=#{m_id} and m_name=#{m_name} and phone=#{phone}
 </select>
 
 </mapper>

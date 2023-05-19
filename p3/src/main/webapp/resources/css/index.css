@@ -8,7 +8,47 @@
 	
 }
 
-.bestItemContainer{
-	display: inline-flex;
+.bestItemTitle{
+	margin: 50px;
+	text-align: left;
 	
+}
+.bestItemContainer{
+	width:1725px;
+	display: inline-flex;
+	/* border: 1px solid; */
+	align-content: space-between;
+	
+	
+}
+
+.bestItemTitle2{
+	width: 575px;
+	text-align: center;
+	height: 70px;
+	font-size: 20px;
+	font-weight: bold;
+	
+}
+.bestIteminItem{
+	text-align:center;
+	width:570px;
+	
+	
+}
+.mainImgSize{
+	width:530px;
+	height: 530px;
+}
+.bestItemSubject{
+	font-size: 25px;
+	font-weight: bold;
+	
+}
+.bestItemComment{
+	
+}
+.bestItemPrice{
+	font-weight: bold;
+	font-size: 20px;
 }

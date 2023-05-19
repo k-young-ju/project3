@@ -1,0 +1,32 @@
+@charset "UTF-8";
+li{
+	cursor: pointer;
+}
+
+li.on{
+	color:red;
+}
+
+
+.menuList{
+	width: 150px;
+	border: 1px solid;
+	margin-bottom: 20px;
+	text-align: left;
+	padding-left: 15px;
+	background-color: black;
+	color: white;
+	
+}
+.menuBtn{
+	cursor: pointer;
+}
+
+#result{
+	width:1650px;
+	height:840px;
+	/* border: 1px solid red; */
+	
+}
+
+	

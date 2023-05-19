@@ -128,7 +128,7 @@ function idCheck(id){
 	///alert(id);
 		
 	$.ajax({
-		url: "idok", //전송받을 페이지 경로
+		url: "/idok", //전송받을 페이지 경로
 		type: "post", //데이터 읽어오는 방식
 		dataType: "text", //데이터 방식
 		data:"m_id="+id,

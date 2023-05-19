@@ -44,6 +44,11 @@
 
 	<tx:annotation-driven />
 	
+	<!-- 네이버 로그인 연동 -->
+ 	<bean id="naverProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    	<property name="location" value="classpath:naver-api.properties" /> 
+	</bean> 
+	
 	<context:component-scan base-package="org.zerock.persistence"></context:component-scan>
 	<context:component-scan base-package="org.zerock.service"></context:component-scan>	
 		

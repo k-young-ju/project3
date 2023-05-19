@@ -4,23 +4,25 @@ import lombok.Data;
 
 @Data
 public class ItemVO {
-	int uid;
-	int qty;
-	String comment;
-	String image;
-	String useyn;
-	int price1;
-//	int price2;
-	int mileage;
-	String signdate;
-	String subject;
-	String s_id;
-	String image2;
-	int sellqty;
-//	int sellprice;
-	int ref;
-	String image3;
-	String image4;
-	String image5;
-	String time_message;
+
+	private int uid;
+	private String itemtype;
+	private String file1;
+	private String file2;
+	private String file3;
+	private String file4;
+	private String file5;
+	private String subject;
+	private String comment;
+	private int price;
+	private String s_id;
+	private int qty;
+	private String useyn;
+	private int mileage;
+	private String signdate;
+	private int sellqty;
+	private int ref;
+	private String time_message;
+	private int deliveryfee;
+	
 }

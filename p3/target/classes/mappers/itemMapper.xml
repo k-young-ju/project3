@@ -7,5 +7,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listLimit" resultType="ItemVO">
 		select * from item where useyn='y' order by sellqty desc limit 0,3
 	</select>
+	
+	<select id="countItem" resultType="int">
+		select count(*) from item where useyn='y'
+			<include refid="optional"></include>
+			<include refid="sorting"></include>
+	</select>
 
+	<select id="listAll" resultType="ItemVO">
+	select * from item where useyn='y'
+		<include refid="optional"></include>
+		<include refid="sorting"></include>
+	limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<sql id="optional">
+	<if test="option !=null">
+		<if test="option == 'L'.toString()">
+			and itemtype='lighting'
+		</if>
+		<if test="option == 'R'.toString()">
+			and itemtype='rope'
+		</if>
+	</if>
+</sql>
+<sql id="sorting">
+	<if test="sorted != null" >
+		<if test="sorted == 'new'.toString()">
+			order by uid desc
+		</if>
+		<if test="sorted == 'named'.toString()">
+			order by subject
+		</if>
+		<if test="sorted == 'rowPrice'.toString()">
+			order by price asc
+		</if>
+		<if test="sorted == 'highPrice'.toString()">
+			order by price desc
+		</if>
+		<!-- <if test="sorted == 'review'.toString()">
+			order by reviewcount desc
+		</if> -->
+	</if>
+</sql>
+
+<select id="view" resultType="ItemVO">
+	select * from item where uid=#{uid}
+</select>
+
+
+	
 </mapper>

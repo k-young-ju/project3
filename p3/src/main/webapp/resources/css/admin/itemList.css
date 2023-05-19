@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.listContainer{
+	display: inline-flex;
+	border: 1px solid red;
+	width: 1500px;
+	text-align: center;
+
+}
+.listItemTitle{
+	margin: 10px;
+	width:160px;
+	text-align: center;
+	border-right: 1px soild red;
+}
+.listContainer2{
+	display: flex;
+	border: 1px solid;
+	width: 1500px;
+	text-align: center;
+}
+.sumnail{
+	width:30px;
+	height:30px;
+}

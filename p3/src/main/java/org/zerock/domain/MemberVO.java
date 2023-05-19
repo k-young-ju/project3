@@ -14,7 +14,7 @@ public class MemberVO {
 //	private String gender;
 	private String email;
 //	private String email2;
-	private String level;
+	private int level;
 	private String zipcode;
 	private String zipcode1;
 	private String zipcode2;

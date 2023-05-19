@@ -72,6 +72,42 @@ public class MemberServiceImpl implements MemberService{
 		
 		return dao.findIdEmailDAO(m);
 	}
+
+	@Override
+	public int findIdPhoneCountService(MemberVO m) throws Exception {
+		
+		return dao.findIdPhoneCountDAO(m);
+	}
+
+	@Override
+	public int findIdEmailCountService(MemberVO m) throws Exception {
+		
+		return dao.findIdEmailCountDAO(m);
+	}
+
+	@Override
+	public int findPassPhoneCountService(MemberVO m) throws Exception {
+		
+		return dao.findPassPhoneCountDAO(m);
+	}
+
+	@Override
+	public int findPassEmailCountService(MemberVO m) throws Exception {
+		
+		return dao.findPassEmailCountDAO(m);
+	}
+
+	@Override
+	public MemberVO findPassPhoneService(MemberVO m) throws Exception {
+		
+		return dao.findPassPhoneDAO(m);
+	}
+
+	@Override
+	public MemberVO findPassEmailService(MemberVO m) throws Exception {
+		
+		return dao.findPassEmailDAO(m);
+	}
 	
 	
 	

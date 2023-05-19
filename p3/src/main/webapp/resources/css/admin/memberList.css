@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.listContainer{
+	width:1500px;
+	border:1px solid #5055B1;
+	height:25px;
+	display: inline-flex;
+}
+
+.itemTitle{
+	text-align: center;
+	width: 250px;
+	background-color: black;
+	color:white; 
+	
+}
+.itemContent{
+	text-align: center;
+	width: 250px;
+}
+
+.selectContainer{
+	width:700px;
+	display: inline-flex;
+	
+}
+.selectItem{
+	width: 150px;
+	height: 30px;
+	background-color: black;
+	color: white;
+	margin: 10px;
+	cursor: pointer;
+}
+.optionContainer{
+	width:800px;
+	display: inline-flex;
+	text-align: right;
+	justify-content: flex-end;
+}
+.optionItem{
+	width: 150px;
+	height: 30px;
+	background-color: black;
+	color: white;
+	margin: 10px;
+	cursor: pointer;
+	text-align: center;
+}
+.memberCount{
+	width: 1500px;
+	text-align: left;
+	height: 30px;
+}

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+.menuContainer{
+	display: inline-flex;
+}
+
+.allDesign{
+	height:40px;
+	width: 50px;
+	background-color: white;
+	border:1px solid #E8E8E8;
+	border-radius: 3px;
+	margin-right: 10px;
+	cursor: pointer;
+	
+}
+.allDesign:hover{
+	background-color: black;
+	color:white;
+	transition:0.5s;
+}
+.LightingDesign{
+	width:140px;
+	height:40px;
+	background-color: white;
+	border:1px solid #E8E8E8;
+	border-radius: 3px;
+	margin-right: 10px;
+	cursor: pointer;
+	
+}
+.LightingDesign:hover{
+	background-color: black;
+	color:white;
+	transition:0.5s;
+}
+.SmartRopeDesign{
+	width:105px;
+	height:40px;
+	background-color: white;
+	border:1px solid #E8E8E8;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.SmartRopeDesign:hover {
+	background-color: black;
+	color:white;
+	transition:0.5s;
+}
+
+#container{
+	/* border:1px solid; */
+	width:1800px;
+	height:30px;
+	display: inline-flex; 
+}
+.countItem{
+	text-align:left;
+	/* border:1px solid green; */
+	width: 1000px;
+}
+.sortBtn{
+	width:800px;
+	text-align: right;
+	/* border: 1px solid red; */
+}
+
+.itemContainer{
+	width:1800px;
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.item{
+	width:550px;
+	height:700px;
+	/* border:1px solid; */
+	margin-bottom: 30px;
+	
+}
+.imgItem{
+	height:550px;
+	width:100%;
+	/* border: 1px solid gray; */
+}
+.imgDesign{
+	width:100%;
+	height:550px;
+}
+.itemSubject{
+	font-size: 20px;
+	font-weight: bold;
+	
+}
+.itemPrice{
+	font-weight: bold;;
+	font-size: 15px;
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.AdminMemberMapper">
+
+<insert id="join">
+	insert into member 
+		(m_id,pass,m_name,email,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,phone,signdate,member_type,level) 
+		values 
+		(#{m_id},#{pass},#{m_name},#{email},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{phone},#{signdate},#{member_type},#{level})
+</insert>
+
+<select id="onemember" resultType="MemberVO">
+	select * from member where m_id=#{m_id}
+</select>
+
+<update id= "modify">
+	update member set pass=#{pass},m_name=#{m_name},email=#{email},zipcode=#{zipcode},zipcode1=#{zipcode1},zipcode2=#{zipcode2},zipcode3=#{zipcode3},zipcode4=#{zipcode4},phone=#{phone} where m_id=#{m_id}
+</update>
+
+<update id="delete">
+	update member set pass='',m_name='',email='',level=1,zipcode='',zipcode1='',zipcode2='',zipcode3='',zipcode4='',phone='',signdate='',delete_id='y' where m_id=#{m_id}
+</update>
+
+<select id="countMember" resultType="int">
+		select count(*) from member
+</select>
+
+<select id="listAll" resultType="MemberVO">
+	select * from member order by level desc limit #{pageStart}, #{perPageNum}
+</select>
+</mapper>

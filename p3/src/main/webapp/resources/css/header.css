@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-    font-family: 'anemone';
-    src: url('resources/css/Cafe24Ohsqyare.ttf') format('truetype');
-  }
-	  
-@font-face{
-	font-family: 'danjung';
-	src:url('/css/Cafe24Danjunghae.ttf') format('truetype');
-}	  
 
 a{
 	text-decoration: none;
@@ -32,11 +23,20 @@ body{
 header{
 	width:100%;
 	z-index:1; 
-	position: fixed;
-	top:10px;
+	position: fixed; 
+	padding-top:15px;
+	transition:1s;
 	
 }
 
+.headerbarch{
+	background-color: rgba(255, 255, 255, 0.9);
+ 	color:black;
+	/* border-bottom: 1px solid black; */
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	
+	
+}
 
 .dropMyMenu{
 	position: absolute;
@@ -47,6 +47,7 @@ header{
 .maintitle{
 	font-weight: bold;
 	font-size: 25px;
+	margin-top:20px;
 	padding-left: 30px;
 	cursor: pointer;
 	font-family: 'anemone';
@@ -57,13 +58,14 @@ header{
 	height:200px;
 	font-size: 20px;
 	padding-left: 50px;
+	margin-top:20px;
 	cursor: pointer;
 	font-family: 'danjung'';
 	
 	}
 .toprightBtn{
 	float:right;
-	padding: 10px;
+	/* padding: 10px; */
 	position: static;
 	cursor: pointer;
 	/* margin-right: 40px; */
@@ -130,6 +132,7 @@ header{
 	color: white;
 	
 }
+
 
 .title{
 	font-family:'anemone';

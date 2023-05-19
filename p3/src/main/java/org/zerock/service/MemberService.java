@@ -12,4 +12,10 @@ public interface MemberService {
 	public void deleteMemberService(String m_id) throws Exception;
 	public MemberVO findIdPhoneService(MemberVO m) throws Exception;
 	public MemberVO findIdEmailService(MemberVO m) throws Exception;
+	public int findIdPhoneCountService(MemberVO m) throws Exception;
+	public int findIdEmailCountService(MemberVO m) throws Exception;
+	public int findPassPhoneCountService(MemberVO m) throws Exception;
+	public int findPassEmailCountService(MemberVO m) throws Exception;
+	public MemberVO findPassPhoneService(MemberVO m) throws Exception;
+	public MemberVO findPassEmailService(MemberVO m) throws Exception;
 }

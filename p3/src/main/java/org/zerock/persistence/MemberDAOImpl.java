@@ -74,6 +74,42 @@ public class MemberDAOImpl implements MemberDAO{
 		
 		return session.selectOne(namespace+".findIdEmail",m);
 	}
+
+	@Override
+	public int findIdPhoneCountDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findIdPhoneCount",m);
+	}
+
+	@Override
+	public int findIdEmailCountDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findIdEmailCount",m);
+	}
+
+	@Override
+	public int findPassPhoneCountDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findPassPhoneCount",m);
+	}
+
+	@Override
+	public int findPassEmailCountDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findPassEmailCount",m);
+	}
+
+	@Override
+	public MemberVO findPassPhoneDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findPassPhone",m);
+	}
+
+	@Override
+	public MemberVO findPassEmailDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findPassEmail",m);
+	}
 	
 	
 	
