@@ -24,5 +24,9 @@ public class ItemVO {
 	private int ref;
 	private String time_message;
 	private int deliveryfee;
+	private String color;
+	private String id;
+	
+	
 	
 }

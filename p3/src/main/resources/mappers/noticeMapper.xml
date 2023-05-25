@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.NoticeMapper">
+
+<insert id="insertNotice">
+	insert into notice (subject,uid,id,name,comment,gongji,fid,thread,file1,signdate,secretset,o_id) 
+	values 
+	(#{subject},#{uid},#{id},#{name},#{comment},#{gongji},#{fid},#{thread},#{file1},#{signdate},#{secretset},#{o_id})
+</insert>
+
+<select id="listAll" resultType="NoticeVO">
+	select * from notice where gongji=#{gongji} 
+	<include refid="faqType"></include>
+	order by fid desc,thread asc
+	 limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<sql id="faqType">
+	<if test="faq_type != null">
+	    <if test="faq_type == 'delivery'">
+	        and faq_type='배송·결제·취소'
+	    </if>
+	    <if test="faq_type == 'exchange'">
+	        and faq_type='교환·반품'
+	    </if>
+	    <if test="faq_type == 'as'">
+	        and faq_type='A/S'
+	    </if>
+	</if>
+
+</sql>
+
+<select id="oneItem" resultType="NoticeVO">
+	select * from notice where n_uid=#{n_uid}
+</select>
+
+<select id="frontWrite" resultType="NoticeVO">
+	<![CDATA[
+		select * from notice where n_uid<#{n_uid} and gongji=#{gongji} order by n_uid desc limit 1
+		]]>
+</select>
+
+<select id="nextWrite" resultType="NoticeVO">
+	<![CDATA[
+		select * from notice where n_uid>#{n_uid} and gongji=#{gongji} order by n_uid asc limit 1
+		]]>
+</select>
+
+<update id="refIncrease">
+	update notice set ref= ref+1 where n_uid=#{n_uid}
+</update>
+
+
+</mapper>

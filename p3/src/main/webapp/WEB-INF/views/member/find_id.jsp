@@ -10,6 +10,28 @@ if(msg != ''){
 	alert(msg);
 }
 
+function type_ch(str){
+	//alert(str);
+	if(str=='p'){
+		document.getElementById('personalStyle').style.display='inline';
+		document.getElementById('personalRadio').style.display='inline';
+		document.getElementById('companyStyle').style.display='none';
+		document.getElementById('companyRadio').style.display='none';
+		$("#findMethodCnumber").prop("checked", false);
+
+		
+	}else{
+		document.getElementById('personalStyle').style.display='none';
+		document.getElementById('personalRadio').style.display='none';
+		document.getElementById('companyStyle').style.display='inline';
+		document.getElementById('companyRadio').style.display='inline';
+		$("#findMethodCnumber").prop("checked", true);
+
+
+		
+	}
+}
+
 function method_ch(str){
 	
 	//alert(str);
@@ -17,19 +39,30 @@ function method_ch(str){
 
 			$("#emailFind").show();
 			$("#phoneFind").hide();
+			
 		email_type.value = "y";
 		
-	}else{
+	}else if(str=='phone'){
 
 			$("#emailFind").hide();
 			$("#phoneFind").show();
 		email_type.value = "n";
 		
+	}else if(str =='company'){
+		
+		$("#emailFind2").hide();
+		$("#cnumberFind").show();
+		
+	}else if(str=='email2'){
+		$("#emailFind2").show();
+		$("#cnumberFind").hide();
 	}
 }
 
 function find_id_go(){
-	if(m_name.value ==''){
+	
+if(member_type.value=='p'){
+	if(name.value ==''){
 		alert("이름을 입력해주세요");
 		return false;
 	}
@@ -45,9 +78,29 @@ function find_id_go(){
 			return false;
 		}
 	}
+}else{
+	if(name.value ==''){
+		alert("법인명을 입력해주세요");
+		return false;
+	}
+	
+	if(email_type.value=='y'){
+		if(email1.value =='' || email2.value==''){
+			alert("이메일을 입력해주세요");
+			return false;
+		}
+	}else{
+		if(c_number1.value =='' || c_number2.value=='' ){
+			alert("법인번호를 입력해주세요");
+			return false;
+		}
+	}
+	
+}
 		
 	email.value= email1.value+"@"+email2.value;
 	phone.value = phone1.value+"-"+phone2.value+"-"+phone3.value;
+	c_number.value = c_number1.value+"-"+c_number2.value;
 }
 </script>
 
@@ -67,51 +120,90 @@ function find_id_go(){
 		<div class="container2">
 			<span class="item">회원유형</span>
 			<span>
-				<select class="selectBox">
+				<select class="selectBox" name ="member_type" onclick="type_ch(this.value)">
 					<option value="p" selected>개인회원</option>
-					<option value="s"> 판매회원</option>
+					<option value="s" > 법인 사업자회원</option>
 				</select>
 			</span>
 		</div>
 		<div class="container2">
 			<span class="item" ></span>
-			<span>
-				<input type="radio" id = " findMethod" name="findMethod"   onclick="method_ch('email')" checked>이메일
-				<input type="radio" id = " findMethod" name="findMethod"   onclick="method_ch('phone')">전화번호
+			<span  id="personalRadio">
+				<input type="radio" id = " findMethodPhone" name="findMethod"   onclick="method_ch('phone')"checked>전화번호
+				<input type="radio" id = " findMethodEmail" name="findMethod"   onclick="method_ch('email')" >이메일
+			</span>
+			<span id="companyRadio" style="display: none;">
+				<input type="radio" id = " findMethodCnumber" name="findMethod"   onclick="method_ch('company')" >법인번호
+				<input type="radio" id = " findMethodEmail2" name="findMethod"   onclick="method_ch('email2')" >이메일
 			</span>
 		</div>
-		<div class="container3" >
-			<div class="namInfo">
-				<span class="item">이름</span>
-				<span>
-					<input id="m_name" name="m_name"  class="findInputName">
-				</span>
-			</div>
-			<div id="emailFind" class="emailFind">
-				<span class="item">이메일로 찾기</span>
-				<span>
-					<input type="hidden" id="email_type" value="y">
-					<input id="email1" name="email1"  class="findInputEmail">@
-					<select id="email2" name="email2" class="findInputEmail">
-						<option value="naver.com">naver.com</option>
-						<option value="gmail.com">gmail.com</option>
-					</select>
-					<input type="hidden" name="email" id="email">
-					
-				</span>
-			</div>
-			<div class="phoneFind" id="phoneFind" style="display: none">
-				<span class="item">전화번호로 찾기</span>
-				<span>
-					<input id="phone1"  name="phone1"  class="findInputPhone">&nbsp;-
-					<input id="phone2" name="phone2"  class="findInputPhone">&nbsp;-
-					<input id="phone3" name="phone3"  class="findInputPhone">
-					<input type="hidden" name="phone" id="phone">
-					
-				</span>
+		<div id="personalStyle">
+			<div class="container3" >
+				<div class="namInfo">
+					<span class="item">이름</span>
+					<span>
+						<input id="name" name="name"  class="findInputName">
+					</span>
+				</div>
+				<div class="phoneFind" id="phoneFind" >
+					<span class="item">전화번호로 찾기</span>
+					<span>
+						<input id="phone1"  name="phone1"  class="findInputPhone">&nbsp;-
+						<input id="phone2" name="phone2"  class="findInputPhone">&nbsp;-
+						<input id="phone3" name="phone3"  class="findInputPhone">
+						<input type="hidden" name="phone" id="phone">
+						
+					</span>
+				</div>
+				<div id="emailFind" class="emailFind" style="display: none">
+					<span class="item">이메일로 찾기</span>
+					<span>
+						<input type="hidden" id="email_type" value="y">
+						<input id="email1" name="email1"  class="findInputEmail">@
+						<select id="email2" name="email2" class="findInputEmail">
+							<option value="naver.com">naver.com</option>
+							<option value="gmail.com">gmail.com</option>
+						</select>
+						<input type="hidden" name="email" id="email">
+						
+					</span>
+				</div>
+				
 			</div>
 		</div>
-		
+		<div id="companyStyle" style="display: none">
+			<div class="container3" >
+				<div class="namInfo">
+					<span class="item">법인명</span>
+					<span>
+						<input id="name" name="name"  class="findInputName">
+					</span>
+				</div>
+			
+				<div class="phoneFind" id="cnumberFind" >
+					<span class="item">법인번호로 찾기</span>
+					<span>
+						<input id="c_number1"  name="c_number1"  class="c_numberStyle">&nbsp;-
+						<input id="c_number2" name="c_number2"  class="c_numberStyle">
+						<input type="hidden" name="c_number" id="c_number">
+						
+					</span>
+				</div>
+				<div id="emailFind2" class="emailFind" style="display: none">
+					<span class="item">이메일로 찾기</span>
+					<span>
+						<input type="hidden" id="email_type" value="y" >
+						<input id="email1" name="email1"  class="findInputEmail">@
+						<select id="email2" name="email2" class="findInputEmail">
+							<option value="naver.com">naver.com</option>
+							<option value="gmail.com">gmail.com</option>
+						</select>
+						<input type="hidden" name="email" id="email">
+						
+					</span>
+				</div>
+			</div>
+		</div>
 		<div style="height:20px;"></div>
 		<div><button class="btnStyle">확인</button></div>	
 	</div>

@@ -3,6 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@page import="java.text.SimpleDateFormat"%>
+<%
+//오늘 날짜
+java.util.Date today = new java.util.Date();
+SimpleDateFormat cal = new SimpleDateFormat("yyyyMMddHHmmss");
+String signdate = cal.format(today);
+
+String session_id = (String)session.getAttribute("m_id");
+String str = "b" + signdate ; //문자열 + 아이디
+String session_cart = (String)session.getAttribute("cart");
+if(session_id == null && session_cart == null){ //장바구니 세션 값이 없다면
+	session.setAttribute("cart", str);
+}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -67,7 +81,23 @@ function kakaoLogin() {
 
 </script>
 <header id="headerbar" class="headerbar">
-<div>
+<div class="headBar2">
+	<div class="leftHeader">
+			<div></div>
+			<div class="maintitle" onclick = "location.href='/'">TANGRAM</div>
+			<div class="topbutton" onclick="location.href='/item/list'">product</div>
+			<div class="topbutton" onclick = "location.href='/review/list'">Review</div>
+			<div id="noticeDrop" >
+				<div class="topbutton" onclick="location.href='/notice/list?option=faq'"  id="dropNotice" style="position: relative;">고객센터
+				</div>
+				<div id="dropN"  class="dropNoticeMenu" >
+						<span class="menu" onclick="location.href='/notice/list?option=faq'">FAQ</span><br>
+						<span class="menu" onclick="location.href='/notice/list?option=qna'">1:1문의</span><br>
+						<span class="menu" onclick="location.href='/notice/list?option=gongji'">공지사항</span>
+				</div>
+			</div>
+			<c:if test="${level =='10' }" ><span class="topbutton" onclick="location.href='/admin'">관리자 페이지로 이동</span></c:if>
+		</div>
 	<div >
 		
 		<span style="margin-right: 100px;" onclick = "search_go()" class="toprightBtn">
@@ -83,10 +113,10 @@ function kakaoLogin() {
 		<span  onclick = "cart_go()" class="toprightBtn">
 			<c:choose>
 				<c:when test="${url =='index' }">
-					<img src = "/img/basket22.png" class ="img_size" id="basketImg">
+					<img src = "/img/basket22.png" class ="img_size" id="basketImg" onclick="location.href='/cart/list'">
 				</c:when>
 				<c:otherwise>
-					<img src = "/img/basket11.png" class ="img_size">
+					<img src = "/img/basket11.png" class ="img_size" onclick="location.href='/cart/list'">
 				</c:otherwise>
 			</c:choose>	
 		</span>
@@ -114,19 +144,7 @@ function kakaoLogin() {
 			</div>
 		</div>
 	</div>
-		<span></span>
-		<span class="maintitle" onclick = "location.href='/'">TANGRAM</span>
-		<span class="topbutton" onclick="location.href='/item/list'">product</span>
-		<span class="topbutton" onclick = "location.href='review'">Review</span>
-		<span class="topbutton" onclick="location.href='howto'">How To</span>
-		<span class="topbutton" onclick="location.href='notice'"  id="dropNotice" style="position: relative;">고객센터
-			<div id="dropN"  class="dropNoticeMenu" >
-				<span class="menu" >FAQ</span><br>
-				<span class="menu">1:1문의</span><br>
-				<span class="menu">공지사항</span>
-			</div>
-		</span>
-		<c:if test="${level =='10' }" ><span class="topbutton" onclick="location.href='/admin'">관리자 페이지로 이동</span></c:if>
+		
 </div>
 </header>
 <script>
@@ -138,12 +156,12 @@ $("#dropMyMenu").on("mouseleave",function(){
 	$("#dropmy").hide();
 });
 
-$("#dropNotice").on("mouseenter",function(){
+$("#noticeDrop").on("mouseenter",function(){
 	$("#dropN").show();
 });
-$("#dropNotice").on("mouseleave",function(){
-	$("#dropN").hide();
-});
+ $("#noticeDrop").on("mouseleave",function(){
+ 	$("#dropN").hide();
+ });
 
 var url = "${url}";
 //alert("header"+url);

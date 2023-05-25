@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-<link rel="stylesheet" type="text/css" href ="/css/admin/adminHeader.css">
+
 <link rel="stylesheet" type="text/css" href ="/css/joinPage.css">
 <%@ include file="/WEB-INF/views/admin/include/header.jsp" %>
 
@@ -12,6 +9,18 @@ var msg = "${msg}";
 
 if(msg != ''){
 	alert(msg);
+}
+function type_ch(str){
+	if(str =='p'){
+		$("#cname").hide();
+		$("#pname").show();
+		$("#cnumber").hide();
+		
+	}else{
+		$("#cname").show();
+		$("#pname").hide();
+		$("#cnumber").show();
+	}
 }
 
 function join_go(){
@@ -24,6 +33,7 @@ function join_go(){
 	email.value = email1.value+"@"+email2.value;
 		
 	phone.value = phone1.value+"-"+phone2.value+"-"+phone3.value;
+	c_number = c_number1.value+"-"+c_number2.value;
 	document.join.submit();
 	
 }
@@ -40,8 +50,8 @@ function join_go(){
 		<div class="joinContainer">
 			<div class="memberType">회원구분</div>
 			<div>
-				<input type="radio" name="member_type" value="p" checked>개인회원
-				<input 	type="radio" name="member_type" value="s">판매회원
+				<input type="radio" name="member_type" value="p" onclick="type_ch('p')" checked >개인회원
+				<input 	type="radio" name="member_type" value="s" onclick="type_ch('s')">법인회원
 			</div>
 		</div>
 		<div style="height:100px;width:1000px;">
@@ -50,7 +60,7 @@ function join_go(){
 		</div>
 		<div class="joinContainerInfo">
 			<div class="memberType">아이디</div>
-			<div><input id="m_id" name="m_id" class="joinInput"  minlength="4" maxlength="16" onchange="idCheck(this.value)" required></div>
+			<div><input id="id" name="id" class="joinInput"  minlength="4" maxlength="16" onkeyup="idCheck(this.value)" required></div>
 			<div id="checkResult" class="checkResult">(영문소문자/숫자,4~16자)</div>
 		</div>
 		<div class="joinContainerInfo">
@@ -59,11 +69,28 @@ function join_go(){
 		</div>
 		<div class="joinContainerInfo">
 			<div class="memberType">비밀번호 확인</div>
-			<div><input type="password" id ="pass2"name="pass2" class="joinInput" onchange="passCheck(this.value)" required></div><div id="passResult"></div>
+			<div><input type="password" id ="pass2"name="pass2" class="joinInput" onkeyup="passCheck(this.value)" required></div><div id="passResult"></div>
 		</div>
-		<div class="joinContainerInfo">
-			<div class="memberType">이름</div>
-			<div><input id="m_name" name="m_name" class="joinInput" required></div>
+		<div id="pname" >
+			<div class="joinContainerInfo">
+				<div class="memberType">이름</div>
+				<div><input id="name" name="name" class="joinInput" ></div>
+			</div>
+		</div>	
+		<div id="cname" style="display: none;">
+			<div class="joinContainerInfo">
+				<div class="memberType">법인명</div>
+				<div><input id="name" name="name" class="joinInput" ></div>
+			</div>
+		</div>
+		<div id="cnumber" style="display: none;">
+			<div class="joinContainerInfo">
+				<div class="memberType">법인번호</div>
+				<div>
+					<input id="c_number1" name="c_number1" class="cnumberInput" >
+					<input id="c_number2" name="c_number2" class="cnumberInput" >
+				</div>
+			</div>
 		</div>
 		<div class="joinContainerAddr">
 			<div class="memberType">주소</div>
@@ -136,7 +163,7 @@ function idCheck(id){
 		url: "/idok", //전송받을 페이지 경로
 		type: "post", //데이터 읽어오는 방식
 		dataType: "text", //데이터 방식
-		data:"m_id="+id,
+		data:"id="+id,
 		success:function(result){ //성공일 경우
 			//alert(result);
 			$("#checkResult").html(result);

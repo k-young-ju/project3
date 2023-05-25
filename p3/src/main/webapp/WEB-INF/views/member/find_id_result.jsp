@@ -16,11 +16,11 @@
 		<div class="idResultItem">저희 쇼핑몰을 이용해주셔서 감사합니다.</div>
 			<div class="idResultItem2">
 				<div class="idResultTitle">아이디 :</div>
-				<div class="idResultContent">${member.m_id }&nbsp;(${member.signdate.substring(0,10) }&nbsp;가입)</div>
+				<div class="idResultContent">${member.id }&nbsp;(${member.signdate.substring(0,10) }&nbsp;가입)</div>
 			</div>
 			<div class="idResultItem2">
 				<div class="idResultTitle">이름 :</div>
-				<div class="idResultContent">${member.m_name }</div>
+				<div class="idResultContent">${member.name }</div>
 			</div>
 			<div class="idResultItem2">
 				<div class="idResultTitle">이메일 :</div>

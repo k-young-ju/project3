@@ -22,7 +22,7 @@
 }
 .itemInfo{
 	width: 618px;
-	height: 696px;
+	/* height: 696px; */
 	margin-left: 50px;
 }
 .viewSubject{
@@ -153,6 +153,12 @@
 	font-weight: bold;
 	font-size: 15px;
 }
+.priceInputStyle{
+	outline: none;
+	border:0px;
+	background-color: #F6F6F6;
+	width: 100px;
+}
 .optionSelectSubject{
 	font-weight: bold;
 	text-align: left;
@@ -195,6 +201,25 @@
 	margin-right: 5px;
 	
 }
+.wholePriceStyle{
+	outline: none;
+	border:0px;
+/* 	background-color: #F6F6F6; */
+	width: 100px;
+	font-size: 20px;
+	text-align: right;
+}
+.totalQty{
+	width: 60px;
+}
+
+.wholeQtyStyle{
+	width: 20px;
+	outline: none;
+	border:0px;
+	font-size: 15px;
+	text-align: right;
+}
 .orderBtnContainer{
 	display: inline-flex;
 	width: 618px;
@@ -207,6 +232,7 @@
 	border:1px solid black;
 	background-color: black;
 	color:white;
+	cursor: pointer;
 }
 .orderBtnEtc{
 	width: 200px;
@@ -214,6 +240,7 @@
 	border-radius: 5px;
 	border: 1px solid #D3D3D3;
 	background-color: white;
+	cursor: pointer;
 }
 .payAPI{
 	display: inline-flex;
@@ -243,4 +270,98 @@
 }
 .detialImg{
 	width: 842px;
+}
+.bottomInfo{
+	width: 1000px;
+	background-color: #FAFAFA;
+}
+.bottomInfoTitle{
+	width:800px;
+	text-align: left;
+	font-weight: bold;
+	border-bottom: 1px solid gray;
+	padding-bottom: 10px;
+	margin-top: 15px;
+	padding-top: 15px;
+}
+.bottomInfoContent{
+
+	width:800px;
+	
+	white-space:pre-wrap;
+	font-size:13px;
+	text-align: left;
+	/* border: 1px solid red; */
+}
+.bottomMenuContainer{
+	width: 1800px;
+/* 	background-color: #FAFAFA; */
+}
+.bottomMenuTitle{
+	font-size: 20px;
+	font-weight: bold;
+	padding: 40px;
+}
+.writeBtn{
+	width: 142px;
+	height: 55px;
+	background-color: white;
+	margin: 10px;
+	border:1px solid #D3D3D3;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.viewBtn{
+	width: 142px;
+	height: 55px;
+	background-color: black;
+	color: white;
+	margin: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.noticeContainer{
+	display: inline-flex;
+	width: 1800px;
+	border-bottom: 1px solid #D3D3D3;
+	border-top: 1px solid #D3D3D3;
+	height: 50px;
+	line-height: 50px;
+}
+.noticeNum{
+	width: 100px;
+}
+.noticeSubject{
+	width: 1100px;
+	text-align: left;
+}
+.noticeName{
+	width: 200px;
+}
+.noticeSigndate{
+	width: 200px;
+}
+.noticeRef{
+	width: 100px;
+}
+.reviewContainer{
+	display: inline-flex;
+	width: 1800px;
+	border-bottom: 1px solid #D3D3D3;
+	border-top: 1px solid #D3D3D3;
+	height: 50px;
+	line-height: 50px;
+/* 	border: 1px solid; */
+	
+}
+.reviewSubject{
+	margin-left: 15px;
+}
+.reviewContent{
+	margin-left: 15px;
+	font-size: 13px;
+	color: gray;
+}
+.reviewScore{
+	margin-left: 20px;
 }

@@ -15,7 +15,7 @@
 		<dt>상품관리</dt>
 			<li onclick="location.href='/admin/item/register'" id="menu4">상품등록</li>
 			<li onclick="location.href='/admin/item/list'" id="menu5">상품목록</li>
-			<li onclick="" id="menu6">관심상품목록</li>
+			<li onclick="location.href='/admin/item/jjim_list'"  id="menu6" >관심상품목록</li>
 	</dl>
 </div>
 <div class="menuList">
@@ -29,28 +29,35 @@
 </div>
 <div class="menuList">
 	<dl>
+		<dt>장바구니관리</dt>
+			<li onclick="location.href='/admin/cart/list'" id="menu11">장바구니목록</li>
+	</dl>
+</div>
+<div class="menuList">
+	<dl>
 		<dt>리뷰관리</dt>
-			<li onclick="" id="menu11">리뷰목록</li>
+			<li onclick="location.href='/admin/review/list'" id="menu12">리뷰목록</li>
 	</dl>
 </div>
 <div class="menuList">
 	<dl>
 		<dt>게시물 관리</dt>
-			<li onclick="" id="menu12">문의목록</li>
-			<li onclick="" id="menu13">공지목록</li>
+			<li onclick="location.href='/admin/notice/list?option=faq'" id="menu13">faq목록</li>
+			<li onclick="location.href='/admin/notice/list?option=qna'" id="menu14">문의목록</li>
+			<li onclick="location.href='/admin/notice/list?option=gongji'" id="menu15">공지목록</li>
 			
 	</dl>
 </div>
 <div class="menuList">
 	<dl>
 		<dt>배송주소록관리</dt>
-			<li onclick="" id="menu14">고객별 주소록</li>
+			<li onclick="" id="menu16">고객별 주소록</li>
 	</dl>
 </div>
 <div class="menuList">
 	<dl>
 		<dt>쿠폰 관리</dt>
-			<li onclick="" id="menu15">쿠폰목록</li>
+			<li onclick="" id="menu17">쿠폰목록</li>
 	</dl>
 </div>
 <script>

@@ -50,7 +50,7 @@ function join_go(){
 </div>
 <div class="joinContainerInfo">
 	<div class="memberType">아이디</div>
-	<div><input id="m_id" name="m_id" class="joinInput"  minlength="4" maxlength="16" onchange="idCheck(this.value)" required></div>
+	<div><input id="id" name="id" class="joinInput"  minlength="4" maxlength="16" onchange="idCheck(this.value)" required></div>
 	<div id="checkResult" class="checkResult">(영문소문자/숫자,4~16자)</div>
 </div>
 <div class="joinContainerInfo">
@@ -63,7 +63,7 @@ function join_go(){
 </div>
 <div class="joinContainerInfo">
 	<div class="memberType">이름</div>
-	<div><input id="m_name" name="m_name" class="joinInput" required></div>
+	<div><input id="name" name="name" class="joinInput" required></div>
 </div>
 <div class="joinContainerAddr">
 	<div class="memberType">주소</div>
@@ -131,7 +131,7 @@ function idCheck(id){
 		url: "/idok", //전송받을 페이지 경로
 		type: "post", //데이터 읽어오는 방식
 		dataType: "text", //데이터 방식
-		data:"m_id="+id,
+		data:"id="+id,
 		success:function(result){ //성공일 경우
 			//alert(result);
 			$("#checkResult").html(result);

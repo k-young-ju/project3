@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.reviewContainer{
+	display: inline-flex;
+	width: 1800px;
+	height: 60px;
+	line-height: 60px;
+	border-top: 1px solid #E8E8E8;
+	border-bottom: 1px solid #E8E8E8;
+	
+
+}
+.score{
+	width: 150px;
+	
+}
+.subject{
+	/* border:1px solid; */
+	text-align: left;
+	margin-left: 15px;
+	width: 1500px;
+}
+.nameInfo{
+	font-size: 13px;
+	color: gray;
+}
+.imgSize{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.fileInfo{
+	text-align: right;
+}

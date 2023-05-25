@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.titleContainer{
+	display: inline-flex;
+	width: 1800px;
+	border:1px solid;
+	background-color: #E8E8E8;
+	font-weight: bold;
+}
+.itemContainer{
+	display: inline-flex;
+	width: 1800px;
+	border-bottom: 1px solid #E8E8E8;
+	align-items: center;
+}
+.imgStyle{
+	width: 200px;
+}
+.imgSize{
+	width: 150px;
+	height: 150px;
+}
+.itemInfo{
+	width: 600px;
+}
+.price{
+	width: 100px;
+}
+.qty{
+	width: 100px;
+}
+.point{
+	width: 100px;
+	
+}
+.delivery{
+	width: 200px;
+}
+.sumPrice{
+	width: 200px;
+}
+.selection{
+	width: 300px;
+}
+.orderBtn{
+	width: 100px;
+	height: 40px;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	border:1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-top:15px;
+	margin-bottom: 5px;
+}
+.jjimBtn{
+	width: 100px;
+	height: 40px;
+	background-color: white;
+	cursor: pointer;
+	border:1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-bottom: 5px;
+}
+.deleteBtn{
+	width: 100px;
+	height: 40px;
+	background-color: white;
+	cursor: pointer;
+	border:1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-bottom: 15px;
+}

@@ -63,76 +63,7 @@ public class MemberController {
 	}
 	
 	
-//	@GetMapping("/callback")
-//	public void naverCallback(String code, String state,HttpSession session) throws Exception{
-//		 String clientId = "snwIq2rIuigoLPb9h3Lk";//애플리케이션 클라이언트 아이디값";
-//		    String clientSecret = "xXv3nlKR4G";//애플리케이션 클라이언트 시크릿값";
-//		     String redirectURI = URLEncoder.encode("http://localhost:8080/member/callback", "UTF-8");
-//		    String apiURL;
-//		    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-//		    apiURL += "client_id=" + clientId;
-//		    apiURL += "&client_secret=" + clientSecret;
-//		    apiURL += "&redirect_uri=" + redirectURI;
-//		    apiURL += "&code=" + code;
-//		    apiURL += "&state=" + state;
-//		    String access_token = "";
-//		    String refresh_token = "";
-//		    System.out.println("apiURL="+apiURL);
-//		    try {
-//		      URL url = new URL(apiURL);
-//		      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-//		      con.setRequestMethod("GET");
-//		      int responseCode = con.getResponseCode();
-//		      BufferedReader br;
-//		      System.out.print("responseCode="+responseCode);
-//		      if(responseCode==200) { // 정상 호출
-//		        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//		      } else {  // 에러 발생
-//		        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-//		      }
-//		      String inputLine;
-//		      StringBuffer res = new StringBuffer();
-//		      while ((inputLine = br.readLine()) != null) {
-//		        res.append(inputLine);
-//		      }
-//		      br.close();
-//		     
-//		      if(responseCode==200) {
-////		        out.println(res.toString());
-//		    	  logger.info(res.toString());
-//		    	  
-//		    	
-//		      }else {
-//		    	
-//		      }
-//		    	 
-//		    } catch (Exception e) {
-//		      System.out.println(e);
-//		    }
-//		    
-//		    // 사용자 정보를 가져올 API 엔드포인트 URL
-//		    String userInfoUrl = "https://openapi.naver.com/v1/nid/me";
-//		    
-//		    // 요청 헤더에 액세스 토큰을 포함
-//		    HttpHeaders headers = new HttpHeaders();
-//		    headers.set("Authorization", "Bearer " + access_token);
-//		    RequestEntity<Void> requestEntity = new RequestEntity<>(headers, HttpMethod.GET, new URI(userInfoUrl));
-//
-//		    // RestTemplate을 사용하여 API 요청
-//		    RestTemplate restTemplate = new RestTemplate();
-//		    ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
-//		    String userInfoJson = responseEntity.getBody();
-//
-//		    // JSON 데이터를 NaverUserInfoResponse 객체로 변환
-//		    ObjectMapper objectMapper = new ObjectMapper();
-//		    NaverUserInfoResponse userInfoResponse = objectMapper.readValue(userInfoJson, NaverUserInfoResponse.class);
-//
-//		    // 사용자 정보 추출
-//		    String nickname = userInfoResponse.getResponse().getNickname();
-//		    System.out.println(nickname);
-		    
-//		    return "redirect:/";
-//	}
+
 	
 	@GetMapping("/join")
 	public void joinGet() throws Exception{
@@ -154,7 +85,7 @@ public class MemberController {
 		}
 		
 		System.out.println(m);
-		if(m.getM_id().matches("[A-Zㄱ-ㅎ]+") || Character.isDigit(m.getM_id().charAt(0)) ||m.getM_id().getBytes().length < 4){
+		if(m.getId().matches("[A-Zㄱ-ㅎ]+") || Character.isDigit(m.getId().charAt(0)) ||m.getId().getBytes().length < 4){
 			rttr.addFlashAttribute("msg","아이디를 요청한 형식에 맞게 작성해주세요");
 			return "redirect:join";
 		}
@@ -229,9 +160,9 @@ public class MemberController {
 			 rttr.addFlashAttribute("msg","비밀번호를 다시 확인해주세요");
 			 return "redirect:login";
 		 }else {
-			 session.setAttribute("m_id", member.getM_id());
+			 session.setAttribute("m_id", member.getId());
 			 session.setAttribute("level", member.getLevel());
-			 session.setAttribute("m_name", member.getM_name());
+			 session.setAttribute("m_name", member.getName());
 			logger.info(session.toString());
 			 return "redirect:/";
 		 }
@@ -291,8 +222,8 @@ public String modifyPost(MemberVO m, RedirectAttributes rttr) throws Exception{
 
 //회원탈퇴
 @GetMapping("delete")
-public String deleteMembe(String m_id, HttpSession session) throws Exception{
-	service.deleteMemberService(m_id);
+public String deleteMembe(String id, HttpSession session) throws Exception{
+	service.deleteMemberService(id);
 	session.invalidate();
 	
 	return "redirect:/";
@@ -307,17 +238,26 @@ public void findIdGet() throws Exception{
 @PostMapping("/find_id")
 public String findIdPost(MemberVO m, Model model,RedirectAttributes rttr) throws Exception{
 	MemberVO member = new MemberVO();
-	
 	int idCount = 0;
-	
-	if(m.getPhone().equals("--")) {
-		member = service.findIdEmailService(m);
-		idCount = service.findIdEmailCountService(m);
+	if(m.getMember_type().equals("p")) {
+		if(m.getPhone().equals("--")) {
+			member = service.findIdEmailService(m);
+			idCount = service.findIdEmailCountService(m);
+		}else {
+			member = service.findIdPhoneService(m);
+			idCount = service.findIdPhoneCountService(m);
+		}
 	}else {
-		member = service.findIdPhoneService(m);
-		idCount = service.findIdPhoneCountService(m);
+		if(m.getC_number().equals("-")) {
+			member = service.findIdEmailService(m);
+			idCount = service.findIdEmailCountService(m);
+		}else {
+			member = service.findIdCnumberServic(m);
+			idCount = service.findIdCnumberCountService(m);
+		}
 	}
 	
+		
 	System.out.println(idCount);
 	if(ObjectUtils.isEmpty(member)){
 		rttr.addFlashAttribute("msg","입력하신 정보와 매칭되는 아이디는 존재하지 않습니다.");
@@ -346,13 +286,24 @@ MemberVO member = new MemberVO();
 	logger.info(m.toString());
 	int passCount = 0;
 	
-	if(m.getPhone().equals("--")) {
-		member = service.findPassEmailService(m);
-		passCount = service.findPassEmailCountService(m);
+	if(m.getMember_type().equals("p")) {
+		if(m.getPhone().equals("--")) {
+			member = service.findPassEmailService(m);
+			passCount = service.findPassEmailCountService(m);
+		}else {
+			member = service.findPassPhoneService(m);
+			passCount = service.findPassPhoneCountService(m);
+		}
 	}else {
-		member = service.findPassPhoneService(m);
-		passCount = service.findPassPhoneCountService(m);
+		if(m.getC_number().equals("-")) {
+			member = service.findPassEmailService(m);
+			passCount = service.findPassEmailCountService(m);
+		}else {
+			member = service.findPassCnumberService(m);
+			passCount = service.findPassCnumberCountService(m);
+		}
 	}
+
 	
 	System.out.println(passCount);
 	if(ObjectUtils.isEmpty(member)){
@@ -370,5 +321,75 @@ MemberVO member = new MemberVO();
 		logger.info(m.toString());
 		return "index";
 	}
+//	@GetMapping("/callback")
+//	public void naverCallback(String code, String state,HttpSession session) throws Exception{
+//		 String clientId = "snwIq2rIuigoLPb9h3Lk";//애플리케이션 클라이언트 아이디값";
+//		    String clientSecret = "xXv3nlKR4G";//애플리케이션 클라이언트 시크릿값";
+//		     String redirectURI = URLEncoder.encode("http://localhost:8080/member/callback", "UTF-8");
+//		    String apiURL;
+//		    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+//		    apiURL += "client_id=" + clientId;
+//		    apiURL += "&client_secret=" + clientSecret;
+//		    apiURL += "&redirect_uri=" + redirectURI;
+//		    apiURL += "&code=" + code;
+//		    apiURL += "&state=" + state;
+//		    String access_token = "";
+//		    String refresh_token = "";
+//		    System.out.println("apiURL="+apiURL);
+//		    try {
+//		      URL url = new URL(apiURL);
+//		      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+//		      con.setRequestMethod("GET");
+//		      int responseCode = con.getResponseCode();
+//		      BufferedReader br;
+//		      System.out.print("responseCode="+responseCode);
+//		      if(responseCode==200) { // 정상 호출
+//		        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//		      } else {  // 에러 발생
+//		        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+//		      }
+//		      String inputLine;
+//		      StringBuffer res = new StringBuffer();
+//		      while ((inputLine = br.readLine()) != null) {
+//		        res.append(inputLine);
+//		      }
+//		      br.close();
+//		     
+//		      if(responseCode==200) {
+////		        out.println(res.toString());
+//		    	  logger.info(res.toString());
+//		    	  
+//		    	
+//		      }else {
+//		    	
+//		      }
+//		    	 
+//		    } catch (Exception e) {
+//		      System.out.println(e);
+//		    }
+//		    
+//		    // 사용자 정보를 가져올 API 엔드포인트 URL
+//		    String userInfoUrl = "https://openapi.naver.com/v1/nid/me";
+//		    
+//		    // 요청 헤더에 액세스 토큰을 포함
+//		    HttpHeaders headers = new HttpHeaders();
+//		    headers.set("Authorization", "Bearer " + access_token);
+//		    RequestEntity<Void> requestEntity = new RequestEntity<>(headers, HttpMethod.GET, new URI(userInfoUrl));
+//
+//		    // RestTemplate을 사용하여 API 요청
+//		    RestTemplate restTemplate = new RestTemplate();
+//		    ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
+//		    String userInfoJson = responseEntity.getBody();
+//
+//		    // JSON 데이터를 NaverUserInfoResponse 객체로 변환
+//		    ObjectMapper objectMapper = new ObjectMapper();
+//		    NaverUserInfoResponse userInfoResponse = objectMapper.readValue(userInfoJson, NaverUserInfoResponse.class);
+//
+//		    // 사용자 정보 추출
+//		    String nickname = userInfoResponse.getResponse().getNickname();
+//		    System.out.println(nickname);
+		    
+//		    return "redirect:/";
+//	}
 
 }

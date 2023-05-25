@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class MemberVO {
 	private String member_type;
-	private String m_id;
+	private String id;
 	private String pass;
-	private String m_name;
+	private String name;
 //	private String birth1;
 //	private String birth2;
 //	private String birth3;
@@ -27,4 +27,5 @@ public class MemberVO {
 	private String delete_id;
 	private int mileage;
 	private int income;
+	private String c_number;
 }

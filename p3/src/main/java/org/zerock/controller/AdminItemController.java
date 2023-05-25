@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.ItemVO;
-import org.zerock.service.AdminItemService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -29,8 +29,11 @@ import lombok.extern.log4j.Log4j;
 public class AdminItemController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminItemController.class);
 	
+		
 	@Inject
-	private AdminItemService service;
+	SqlSession sqlsession;
+	
+	private static String namespace = "org.zerock.mapper.AdminItemMapper";
 
 	// 첨부파일 저장 경로
 	// servlet-context.xml에 있는 bean id="uploadPath" 경로 매칭
@@ -43,7 +46,7 @@ public class AdminItemController {
 		String menu = "menu5";
 		
 		model.addAttribute("menu",menu);
-		model.addAttribute("list",service.listAllItemService(cri));
+		model.addAttribute("list",sqlsession.selectList(namespace+".listAll",cri));
 	}
 	
 	@GetMapping("/register")
@@ -93,9 +96,11 @@ public class AdminItemController {
 		vo.setFile4(savedName[3]);
 		vo.setFile5(savedName[4]);
 		
-//		logger.info(vo.toString());
+		logger.info(vo.toString());
 		
-		service.adminRegisterItemService(vo);
+		sqlsession.insert(namespace+".register",vo);
+		
+		
 		rttr.addFlashAttribute("msg","상품이 등록되었습니다.");
 		rttr.addFlashAttribute("menu","menu5");
 		rttr.addFlashAttribute("option","itemList");
@@ -109,7 +114,8 @@ public class AdminItemController {
 		String menu = "menu5";
 		
 		model.addAttribute("menu",menu);
-		model.addAttribute("oneItem",service.adminOneItemService(uid));
+		model.addAttribute("oneItem",sqlsession.selectOne(namespace+".oneItem",uid));
+		
 	}
 	
 	@PostMapping("/modify")
@@ -148,11 +154,20 @@ public class AdminItemController {
 				
 		logger.info(vo.toString());
 				
-		service.adminModifyItemService(vo);
+		sqlsession.update(namespace+".modify",vo);
 		
 		rttr.addFlashAttribute("msg","상품이 수정되었습니다.");
 	
 		return "redirect:list?uid="+vo.getUid();
+	}
+	@GetMapping("/jjim_list")
+	public void jjimList(Criteria cri,Model model) throws Exception{
+		
+		String menu = "menu6";
+		
+		model.addAttribute("menu",menu);
+		model.addAttribute("list",sqlsession.selectList(namespace+".listJjim",cri));
+		
 	}
 	
 }

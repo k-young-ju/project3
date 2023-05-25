@@ -20,9 +20,9 @@ public class MemberDAOImpl implements MemberDAO{
 	private static String namespace = "org.zerock.mapper.MemberMapper";
 
 	@Override
-	public int idCheckDAO(String m_id) throws Exception {
-		logger.info("dao"+m_id);
-		return session.selectOne(namespace+".idCount",m_id) ;
+	public int idCheckDAO(String id) throws Exception {
+		logger.info("dao"+id);
+		return session.selectOne(namespace+".idCount",id) ;
 	}
 
 	@Override
@@ -46,9 +46,9 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public MemberVO oneMemberDAO(String m_id) throws Exception {
+	public MemberVO oneMemberDAO(String id) throws Exception {
 		
-		return session.selectOne(namespace+".onemember",m_id);
+		return session.selectOne(namespace+".onemember",id);
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void deleteMemberDAO(String m_id) throws Exception {
-		session.update(namespace+".delete",m_id);
+	public void deleteMemberDAO(String id) throws Exception {
+		session.update(namespace+".delete",id);
 		
 	}
 
@@ -109,6 +109,30 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberVO findPassEmailDAO(MemberVO m) throws Exception {
 		
 		return session.selectOne(namespace+".findPassEmail",m);
+	}
+
+	@Override
+	public int findIdCnumberCountDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findIdCnumberCount",m);
+	}
+
+	@Override
+	public MemberVO findIdCnumberDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findIdCnumber",m);
+	}
+
+	@Override
+	public int findPassCnumberCountDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findPassCnumberCount",m);
+	}
+
+	@Override
+	public MemberVO findPassCnumberDAO(MemberVO m) throws Exception {
+		
+		return session.selectOne(namespace+".findPassCnumber",m);
 	}
 	
 	

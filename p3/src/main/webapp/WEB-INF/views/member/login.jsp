@@ -12,7 +12,7 @@ if(msg != ''){
 
 function login_go(){
 	//alert(session_id.value);
-	if(m_id.value==''){
+	if(id.value==''){
 		alert("아이디를 입력해주세요");
 		return false;
 	}
@@ -36,7 +36,7 @@ function login_go(){
 			<div  class="container" >
 				<div class="container_item" style="width:100px;padding-top:12px;">아이디</div>
 				<div class="container_item">
-					<input id="m_id" name="m_id" class="loginInput" placeholder="아이디">
+					<input id="id" name="id" class="loginInput" placeholder="아이디">
 					<input type="hidden" id ="session_id" name="session_id">
 				</div>
 			</div>
@@ -60,7 +60,7 @@ function login_go(){
 	<div  class ="snsLogin">
 		<div style="margin-bottom: 10px;">SNS 계정 로그인</div>
 		<div>
-			<span id="naverIdLogin_loginButton"><a href="${url }"><img src = "/img/naverLogo.png"  class="apiImg"></a></span>
+			<span id="naverIdLogin_loginButton" ><a href="${url}"><img src = "/img/naverLogo.png"  class="apiImg"></a></span>
 			<span onclick="kakaoLogin()"><img src = "/img/kakaoLogo.png" class="apiImg" onclick=""></span>
 		</div>
 	</div>
@@ -89,54 +89,61 @@ function login_go(){
 
 <script>
 
-var naverLogin = new naver.LoginWithNaverId(
-	{
-		clientId: "snwIq2rIuigoLPb9h3Lk", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-		callbackUrl: "http://localhost:8080", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-		isPopup: false,
-		callbackHandle: true
-	}
-);	
-naverLogin.init();
+// var naverLogin = new naver.LoginWithNaverId(
+// 	{
+// 		clientId: "snwIq2rIuigoLPb9h3Lk", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+// 		callbackUrl: "http://localhost:8080", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+// 		isPopup: false,
+// 		callbackHandle: true
+// 	}
+// );	
+// naverLogin.init();
 
-window.addEventListener('load', function () {
-	naverLogin.getLoginStatus(function (status) {
-		//alert(status);
-		if (status) {
-			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+// window.addEventListener('load', function () {
+// 	naverLogin.getLoginStatus(function (status) {
+// 		//alert(status);
+// 		if (status) {
+// 			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
     		
-			console.log(naverLogin.user); // 체크된 항목 객체로 전달
+// 			console.log(naverLogin.user); // 체크된 항목 객체로 전달
 
-			console.log(naverLogin.user.id); // 네이버에서 제공하는 식별 아이디
-			console.log(naverLogin.user.nickname); // 닉네임
-			console.log(naverLogin.user.email); // 이메일  
+// 			console.log(naverLogin.user.id); // 네이버에서 제공하는 식별 아이디
+// 			console.log(naverLogin.user.nickname); // 닉네임
+// 			console.log(naverLogin.user.email); // 이메일  
 
-			location.href="callback?m_id="+naverLogin.user.id+"&email="+naverLogin.user.email;
-			if( email == undefined || email == null) {
-				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
-				naverLogin.reprompt();
-				return;
-			}
-		} else {
-			console.log("callback 처리에 실패하였습니다.");
-		}
+// 			location.href="callback?id="+naverLogin.user.id+"&email="+naverLogin.user.email;
+// 			if( email == undefined || email == null) {
+// 				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+// 				naverLogin.reprompt();
+// 				return;
+// 			}
+// 		} else {
+// 			console.log("callback 처리에 실패하였습니다.");
+// 		}
 		
-	});
-});
+// 	});
+// });
 
 
-function openPopUp() {
-    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-}
-function closePopUp(){
-    testPopUp.close();
-}
-function naverLogout() {
-	openPopUp();
-	setTimeout(function() {
-		closePopUp();
-	}, 1000);
-}
+// function openPopUp() {
+//     testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+// }
+// function closePopUp(){
+//     testPopUp.close();
+// }
+// function naverLogout() {
+// 	openPopUp();
+// 	setTimeout(function() {
+// 		closePopUp();
+// 	}, 1000);
+// }
 </script>
+<script>
+  		function naver_login() {
+			
+  			location.href="naverLogin.inc";
+		} 
+   
+   </script>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

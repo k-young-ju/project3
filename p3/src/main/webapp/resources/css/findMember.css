@@ -93,6 +93,13 @@
 	border-radius: 5px;
 	
 }
+.c_numberStyle{
+	width: 137px;
+	height:37px;
+	border:1px solid gray;
+	border-radius: 5px;
+}
+
 .btnStyle{
 	width:424px;
 	height:53px;

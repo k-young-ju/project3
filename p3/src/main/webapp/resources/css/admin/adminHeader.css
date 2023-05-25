@@ -35,7 +35,9 @@ header{
 	/* border: 1px solid; */
 	
 }
-
+.contentContainer{
+	margin: 0 auto;
+}
 .headerbarch{
 	background-color: rgba(255, 255, 255, 0.9);
  	color:black;
@@ -170,5 +172,11 @@ header{
 	
 }
 .sideContainer{
-	margin-left: 40px;
+	margin: 0 auto;
+}
+.pagingBtn{
+	width: 40px;
+	background-color: #D3D3D3;
+	border-radius: 50%;
+	padding-top: 5px;
 }

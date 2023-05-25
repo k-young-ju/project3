@@ -173,3 +173,20 @@
 	
 	
 }
+.c_numberInput{
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+	width:147px;
+	height:40px;
+	margin-left: 20px;
+	outline: none;
+	padding-left: 10px;
+}
+.c_numberInput2{
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+	width:147px;
+	height:40px;
+	outline: none;
+	padding-left: 10px;
+}

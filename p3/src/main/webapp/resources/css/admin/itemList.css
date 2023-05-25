@@ -2,22 +2,28 @@
 
 .listContainer{
 	display: inline-flex;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	width: 1500px;
 	text-align: center;
+	background-color: #E8E8E8;
+	
 
 }
 .listItemTitle{
 	margin: 10px;
 	width:160px;
 	text-align: center;
-	border-right: 1px soild red;
+	align-items: center;
+	/* border-right: 1px soild red; */
 }
 .listContainer2{
 	display: flex;
-	border: 1px solid;
+	/* border: 1px solid; */
 	width: 1500px;
 	text-align: center;
+	border-bottom: 1px solid #E8E8E8;
+	align-items: center;
+	
 }
 .sumnail{
 	width:30px;

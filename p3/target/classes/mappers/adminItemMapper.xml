@@ -30,4 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where uid=#{uid}	
 	</update>
 	
+	<select id="listJjim" resultType="itemVO">
+		select * from jjim join item on jjim.uid = item.uid limit #{pageStart}, #{perPageNum}
+		
+	</select>
+	
 </mapper>

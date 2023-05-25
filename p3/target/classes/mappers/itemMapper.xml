@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="optional"></include>
 		<include refid="sorting"></include>
 	limit #{cri.pageStart}, #{cri.perPageNum}
+		
 </select>
 
 <sql id="optional">
@@ -32,6 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
 </sql>
 <sql id="sorting">
+	<if test="sorted ==null">
+		order by uid desc
+	</if>
 	<if test="sorted != null" >
 		<if test="sorted == 'new'.toString()">
 			order by uid desc
@@ -49,12 +53,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by reviewcount desc
 		</if> -->
 	</if>
+	
 </sql>
+
+
 
 <select id="view" resultType="ItemVO">
 	select * from item where uid=#{uid}
 </select>
 
-
+<select id="countSearch" resultType="int">
+	select count(*) from item where useyn='y'
+	<include refid="search"></include>
 	
+</select>
+
+<select id="searchList" resultType="ItemVO">
+	select * from item where useyn='y' 
+	<include refid="search"></include>
+	limit #{pageStart}, #{perPageNum}
+</select>
+
+<sql id="search">
+	<if test="searchTitle != null" >
+		<!-- 
+		MyBatis에서는 변수가 자바객체처럼 사용되므로 
+		( OGNL (Object Graph Navigation Language)를 사용하여 속성 처리를 하고 있기 때문에 )
+		자바에서 사용되는 문자열 비교 메소드를 이용하면 된다.
+		단 비교할 문자를 먼저 쓴 경우도 에러 발생.
+
+		<if test="searchType == 't'.toString()"> (o)
+		<if test="searchType eq 't'.toString()"> (o)
+		<if test="searchType.toString() == 't'.toString()"> (o)
+		<if test="searchType.equalsIgnoreCase('t')"> (o)
+		<if test='searchType == "t"'> (o)
+
+		// 작은, 큰 따옴표 순서
+		<if test='"t".equals(searchType)'> (o)
+		<if test="'t'.equals(searchType)"> (x)
+
+		<if test='searchType.equals("t")'> (o)
+		<if test="searchType.equals('t')"> (x)
+		-->
+
+		<if test="searchTitle == 'itemName'.toString()">
+			and subject like CONCAT('%', #{keyword}, '%')
+		</if>
+	</if>
+</sql>
+
+<select id="viewItemNotice" resultType="NoticeVO">
+	select * from notice where uid=#{uid} limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="viewItemReview" resultType="ReviewVO">
+	select * from review where uid=#{uid} limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+	
+<select id="countColor" resultType="int">
+	select count(*) from cart where uid=#{uid} and color=#{color} and id=#{id}
+</select>
+
+<insert id="insertCart">
+	insert into cart (o_id,id,s_id,uid,price,qty,point,signdate,file1,color,subject) values 
+	(#{o_id},#{id},#{s_id},#{uid},#{price},#{qty},#{point},#{signdate},#{file1},#{color},#{subject})
+</insert>	
+
+<insert id="insertSelect">
+	insert into selectoption (id,uid,price,qty,color,subject) values 
+	(#{id},#{uid},#{price},#{qty},#{color},#{subject})
+</insert>
+
+<select id="selectAll" resultType="SelectVO">
+	select * from selectoption where uid=#{uid} and id=#{id}
+	
+</select>
+
+<delete id="deleteCart">
+	delete from selectoption where s_uid = #{s_uid}
+</delete>
 </mapper>

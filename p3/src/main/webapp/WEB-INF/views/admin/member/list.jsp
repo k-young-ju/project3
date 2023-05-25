@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-<link rel="stylesheet" type="text/css" href ="/css/admin/adminHeader.css">
+
 <link rel="stylesheet" type="text/css" href ="/css/admin/memberList.css">  
 <%@ include file="/WEB-INF/views/admin/include/header.jsp" %>
 
@@ -41,22 +38,54 @@
 		</div>
 		<c:forEach var="list" items="${list }">
 		<div class="listContainer" >
-			<div ><input type ="checkbox" name ="ap_check" value="${list.m_id }"></div>
+			<div ><input type ="checkbox" name ="ap_check" value="${list.id }"></div>
 			<div class="itemContent" >
 				<c:if test="${list.level==1}">개인회원</c:if>
-				<c:if test="${list.level ==5}">판매회원</c:if>
+				<c:if test="${list.level ==5}">법인회원</c:if>
 				<c:if test="${list.level==10 }">관리자</c:if>
 			</div>
-			<div class="itemContent" >${list.m_id }</div>
-			<div class="itemContent" >${list.m_name }</div>
+			<div class="itemContent" >${list.id }</div>
+			<div class="itemContent" >${list.name }</div>
 			<div class="itemContent" >${list.level }</div>
 			<div class="itemContent">${list.phone }</div>
 			<div class="itemContent">${list.email }</div>
-			<div class="itemContent"  onclick="location.href='modify?m_id=${list.m_id}'"><b>수정</b></div>
+			<div class="itemContent"  onclick="location.href='modify?id=${list.id}'"><b>수정</b></div>
 		</div>
 		
 		</c:forEach>
 		</form>
+			<!-- 페이징 추가 -->
+		<div style="display: inline-flex;">
+			
+					<div>
+						<a href="list?page=1"><img src="/img/back2.png"></a>
+					</div>
+					<div><a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}"><img src="/img/back1.png"></a></div>
+		
+				<c:set var="number" value="${pageMaker.totalCount - (pageMaker.cri.page - 1) * pageMaker.cri.perPageNum }" />
+				<c:forEach var="idx" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+					<div class="pagingBtn" >
+						<c:if test="${pageMaker.cri.page == idx}"><b></c:if>
+						<%-- <a href="listPage?page=${idx}">${idx}</a> --%>
+						<a href="list${pageMaker.makeQuery(idx)}">${idx}</a>
+						<c:if test="${pageMaker.cri.page == idx}"></b></c:if>
+					</div>
+					<c:set var="number" value="${number - 1 }"/> 
+					</c:forEach>
+					<div><a href="list${pageMaker.makeQuery(pageMaker.endPage +1)}"><img src="/img/front1.png"></a></div>
+					<div>
+						<c:choose>
+							<c:when test="${pageMaker.totalCount % cri.perPageNum ==0}">
+								<a href="list${pageMaker.makeQuery(pageMaker.totalCount / cri.perPageNum) }"><img src="/img/front2.png"></a>
+							</c:when>
+							<c:otherwise>
+								<a href="list${pageMaker.makeQuery(pageMaker.totalCount / cri.perPageNum+1) }"><img src="/img/front2.png"></a>
+	
+							</c:otherwise>
+						</c:choose>
+					</div>	
+				
+			</div>
 		</div>
 </div>
 </center>
@@ -68,7 +97,7 @@
 			url: "/admin/member/modify", //전송받을 페이지 경로
 			type: "get", //데이터 읽어오는 방식
 			dataType: "text", //데이터 방식
-			data: "m_id="+id, //데이터 전달
+			data: "id="+id, //데이터 전달
 			error:function(){ //실패일 경우
 				alert("실패");
 			},

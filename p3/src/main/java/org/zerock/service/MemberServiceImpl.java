@@ -16,9 +16,9 @@ public class MemberServiceImpl implements MemberService{
 	private MemberDAO dao;
 	
 	@Override
-	public int idCheckService(String m_id) throws Exception {
-		logger.info("service"+m_id);
-		return dao.idCheckDAO(m_id);
+	public int idCheckService(String id) throws Exception {
+		logger.info("service"+id);
+		return dao.idCheckDAO(id);
 	}
 
 	@Override
@@ -42,9 +42,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO oneMemberService(String m_id) throws Exception {
+	public MemberVO oneMemberService(String id) throws Exception {
 		
-		return dao.oneMemberDAO(m_id);
+		return dao.oneMemberDAO(id);
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void deleteMemberService(String m_id) throws Exception {
-		dao.deleteMemberDAO(m_id);
+	public void deleteMemberService(String id) throws Exception {
+		dao.deleteMemberDAO(id);
 		
 	}
 
@@ -107,6 +107,30 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO findPassEmailService(MemberVO m) throws Exception {
 		
 		return dao.findPassEmailDAO(m);
+	}
+
+	@Override
+	public int findIdCnumberCountService(MemberVO m) throws Exception {
+		
+		return dao.findIdCnumberCountDAO(m);
+	}
+
+	@Override
+	public MemberVO findIdCnumberServic(MemberVO m) throws Exception {
+		
+		return dao.findIdCnumberDAO(m);
+	}
+
+	@Override
+	public int findPassCnumberCountService(MemberVO m) throws Exception {
+		
+		return dao.findPassCnumberCountDAO(m);
+	}
+
+	@Override
+	public MemberVO findPassCnumberService(MemberVO m) throws Exception {
+		
+		return dao.findPassCnumberDAO(m);
 	}
 	
 	

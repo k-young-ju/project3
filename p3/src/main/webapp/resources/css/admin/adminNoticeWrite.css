@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+.joinTitle{
+	font-family:'anemone';
+	font-size: 30px;
+	font-weight: bold;
+	width:1000px; 
+	height:80px;
+	justify-content: center;
+	
+}
+.noticeContainer{
+	border-top:1px solid #E9E9E9;
+	border-bottom:1px solid #E9E9E9;
+	width:1000px;
+	display: inline-flex;
+	height:50px;
+	text-align: left;
+/* 	border: 1px solid green;  */
+	line-height: 50px;
+}
+
+.noticeType{
+	background-color: #FAFAFA;
+	width:150px;
+	text-align: center;
+	
+}
+.faqType{
+	display: none;
+	width:1000px;
+	height: 50px;
+	line-height: 50px;
+}
+.faqhidden{
+	display:inline-flex;
+}
+.faqshow{
+	display: none;
+}
+.radioType{
+	margin-left: 20px;
+}
+.commentType{
+	background-color: #FAFAFA;
+	width:150px;
+	text-align: center;
+}
+
+.noticeContainerInfo{
+	border-top:1px solid #E9E9E9;
+	width:1000px;
+	display: inline-flex;
+	height:70px;
+	text-align: left;
+	line-height: 70px;
+	/* border: 1px solid red; */
+}
+.noticeCommentContainerInfo{
+	border-top:1px solid #E9E9E9;
+	width:1000px;
+	display: inline-flex;
+	height:200px;
+	text-align: left;
+	line-height: 70px;
+}
+.noticeInput{
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+	width:800px;
+	height:40px;
+	margin-left: 20px;
+	outline: none;
+	
+}
+.textStyle{
+	border:1px solid #E8E8E8;
+	border-radius:5px;
+	width:800px;
+	margin-left: 20px;
+	outline: none;
+	height: 180px;
+	margin-top: 5px;
+}
+
+
+.writeOkBtn{
+	background-color: black;
+	color: white;
+	width:200px;
+	height:50px;
+	margin: 10px;
+	
+	
+}
+.imgSize{
+	width: 50px;
+	height: 50px;
+}
+.deleteBtn{
+	background-color: white;
+	width:200px;
+	height:50px;
+	margin: 10px;
+}

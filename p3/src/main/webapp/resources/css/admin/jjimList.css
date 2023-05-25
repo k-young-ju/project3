@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.listContainer{
+	display: inline-flex;
+	/* border: 1px solid red; */
+	width: 1400px;
+	text-align: center;
+	background-color: #E8E8E8;
+	
+
+}
+.listItemTitle{
+	margin: 10px;
+	width:160px;
+	text-align: center;
+	align-items: center;
+	/* border-right: 1px soild red; */
+}
+.listContainer2{
+	display: flex;
+	/* border: 1px solid; */
+	width: 1400px;
+	text-align: center;
+	border-bottom: 1px solid #E8E8E8;
+	align-items: center;
+	
+}
+.sumnail{
+	width:50px;
+	height:50px;
+}
+.itemtype{
+	width: 100px;
+	
+}
+.itemImg{
+	width: 100px;
+}
+.itemName{
+	width: 500px;
+	
+}
+.itemPrice{
+	width: 150px;
+}
+.jjimId{
+	width: 100px;
+}
+.jjimDate{
+	width: 350px;
+}
+.itemuseyn{
+	width: 100px;
+}

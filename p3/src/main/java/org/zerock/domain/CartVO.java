@@ -6,7 +6,7 @@ import lombok.Data;
 public class CartVO {
 	int ct_uid;
 	String o_id;
-	String m_id;
+	String id;
 	String s_id;
 	int uid;
 	int price;
@@ -15,4 +15,5 @@ public class CartVO {
 	String signdate;
 	String file1;
 	String color;
+	String subject;
 }

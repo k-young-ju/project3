@@ -5,7 +5,7 @@
 	
 	border: 1px solid;
 	width:800px;
-	height:600px;
+/* 	height:600px; */
 	padding: 30px;
 	
 }
@@ -17,6 +17,9 @@
 	/* border: 1px solid blue; */
 	display: inline-flex;
 	
+}
+.introduce{
+	color:red;
 }
 .itemName{
 	width:200px;
@@ -53,5 +56,5 @@
 	background-color: black;
 	color: white;
 	border-radius: 5px;
-	
+	cursor: pointer;
 }

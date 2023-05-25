@@ -22,7 +22,7 @@
 		</div>
 		<div class="modifyContainerInfo">
 			<div class="memberType">아이디</div>
-			<div><input id="m_id" name="m_id" class="modifyInput"  value="${m.m_id }" readonly></div>
+			<div><input id="id" name="id" class="modifyInput"  value="${m.id }" readonly></div>
 			
 		</div>
 		<div class="modifyContainerInfo">
@@ -33,10 +33,26 @@
 			<div class="memberType">비밀번호 확인</div>
 			<div><input type="text" id ="pass2" class="modifyInput" value="${m.pass }" onchange="passCheck(this.value)" required></div><div id="passResult"></div>
 		</div>
+		<c:if test="${m.level =='1' }">
 		<div class="modifyContainerInfo">
 			<div class="memberType">이름</div>
-			<div><input id="m_name" name="m_name" class="modifyInput" value="${m.m_name }" required></div>
+			<div><input id="name" name="name" class="modifyInput" value="${m.name }" required></div>
 		</div>
+		</c:if>
+		<c:if test="${m.level =='5' }">
+		<div class="modifyContainerInfo">
+			<div class="memberType">법인명</div>
+			<div><input id="name" name="name" class="modifyInput" value="${m.name }" required></div>
+		</div>
+		<div class="modifyContainerInfo">
+			<div class="memberType">법인번호</div>
+			<div>
+				<input id="c_number1" name="c_number1" class="c_numberInput" value="${c_number1 }" required>&nbsp;-
+				<input id="c_number2" name="c_number2" class="c_numberInput2" value="${c_number2 }" required>
+				<input type="hidden"  id ="c_number" name="c_number">
+			</div>
+		</div>
+		</c:if>
 		<div class="modifyContainerAddr">
 			<div class="memberType">주소</div>
 			<div class="addrContainer">
@@ -89,7 +105,7 @@
 		<div style="height:10px;"></div>
 		<div class="BtnStyle">
 			<button class="modifyOkBtn">회원정보수정</button>
-			<input type="button" value="취소" class="modifyCancelBtn" onclick = "location.href='/'">
+			<input type="button" value="취소" class="modifyCancelBtn" onclick = "location.href='list'">
 			<input type="button" value="회원탈퇴" class="deleteMember" onclick="delete_go()">
 		</div>
 		</form>
@@ -114,6 +130,7 @@ function modify_go(){
 	email.value = email1.value+"@"+email2.value;
 	
 	phone.value = phone1.value+"-"+phone2.value+"-"+phone3.value;
+	c_number.value = c_number1.value+"-"+c_number1.value;
 	//alert(email.value+"+"+phone.value);
 	document.modify.submit();
 	
@@ -121,13 +138,13 @@ function modify_go(){
 }
 
 function delete_go(){
-	var id = "${m.m_id}";
+	var id = "${m.id}";
 	
 	//alert(id);
 	var result = confirm("탈퇴하시면 동일한 아이디로 가입이 불가능합니다. \n정말 탈퇴하시겠습니까?");
 	
 	if(result ==true){
-		location.href="delete?m_id="+id;
+		location.href="delete?id="+id;
 	}
 	
 }

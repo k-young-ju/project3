@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.faqTitleContainer{
+	display: inline-flex;
+	width: 1400px;
+	background-color: #D3D3D3;
+	border: 1px solid #D3D3D3;
+}
+.faqContainer{
+	display: inline-flex;
+	width: 1400px;
+	border-bottom: 1px solid;
+}
+.numbering{
+	width: 200px;
+	
+}
+.subject{
+	width: 650px;
+}
+.writer{
+	width: 200px;
+}
+.date1{
+	width: 200px;
+}
+.faqType{
+	width: 150px;
+}
+
+.status{
+	width: 100px;
+}
+.redate{
+	width: 100px;
+}
+.btnContainer{
+	width: 1400px;
+	text-align: right;
+	margin-top: 30px;
+	/* border: 1px solid; */
+}
+.writeBtn{
+	width: 100px;
+	height: 40px;
+	background-color: white;
+	
+}

@@ -48,7 +48,7 @@ public class PageMaker {
 		//위 메소드 호출
 		calcData();
 	}
-	// get방식 - url 주소 변수 값 - 처리 용이하게..
+	// get방식 - url 주소 변수 값 - 처리 용이하게.. 경로 뒤 ?처리됨
 	public String makeQuery(int page) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 			.queryParam("page", page)
@@ -58,18 +58,18 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 	
-//	// search 추가
-//		public String makeSearch(int page) {
-//			UriComponents uriComponents = UriComponentsBuilder.newInstance()
-//				.queryParam("page", page)
-//				.queryParam("perPageNum", cri.getPerPageNum())
-//				.queryParam("searchType", ((SearchCriteria) cri).getSearchType())
-//				.queryParam("keyword", ((SearchCriteria) cri).getKeyword())
-//				//.queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword())) //한글이 깨질 경우 사용
-//				.build();
-//
-//			return uriComponents.toUriString();
-//		}
+	// search 추가
+		public String makeSearch(int page) {
+			UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("searchTitle", ((SearchCriteria) cri).getSearchTitle())
+				//.queryParam("keyword", ((SearchCriteria) cri).getKeyword())
+				.queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword())) //한글이 깨질 경우 사용
+				.build();
+
+			return uriComponents.toUriString();
+		}
 		
 		// get 방식으로 값을 넘겼을때 한글이 깨질 경우 처리 추가
 		private String encoding(String keyword) {

@@ -56,7 +56,17 @@
 				</div>
 				<div class="itemSubject">
 					<div class="itemName">배송비 : </div>
-					<div class="itemContent"><input name="deliveryfee" id="deliveryfee"  class="inputStyle" required></div>
+					<div class="itemContent">
+						<select name="deliveryfee" id="deliveryfee"  class="inputStyle" >
+							<option value="0">무료</option>
+							<option value="3000">3,000원</option>	
+						</select>
+					</div>
+				</div>
+				<div class="introduce">여러 색상을 등록하시고 싶으시면 콤마(,)로 구분해 주세요.</div>
+				<div class="itemSubject">
+					<div class="itemName">색상 : </div>
+					<div class="itemContent"><input name="color"  id="color" class="inputStyle"  required></div>
 				</div>
 				<div class="itemSubject">
 					<div class="itemName">판매자 : </div>

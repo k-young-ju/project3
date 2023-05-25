@@ -16,7 +16,7 @@
 </div>
 <div class="modifyContainerInfo">
 	<div class="memberType">아이디</div>
-	<div><input id="m_id" name="m_id" class="modifyInput"  value="${m.m_id }" readonly></div>
+	<div><input id="id" name="id" class="modifyInput"  value="${m.id }" readonly></div>
 	
 </div>
 <div class="modifyContainerInfo">
@@ -29,7 +29,7 @@
 </div>
 <div class="modifyContainerInfo">
 	<div class="memberType">이름</div>
-	<div><input id="m_name" name="m_name" class="modifyInput" value="${m.m_name }" required></div>
+	<div><input id="name" name="name" class="modifyInput" value="${m.name }" required></div>
 </div>
 <div class="modifyContainerAddr">
 	<div class="memberType">주소</div>
@@ -114,13 +114,13 @@ function modify_go(){
 }
 
 function delete_go(){
-	var id = "${m.m_id}";
+	var id = "${m.id}";
 	
 	//alert(id);
 	var result = confirm("탈퇴하시면 동일한 아이디로 가입이 불가능합니다. \n정말 탈퇴하시겠습니까?");
 	
 	if(result ==true){
-		location.href="delete?m_id="+id;
+		location.href="delete?id="+id;
 	}
 	
 }

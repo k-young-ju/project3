@@ -7,21 +7,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <insert id="join">
 	insert into member 
-		(m_id,pass,m_name,email,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,phone,signdate,member_type,level) 
+		(id,pass,name,email,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,phone,signdate,member_type,level,c_number) 
 		values 
-		(#{m_id},#{pass},#{m_name},#{email},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{phone},#{signdate},#{member_type},#{level})
+		(#{id},#{pass},#{name},#{email},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{phone},#{signdate},#{member_type},#{level},#{c_number})
 </insert>
 
 <select id="onemember" resultType="MemberVO">
-	select * from member where m_id=#{m_id}
+	select * from member where id=#{id}
 </select>
 
 <update id= "modify">
-	update member set pass=#{pass},m_name=#{m_name},email=#{email},zipcode=#{zipcode},zipcode1=#{zipcode1},zipcode2=#{zipcode2},zipcode3=#{zipcode3},zipcode4=#{zipcode4},phone=#{phone} where m_id=#{m_id}
+	update member 
+	set pass=#{pass},name=#{name},email=#{email},zipcode=#{zipcode},zipcode1=#{zipcode1},zipcode2=#{zipcode2},zipcode3=#{zipcode3},zipcode4=#{zipcode4},phone=#{phone},c_number=#{c_number} 
+	where id=#{id}
 </update>
 
 <update id="delete">
-	update member set pass='',m_name='',email='',level=1,zipcode='',zipcode1='',zipcode2='',zipcode3='',zipcode4='',phone='',signdate='',delete_id='y' where m_id=#{m_id}
+	update member set pass='',name='',email='',level=1,zipcode='',zipcode1='',zipcode2='',zipcode3='',zipcode4='',phone='',signdate='',c_number='',delete_id='y' 
+	where id=#{id}
 </update>
 
 <select id="countMember" resultType="int">

@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+.tabContainer{
+	width: 1800px;
+	height: 100px;
+	display: inline-flex;
+}
+.tabItem{
+	width: 600px;
+	height: 40px;
+	border: 1px solid black;
+	padding-top: 10px;
+}
+.tabInContainer{
+	width: 1800px;
+	text-align: left;
+}
+
+.faqContainer{
+	width: 1800px;
+	height: 40px;
+	display: inline-flex;
+	border-bottom: 1px solid #E8E8E8;
+	padding-top:10px;;
+	padding-left: 30px;
+}
+.qnaContainer{
+	padding-left:50px;
+	width: 1800px;
+	height: 60px;
+	line-height:60px;
+	display: inline-flex;
+	border-bottom: 1px solid #E8E8E8;
+	padding-top:10px;;
+	justify-content: space-between;
+	
+	/* border-top: 1px solid #E8E8E8; */
+	/* border:1px solid; */
+	
+}
+
+.gongjiTitle{
+	width: 1800px;
+	height: 40px;
+	padding-top: 10px;
+	display: inline-flex;
+	background-color: #FAFAFA;
+	border: 1px solid #E8E8E8;
+}
+.noticeNum{
+	width: 100px;
+	text-align: center;
+	margin-top: 5px;
+}
+
+.noticeSubject{
+	width: 1100px;
+	text-align: center;
+	margin-top: 5px;
+}
+
+.noticeWriter{
+	width:150px;
+	text-align: center;
+	margin-top: 5px;
+}
+.noticeSigndate{
+	width: 250px;
+	text-align: center;
+	margin-top: 5px;
+}
+.noticeRef{
+	text-align: center;
+	margin-top: 5px;
+	width: 200px;
+}
+.drop{
+	display:none; 
+	width: 1800px;
+	height: 40px;
+	border-bottom: 1px solid #E8E8E8;
+	padding-top:10px;;
+	padding-left: 30px;
+	
+}
+.fileImg{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.mnameStyle{
+	margin-left: 20px;
+	color:gray;
+}
+.gongjiContent{
+	width: 1800px;
+	height: 40px;
+	padding-top: 10px;
+	display: inline-flex;
+	/* background-color: #FAFAFA; */
+	border-bottom: 1px solid #E8E8E8;
+}
+.noticeSubjectContent{
+	width: 1070px;
+	text-align: left;
+	margin-top: 5px;
+	padding-left: 30px;
+}
+.tabBtn{
+	color:white;
+	background-color: black;
+}

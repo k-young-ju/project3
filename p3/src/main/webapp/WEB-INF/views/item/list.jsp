@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+
 <link rel="stylesheet" type="text/css" href ="/css/itemList.css">
 
 
@@ -12,9 +13,9 @@
 	</div>
 	
 	<div class="menuContainer">
-		<div><input type="button" name="All" value="All" class="allDesign" onclick="location.href='list'"></div>
-		<div><input type="button" name="Lighting" value="Lighting AETHER" class="LightingDesign" onclick="location.href='list?option=L'"></div>
-		<div><input type="button" name="SmartRope" value="SmartRope" class="SmartRopeDesign" onclick="location.href='list?option=R'"></div>
+		<div><input type="button"  id="all" name="All" value="All" class="allDesign" onclick="location.href='list'"></div>
+		<div><input type="button" id="L" name="Lighting" value="Lighting AETHER" class="LightingDesign" onclick="location.href='list?option=L'"></div>
+		<div><input type="button" id="R" name="SmartRope" value="SmartRope" class="SmartRopeDesign" onclick="location.href='list?option=R'"></div>
 	</div>
 	<div style="height:70px;"></div>
 	
@@ -43,15 +44,15 @@
 	<div style="height:30px;"></div>
 	<!-- 페이징 추가 -->
 <div style="display: inline-flex;">
-		<c:if test="${pageMaker.prev}">
+		<%-- <c:if test="${pageMaker.prev}"> --%>
 			<div>
 				<a href="list?page=1"><img src="/img/back2.png"></a>
 			</div>
 			<div><a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}"><img src="/img/back1.png"></a></div>
-		</c:if>
+		<%-- </c:if> --%>
 		<c:set var="number" value="${pageMaker.totalCount - (pageMaker.cri.page - 1) * pageMaker.cri.perPageNum }" />
 		<c:forEach var="idx" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-			<div>
+			<div class="pagingBtn">
 				<c:if test="${pageMaker.cri.page == idx}"><b></c:if>
 				<%-- <a href="listPage?page=${idx}">${idx}</a> --%>
 				<a href="list${pageMaker.makeQuery(idx)}">${idx}</a>
@@ -60,7 +61,7 @@
 			<c:set var="number" value="${number - 1 }"/> 
 		</c:forEach>
 
-		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		<%-- <c:if test="${pageMaker.next && pageMaker.endPage > 0}"> --%>
 			<div><a href="list${pageMaker.makeQuery(pageMaker.endPage +1)}"><img src="/img/front1.png"></a></div>
 			<div>
 				<c:choose>
@@ -68,11 +69,25 @@
 						<a href="list${pageMaker.makeQuery(pageMaker.totalCount / cri.perPageNum) }"><img src="/img/front2.png"></a>
 					</c:when>
 					<c:otherwise>
-						<a href="list${pageMaker.makeQuery(pageMaker.totalCount / cri.perPageNum+1) }"><img src="/img/front2.png"></a></div>
+						<a href="list${pageMaker.makeQuery(pageMaker.totalCount / cri.perPageNum+1) }"><img src="/img/front2.png"></a>
+						
 					</c:otherwise>
 				</c:choose>
-		</c:if>
+			</div>	
+		<%-- </c:if> --%>
 	
 </div>
 
 </center>
+
+<script>
+var option ="${option}";
+
+if(option =='R'){
+	$("#R").addClass("active");
+}else if(option =='L'){
+	$("#L").addClass("active");	
+}else{
+	$("#all").addClass("active");
+}
+</script>

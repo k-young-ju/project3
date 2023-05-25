@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+a{
+	text-decoration: none;
+	
+}
+body{
+	
+	padding: 0px;
+	margin: 0px;
+}
+.title{
+	background-color: black;
+	color:white; 
+	padding-top:10px;
+	text-align: left;
+	height: 30px;
+	padding-left: 20px;
+	font-weight: bold;
+	
+	
+}
+.searchContainer{
+	width: 500px;
+	height: 130px;
+	border: 4px solid #F0F0F0;
+	display: inline-flex;
+	justify-content:center;
+	align-items: center;
+
+	
+	
+	
+}
+.searchSelect{
+	width: 100px;
+	height: 35px;
+	margin: 5px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+}
+.searchInput{
+	height: 35px;
+	width: 200px;
+	margin: 5px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	outline: none;
+}
+
+.searchBtn{
+	width: 80px;
+	height: 35px;
+	background-color: black;
+	color: white;
+	margin: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	
+}
+.listTitle{
+	width: 500px;
+	height: 40px;
+	display: inline-flex;
+	background-color: #E8E8E8;
+	align-items: center;
+	justify-content: center;
+}
+.itemImg{
+	width: 100px;
+}
+.itemInfo{
+	width: 300px;
+}
+.selectItem{
+	width: 100px;
+}
+.imgSize{
+	width: 80px;
+	height: 80px;
+}
+.selectItem{
+	width: 50px;
+	height: 30px;
+}
+.listContent{
+	margin-top:5px;
+	width: 500px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: left;
+}
+.middleContainer{
+	display: inline-flex;
+}
+.countSearch{
+	width:400px;
+	text-align: left;
+}
+.pageSelect{
+	text-align: right;
+}
+.pagingBtn{
+	width: 40px;
+	background-color: #D3D3D3;
+	border-radius: 50%;
+	padding-top: 5px;
+}

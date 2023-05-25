@@ -5,33 +5,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
-import javax.mail.Session;
-import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.PageMaker;
-import org.zerock.service.AdminMemberService;
-import org.zerock.service.MemberService;
 
 @Controller
 @RequestMapping("/admin/member")
 public class AdminMemberController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
 	
+		
 	@Inject
-	private AdminMemberService service;
+	private SqlSession sqlsession;
+	
+	private static String namespace = "org.zerock.mapper.AdminMemberMapper";
 	
 	@GetMapping("/join")
 	public void joinGet(Model model) throws Exception{
@@ -55,7 +52,7 @@ public class AdminMemberController {
 		}
 		
 	
-		if(m.getM_id().matches("[A-Zㄱ-ㅎ]+") || Character.isDigit(m.getM_id().charAt(0)) ||m.getM_id().getBytes().length < 4){
+		if(m.getId().matches("[A-Zㄱ-ㅎ]+") || Character.isDigit(m.getId().charAt(0)) ||m.getId().getBytes().length < 4){
 			rttr.addFlashAttribute("msg","아이디를 요청한 형식에 맞게 작성해주세요");
 			rttr.addFlashAttribute("option","memberAdd");
 			rttr.addFlashAttribute("menu","menu1");
@@ -69,8 +66,10 @@ public class AdminMemberController {
 			
 			return "redirect:join";
 		}
-		System.out.println(m);
-		service.joinService(m);
+		//System.out.println(m);
+		
+		sqlsession.insert(namespace+".join",m);
+		
 		rttr.addFlashAttribute("msg","회원추가 되었습니다.");
 		
 		return "redirect:list";
@@ -79,29 +78,35 @@ public class AdminMemberController {
 	@GetMapping("/list")
 	public void listGet(Model model, Criteria cri) throws Exception{
 		String menu = "menu2";
-		model.addAttribute("menu",menu);
+		cri.setPerPageNum(10);
 		
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setCri(cri);
 //		pageMaker.setTotalCount(131);
-		pageMaker.setTotalCount(service.countMemberService(cri)); //총 회원수
+		
+		pageMaker.setTotalCount(sqlsession.selectOne(namespace+".countMember",cri)); //총 회원수
 
+		model.addAttribute("menu",menu);
 		model.addAttribute("cri",cri);
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("list", service.listAllMember(cri));
+		model.addAttribute("list", sqlsession.selectList(namespace+".listAll",cri));
 	}
 	
 	@GetMapping("/modify")
-	public void modifyGet(String m_id, Model model) throws Exception{
+	public void modifyGet(String id, Model model) throws Exception{
 		String menu = "menu2";
 		model.addAttribute("menu",menu);
 		
-		MemberVO m = service.oneMemberService(m_id);
+		MemberVO m = sqlsession.selectOne(namespace+".onemember",id);
+			
 		String[] email_ch = m.getEmail().split("@");
 		String email1 = email_ch[0];
 		String email2 = email_ch[1];
 		
+		String[] c_number_ch =m.getC_number().split("-");
+		String c_number1 = c_number_ch[0];
+		String c_number2 = c_number_ch[1];
 		String[] phone_ch = m.getPhone().split("-");
 		String phone1 = phone_ch[0];
 		String phone2 = phone_ch[1];
@@ -114,18 +119,27 @@ public class AdminMemberController {
 		model.addAttribute("phone1",phone1);
 		model.addAttribute("phone2",phone2);
 		model.addAttribute("phone3",phone3);
+		model.addAttribute("c_number1",c_number1);
+		model.addAttribute("c_number2",c_number2);
 		
 	}
 	
 	@PostMapping("/modify")
 	public String modifyPost(MemberVO m, RedirectAttributes rttr,Model model) throws Exception{
-		logger.info(m.toString());
-		service.updateMemberService(m);
+		//logger.info(m.toString());
+				
+		sqlsession.update(namespace+".modify",m);
+		
 		rttr.addFlashAttribute("msg","수정되었습니다");
-			
-		
-		return "redirect:modify?m_id="+m.getM_id();
+				
+		return "redirect:modify?id="+m.getId();
 	}
+	
+	@GetMapping("/delete")
+	public String deleteMember(String id) throws Exception{
+		sqlsession.update(namespace+".delete",id);
 		
+		return "redirect:list";
+	}
 	
 }
