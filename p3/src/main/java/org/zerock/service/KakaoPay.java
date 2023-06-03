@@ -30,7 +30,7 @@ public class KakaoPay {
 	 
 	        // 서버로 요청할 Header
 	        HttpHeaders headers = new HttpHeaders();
-	        headers.add("Authorization", "KakaoAK " + "47b5baa3c8656ecd5f08104227dc45c5");
+	        headers.add("Authorization", "KakaoAK " + "admin 키");
 	        headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
 	        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 	        
@@ -43,9 +43,9 @@ public class KakaoPay {
 	        params.add("quantity", qty);
 	        params.add("total_amount", price);
 	        params.add("tax_free_amount", "100");
-	        params.add("approval_url", "http://192.168.0.16:8080/kakaoPaySuccess");
-	        params.add("cancel_url", "http://192.168.0.16:8080/kakaoPayCancel");
-	        params.add("fail_url", "http://192.168.0.16:8080/kakaoPaySuccessFail");
+	        params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
+	        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
+	        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
 	 
 	         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 	 
