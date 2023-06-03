@@ -62,7 +62,7 @@ function login_go(){
 		<div>
 			<span id="naver_id_login" ><a href="${url}"><img src = "/img/naverLogo.png"  class="apiImg"></a></span>
 			<script type="text/javascript">
-			  	var naver_id_login = new naver_id_login("네이버 키", "콜백경로");
+			  	var naver_id_login = new naver_id_login("네이버 자바스크립트키", "콜백경로");
 			  	var state = naver_id_login.getUniqState();
 			  	naver_id_login.setButton("green", 1,50);
 			   	naver_id_login.setDomain("서비스 로경로");
