@@ -16,15 +16,17 @@ String session_cart = (String)session.getAttribute("cart");
 if(session_id == null && session_cart == null){ //장바구니 세션 값이 없다면
 	session.setAttribute("cart", str);
 }
+
+String currentPath = request.getRequestURI();
+
 %>
+
+
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"  /> 
-<link rel="stylesheet" type="text/css" href ="/css/header.css">
-<link rel="stylesheet" type="text/css" href ="/css/loginPage.css">
 
 
 <title>탱그램 쇼핑몰</title>
@@ -40,50 +42,26 @@ if(session_id == null && session_cart == null){ //장바구니 세션 값이 없
 	src:url('/css/Cafe24Danjunghae.ttf') format('truetype');
 }	  
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"  /> 
+<link rel="stylesheet" type="text/css" href ="/css/header.css">
+<link rel="stylesheet" type="text/css" href ="/css/loginPage.css">
+
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ 
 <script src="http://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
-<script>
-
-Kakao.init('b1c205967d7b8b38d1e072e593b2b11a'); // 발급받은 키 중 javascript 키를 사용
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
-//카카오로그인
-function kakaoLogin() {
-	Kakao.Auth.login({
-		success: function (response) {
-			Kakao.API.request({
-				url: '/v2/user/me',
-				success: function (response) {
-					console.log(response); //회원정보
-					console.log("식별 아이디:"+response.id);
-					//console.log("닉네임:"+response.properties.nickname); 
-					console.log("이메일:"+response.kakao_account.email); 
-					// 세션에 값 저장
-					sessionStorage.setItem("m_id", response.id);
-
-				},
-				fail: function (error) {
-					console.log(error)
-				},
-			})
-		},
-		fail: function (error) {
-			console.log(error)
-		},
-	})
-}
- 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 
-</script>
+
 <header id="headerbar" class="headerbar">
 <div class="headBar2">
 	<div class="leftHeader">
-			<div></div>
 			<div class="maintitle" onclick = "location.href='/'">TANGRAM</div>
 			<div class="topbutton" onclick="location.href='/item/list'">product</div>
 			<div class="topbutton" onclick = "location.href='/review/list'">Review</div>
@@ -99,18 +77,7 @@ function kakaoLogin() {
 			<c:if test="${level =='10' }" ><span class="topbutton" onclick="location.href='/admin'">관리자 페이지로 이동</span></c:if>
 		</div>
 	<div >
-		
-		<span style="margin-right: 100px;" onclick = "search_go()" class="toprightBtn">
-			<c:choose>
-				<c:when test="${url =='index' }">
-					<img src = "/img/search22.png" class ="img_size" id = "searchImg">
-				</c:when>
-				<c:otherwise>
-					<img src = "/img/search11.png" class ="img_size" >
-				</c:otherwise>
-			</c:choose>
-		</span>
-		<span  onclick = "cart_go()" class="toprightBtn">
+		<span  class="toprightBtn">
 			<c:choose>
 				<c:when test="${url =='index' }">
 					<img src = "/img/basket22.png" class ="img_size" id="basketImg" onclick="location.href='/cart/list'">

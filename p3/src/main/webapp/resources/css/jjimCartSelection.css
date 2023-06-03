@@ -1,0 +1,160 @@
+@charset "UTF-8";
+a{
+	text-decoration: none;
+	
+}
+body{
+	
+	padding: 0px;
+	margin: 0px;
+}
+.title{
+	background-color: black;
+	color:white; 
+	padding-top:10px;
+	text-align: left;
+	height: 30px;
+	padding-left: 20px;
+	font-weight: bold;
+	
+	
+}
+.allContainer{
+	width: 600px;
+	height: 400px;
+	overflow: auto;
+}
+.subject{
+	width: 550px;
+	height: 60px;
+	font-weight: bold;
+	font-size: 18px;
+	border-bottom: 1px solid #E8E8E8;
+	text-align: left;
+	line-height: 40px;
+}
+.itemContainer{
+	display: inline-flex;
+	width: 550px;
+	
+}
+.imgSize{
+	width: 80px;
+	height: 80px;
+}
+.colorName{
+	height: 60px;
+	margin: 30px;
+	
+}
+.colorSelect{
+	margin: 30px;
+}
+.introduceOption{
+	text-align: left;
+	padding-left: 15px;
+}
+.selectContainer{
+	width: 550px;
+	height: 70px;
+	background-color: #F6F6F6;
+	/* border-bottom: 1px solid gray; */
+	margin-bottom: 5px;
+	
+}
+.optionSelectSubject{
+	font-weight: bold;
+	text-align: left;
+}
+.optionColor{
+	text-align: left;
+}
+.detailContainer{
+	display: inline-flex;
+	align-items: center;
+}
+.detailSubject{
+	width: 330px;
+}
+.qtyContainer{
+	
+	display: inline-flex;
+/* 	line-height: 70px; */
+ 	/* border: 1px solid; */
+/* 	height: 70px; */
+	align-items:flex-start;
+	
+}
+.qtyStyle{
+	width: 27px;
+}
+.qtyBtn{
+	/* border: 1px solid red; */
+	height: 22px;
+	
+
+}
+
+.qtyBtnStyle{
+	width: 20px;
+	height: 10px;
+	cursor: pointer;
+	/* border: 1px solid; */
+	/* transform:translateY(-8px); */
+}
+.deleteBtnContainer{
+	height: 30px;
+	margin-left: 10px;
+	/* border: 1px solid; */
+	padding-top: 15px;
+}
+.deleteBtn{
+	width:12px;
+	height: 12px;
+	cursor: pointer;
+}
+.priceStyle{
+	/* border: 1px solid; */
+	margin-left: 10px;
+	align-items: center;
+	line-height: 70px;
+	height: 70px;
+	width: 100px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+}
+.priceInputStyle{
+	outline: none;
+	border:0px;
+	background-color: #F6F6F6;
+	width: 100px;
+}
+.totalDiv{
+	margin-top:20px;
+	width: 550px;
+	text-align: left;
+}
+.wholePrice{
+	font-size: 20px;
+	font-weight: bold;
+}
+.orderbtnDiv{
+	margin-top: 15px;
+	
+}
+.orderBtn{
+	width: 120px;
+	height: 45px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	
+}
+.cartBtn{
+	width: 120px;
+	height: 45px;
+	background-color: white;
+	border:1px solid #E8E8E8;
+	border-radius: 5px;
+}

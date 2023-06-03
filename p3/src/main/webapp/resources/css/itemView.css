@@ -365,3 +365,9 @@
 .reviewScore{
 	margin-left: 20px;
 }
+.soldOut{
+	font-size: 40px;
+	font-weight:bold;
+	text-align: center;
+	width: 100%;
+}

@@ -1,18 +1,22 @@
 package org.zerock.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.ItemVO;
+import org.zerock.dto.CouponNumberMaker;
 import org.zerock.persistence.ItemDAO;
 import org.zerock.persistence.MemberDAO;
 
@@ -30,6 +34,10 @@ public class HomeController {
 	@Inject
 	ItemDAO idao;
 	
+	@Inject
+	SqlSession sqlsession;
+	
+	private static String namespace = "org.zerock.mapper.MemberMapper";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home( Model model) throws Exception{
@@ -38,6 +46,27 @@ public class HomeController {
 		model.addAttribute("bestList",idao.listLimitDAO());
 		model.addAttribute("url","index");
 		logger.info(idao.listLimitDAO().toString());
+		
+		java.util.Date today = new java.util.Date();
+		SimpleDateFormat cal = new SimpleDateFormat("yyyyMMddHHmmss");
+		String signdate = cal.format(today);
+		
+		 // 임의의 문자열을 생성하는 메서드
+        String randomString = CouponNumberMaker.generateRandomString(14);
+         StringBuilder sb = new StringBuilder();
+         for(int i=0;i<signdate.length();i++) {
+        	 sb.append(signdate.charAt(i));
+        	 sb.append(randomString.charAt(i));
+         }
+        String cp_number = sb.toString();
+        
+        //log.info(cp_number);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("cp_number", cp_number);
+        int point =3000;
+        map.put("point", point);
+        sqlsession.insert(namespace+".autoInsert",map); //3000원 쿠폰 자동생성
+         
 		return "index";
 	}
 	
@@ -47,5 +76,6 @@ public class HomeController {
 	return "/admin/index";
 			
 	}
+		  
 	
 }

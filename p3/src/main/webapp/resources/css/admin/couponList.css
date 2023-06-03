@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+
+.listContainer{
+	width: 1400px;
+	display: inline-flex;
+	background-color: #E8E8E8;
+	
+}
+.itemContainer{
+	width: 1400px;
+	display: inline-flex;
+	border-bottom: 1px solid #E8E8E8;
+	align-items: center;
+}
+.number{
+	width: 100px;
+}
+.cp_number{
+	width: 500px;
+}
+.point{
+	width: 200px;
+}
+.id{
+	width: 150px;
+}
+.useyn{
+	width: 100px;
+}
+.mode{
+	width: 300px;
+}
+.inputStyle{
+	width: 100px;
+}
+.registerBtn{
+	width: 100px;
+	height: 40px;
+	background-color: black;
+	color: white;
+	border-radius:5px;
+	margin-right: 5px; 
+	cursor: pointer;
+	
+}
+.deleteBtn{
+	width: 100px;
+	height: 40px;
+	background-color: white;
+	border-radius:5px;
+	border: 1px solid #E8E8E8;
+	cursor: pointer;
+}
+.deleteBtnContainer{
+	width: 1400px;
+	text-align: left;
+	
+}
+.selectDeleteBtn{
+	width: 100px;
+	height: 40px;
+	background-color: black;
+	color:white;
+	border-radius:5px;
+	border: 1px solid #E8E8E8;
+	cursor: pointer;
+	margin-bottom: 10px;
+	
+}

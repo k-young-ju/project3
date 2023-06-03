@@ -8,12 +8,7 @@ public class MemberVO {
 	private String id;
 	private String pass;
 	private String name;
-//	private String birth1;
-//	private String birth2;
-//	private String birth3;
-//	private String gender;
 	private String email;
-//	private String email2;
 	private int level;
 	private String zipcode;
 	private String zipcode1;
@@ -21,11 +16,9 @@ public class MemberVO {
 	private String zipcode3;
 	private String zipcode4;
 	private String phone;
-//	private String phone2;
-//	private String phone3;
 	private String signdate;
 	private String delete_id;
-	private int mileage;
+	private int point;
 	private int income;
 	private String c_number;
 }

@@ -47,12 +47,3 @@
 </div>		
 </center>
 
-<script>
-
-var msg = "${msg}";
-
-if(msg != ''){
-	alert(msg);
-}
-	
-</script>

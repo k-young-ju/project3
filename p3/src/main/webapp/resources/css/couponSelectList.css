@@ -1,0 +1,65 @@
+@charset "UTF-8";
+a{
+	text-decoration: none;
+	
+}
+body{
+	
+	padding: 0px;
+	margin: 0px;
+}
+.title{
+	background-color: black;
+	color:white; 
+	padding-top:10px;
+	text-align: left;
+	height: 30px;
+	padding-left: 20px;
+	font-weight: bold;
+	
+	
+}
+.menuContainer{
+	width: 700px;
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+.titleContainer{
+	display: inline-flex;
+	width: 700px;
+	background-color: #FAFAFA;
+	border-bottom: 1px solid #E8E8E8;
+	border-top: 1px solid #E8E8E8;
+}
+.itemContainer{
+	width: 700px;
+	display: inline-flex;
+	border-bottom: 1px solid #E8E8E8;
+	align-items: center;
+}
+.number{
+	width: 50px;
+	
+}
+.cp_number{
+	width: 250px;
+}
+.cp_point{
+	width: 100px;
+}
+.date{
+	width: 200px;
+}
+.select{
+	width: 100px;
+}
+.selectBtn{
+	width: 80px;
+	height: 40px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	margin-left: 10px;
+	cursor: pointer;
+}

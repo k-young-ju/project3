@@ -34,4 +34,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="listAll" resultType="MemberVO">
 	select * from member order by level desc limit #{pageStart}, #{perPageNum}
 </select>
+
+<select id="countMemberRemain" resultType="int">
+	select count(*) from member where delete_id='n'
+</select>
+
+<select id="listRemain" resultType="MemberVO">
+	select * from member where delete_id='n' order by level desc limit #{pageStart}, #{perPageNum}
+</select>
+
+<select id="countMemberDelete" resultType="int">
+	select count(*) from member where delete_id='y'
+</select>
+
+<select id="listDelete" resultType="MemberVO">
+	select * from member where delete_id='y' order by level desc limit #{pageStart}, #{perPageNum}
+</select>
+
+<update id="levelChange">
+	update member set level=#{level} where id=#{id};
+</update>
+
+<update id="pointPlus">
+	update member set point = point +#{point} where id=#{id}
+</update>
 </mapper>

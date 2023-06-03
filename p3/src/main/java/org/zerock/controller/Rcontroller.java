@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.zerock.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -21,12 +20,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class Rcontroller {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
-	
-	@Inject
-	private MemberService service;
-	
-		
+				
 	@Inject
 	SqlSession sqlsession;
 	
@@ -44,7 +38,7 @@ public class Rcontroller {
 				
 			}
 			int result = sqlsession.selectOne(namespace+".idCount",id);
-			//int result = service.idCheckService(id);
+		
 			
 			if(result ==0) {
 				return "<div style='color:blue'>&nbsp;"+id+"는 사용가능한 아이디입니다.</div>";
@@ -56,14 +50,15 @@ public class Rcontroller {
 	
 		//선택옵션 삭제
 		@PostMapping("/select_delete")
-		public void viewCartDelete(int ct_uid) throws Exception{
-			//cservice.deleteCartService(ct_uid);
-			sqlsession.delete(namespace+".deleteSelect",ct_uid);
+		public void viewCartDelete(int s_uid) throws Exception{
+			
+			sqlsession.delete(namespace+".deleteSelect",s_uid);
 					
 		}
-		//장바구니 수량변경
+		//상품 선택박스 수량변경
 		@PostMapping("/updateQty")
 		public void updateQty(int s_uid, Integer qty) throws Exception{
+			log.info("=========post");
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("s_uid", s_uid);
@@ -71,6 +66,25 @@ public class Rcontroller {
 			log.info(map.toString());
 			sqlsession.update(namespace+".updateQty",map);
 			
+		}
+		//장바구니 수량변경
+		@PostMapping("/updateCartQty")
+		public void updateCartQtyGet(int ct_uid,int qty) throws Exception{
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("ct_uid", ct_uid);
+			map.put("qty", qty);
+			log.info(map.toString());
+			sqlsession.update(namespace+".updateCartQty",map);
+			
+		}
+		@PostMapping("delete_id")
+		public void deleteId(String lists) throws Exception{
+			log.info(lists);
+			String[] list_ch = lists.split(",");
+			for(int i=0;i<list_ch.length;i++) {
+				sqlsession.update(namespace+".delete",list_ch[i]);
+			}
 		}
 	
 }

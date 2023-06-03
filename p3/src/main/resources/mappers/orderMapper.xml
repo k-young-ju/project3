@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.OrderMapper">
+
+<insert id="insertOrder">
+	insert into order1 (od_number,id,o_id,od_status,od_date,point,total_price,total_qty,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,name,phone,email,usepoint,message) values 
+	(#{od_number},#{id},#{o_id},'입금확인중',#{od_date},#{point},#{total_price},#{total_qty},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{name},#{phone},#{email},#{usepoint},#{message});
+</insert>
+<select id="usePointOrder" resultType="OrderVO">
+	<![CDATA[
+	select *,(select subject from cart where cart.o_id=order1.od_number) as subject from order1 where usepoint >0 and id=#{id}
+		]]>
+</select>
+
+<select id="countList" resultType="int">
+	select count(*) from order1 where id=#{id}
+
+</select>
+
+<select id="usepoint" resultType="int">
+	select usepoint from order1 where od_number=#{od_number}
+</select>
+
+<select id="listAll" resultType="OrderVO">
+	select * from order1 where id=#{id}  
+	<include refid="search"></include>
+	limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+<sql id="search">
+	<if test="vo.od_status != null">
+		and od_status =#{vo.od_status}
+	</if>
+	<if test="od_date1 !=null">
+		<![CDATA[
+		and od_date >= #{od_date1}
+		]]>	
+	</if>
+	<if test="od_date2 != null">
+		<![CDATA[
+		and od_date <= #{od_date2}
+			]]>	
+	</if>
+</sql>
+
+<select id="result" resultType="OrderVO">
+	select * from order1 where od_number=#{od_number}
+</select>
+
+<update id="cancel">
+	update order1 set od_status='취소' where od_number=#{od_number}
+</update>
+
+<select id="findOrder" resultType="int">
+	select count(*) from order1 where name=#{name} and od_number=#{od_number}
+</select>
+
+<select id="cancelStatus" resultType="String">
+	select od_status from order1 where od_number=#{od_number}
+</select>
+
+<select id="countStatus1" resultType="int">
+	select count(*) from order1 where od_status='입금확인중'	and id=#{id}
+</select>
+
+<select id="countStatus2" resultType="int">
+	select count(*) from order1 where od_status='배송 준비중'	and id=#{id}
+</select>
+
+<select id="countStatus3" resultType="int">
+	select count(*) from order1 where od_status='배송중'	and id=#{id}
+</select>
+
+<select id="countStatus4" resultType="int">
+	select count(*) from order1 where od_status='배송완료'	and id=#{id}
+</select>
+
+<select id="countStatus5" resultType="int">
+	select count(*) from order1 where od_status='취소'	and id=#{id}
+</select>
+
+<select id="totalOrderPrice" resultType="int">
+	select sum(total_price) from order1 where id=#{id} and od_status !='취소'
+</select>
+
+<select id="totalOrderPoint" resultType="int">
+	select sum(point) from order1 where id=#{id} and od_status !='취소'
+</select>
+
+<select id="usedPoint" resultType="int">
+	select sum(usepoint) from order1 where id=#{id} and od_status !='취소'
+</select>
+
+<select id="usepointGet" resultType="int">
+	select usepoint from order1 where od_number=#{od_number}
+</select>
+</mapper>

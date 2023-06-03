@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 <link rel="stylesheet" type="text/css" href ="/css/reviewWrite.css">
-<script type="text/javascript" src="/smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <center>
 <form method="post" enctype="multipart/form-data">
 	<div style="height:100px;"></div>
@@ -43,10 +43,8 @@
 		</div>
 	</div>
 	<div class="row">
-	
 		<!-- 네이버 스마트 에디터 적용 -->
 	    <textarea name="comment"  id="comment"  rows="10" cols="100" style="width: 1800px;height: 500px;" ></textarea>
-	 	    
 	</div>
 	<div class="fileContainer">
 		<div class="subjectItem">첨부파일</div>
@@ -77,11 +75,28 @@ function itemInfo(){
 </script>
 
 <script type="text/javascript">
-// var oEditors = [];
-// nhn.husky.EZCreator.createInIFrame({
-//  oAppRef: oEditors,
-//  elPlaceHolder: "comment",
-//  sSkinURI: "/smartEditor/SmartEditor2Skin.html",
-//  fCreator: "createSEditor2"
-// });
+	var oEditors = [];
+	
+	smartEditor = function(){
+		console.log("naver editor");
+		nhn.husky.EZCreator.createInIFrame({
+			 oAppRef: oEditors,
+			 elPlaceHolder: "comment",
+			 sSkinURI: "/editor/SmartEditor2Skin.html",
+			 fCreator: "createSEditor2"
+		});
+	}
+	$(document).ready(function(){
+		smartEditor();
+		
+	})
+	
+function write_go(){
+		oEditors.getById["comment"].exec("UPDATE_CONTENTS_FIELD", []);  
+		//스마트 에디터 값을 텍스트컨텐츠로 전달
+		//alert(document.getElementById("comment").value); 
+				// 값을 불러올 땐 document.get으로 받아오기
+		return; 
+}
+	
 </script>

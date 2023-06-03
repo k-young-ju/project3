@@ -63,6 +63,20 @@
 					<div class="itemContent"><input name="price" id="price"  class="inputStyle" value="${oneItem.price }" required></div>
 				</div>
 				<div class="itemSubject">
+					<div class="itemName">배송비 : </div>
+					<div class="itemContent">
+						<select name="deliveryfee" id="deliveryfee"  class="inputStyle" >
+							<option value="0" <c:if test="${oneItem.deliveryfee ==0 }">selected</c:if>>무료</option>
+							<option value="3000" <c:if test="${oneItem.deliveryfee ==3000 }">selected</c:if>>3,000원</option>	
+						</select>
+					</div>
+				</div>
+				<div class="introduce">여러 색상을 등록하시고 싶으시면 콤마(,)로 구분해 주세요.</div>
+				<div class="itemSubject">
+					<div class="itemName">색상 : </div>
+					<div class="itemContent"><input name="color"  id="color" class="inputStyle"  value="${oneItem.color }"required></div>
+				</div>
+				<div class="itemSubject">
 					<div class="itemName">판매자 : </div>
 					<div class="itemContent"><input name="s_id"  id="s_id" class="inputStyle" value="${oneItem.s_id }" readonly></div>
 				</div>

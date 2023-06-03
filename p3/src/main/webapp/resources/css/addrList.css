@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+.titleContainer{
+	display:inline-flex;
+	width: 1800px; 
+	background-color: #FAFAFA;
+	height: 50px;
+	align-items: center;
+	border-top: 1px solid #E8E8E8;
+	border-bottom: 1px solid #E8E8E8;
+	
+}
+.itemContainer{
+	display:inline-flex;
+	width: 1800px; 
+	border-bottom: 1px solid #E8E8E8;
+	height: 40px;
+	align-items: center;
+}
+.adStatus{
+	width: 150px;
+	
+}
+.subject{
+	width: 100px;
+}
+.name{
+	width: 100px;
+}
+.phone{
+	width: 150px;
+}
+.mode{
+	width: 100px;
+}
+.addrTitle{
+	width:1200px;
+}
+.addritem1{
+	width: 100px;
+}
+.addritem2{
+	width: 275px;
+}
+.nolist{
+	width: 1800px;
+	height: 100px;
+	line-height: 100px;
+	border-bottom: 1px solid #E8E8E8;
+}
+.btnContainer{
+	width: 1800px;
+	display: inline-flex;
+	justify-content: flex-end;
+}
+.registerBtn{
+	margin-top:15px;
+	width: 120px;
+	height:40px;
+	background-color: black;
+	color: white;
+	border-radius:5px; 
+	 
+	
+}

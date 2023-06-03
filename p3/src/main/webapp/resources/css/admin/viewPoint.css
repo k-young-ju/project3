@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.id{
+	width: 1400px;
+	text-align: left;
+}
+.name{
+	width: 1400px;
+	text-align: left;
+}
+.viewtitleContainer{
+	width: 1400px;
+	display: inline-flex;
+	align-items: center;
+	background-color: black;
+	color: white;
+}
+.listContainer{
+	width: 1400px;
+	display: inline-flex;
+	align-items: center;
+	
+}
+.date{
+	width: 400px;
+}
+.od_number{
+	width: 400px;
+}
+.totalQty{
+	width: 200px;
+	
+}
+.totalPrice{
+	width: 200px;
+}
+.point{
+	width: 200px;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.AddrMapper">
+<insert id="insertAddr">
+	insert into addr (subject,name,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,phone,id) values 
+	(#{subject},#{name},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{phone},#{id})
+</insert>
+
+<select id="countAddr" resultType="int">
+	select count(*) from addr where id=#{id}
+</select>
+
+<select id="listAll" resultType="AddrVO">
+	select * from addr where id=#{id}
+</select>
+
+<select id="oneAddr" resultType="AddrVO">
+	select * from addr where ad_uid=#{ad_uid}
+</select>
+
+<update id="modify">
+	update addr set 
+	subject=#{subject},name=#{name},id=#{id},zipcode=#{zipcode},zipcode1=#{zipcode1},zipcode2=#{zipcode2},zipcode3=#{zipcode3},zipcode4=#{zipcode4},phone=#{phone}
+</update>
+
+<delete id="deleteAddr">
+	delete from addr where ad_uid=#{ad_uid}
+</delete>
+</mapper>

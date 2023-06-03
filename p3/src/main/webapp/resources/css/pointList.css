@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.pointContainer{
+	display: inline-flex;
+	width: 1800px;
+	height: 100px;
+	border:4px solid #E8E8E8;
+}
+.pointSubject{
+	width: 500px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	
+}
+.pointContent{
+	width: 1300px;
+	padding-bottom: 10px;
+	
+}
+.pointDetail{
+	text-align: left;
+	padding: 10px;
+}
+.info{
+	width: 1800px;
+	text-align: left;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.listContainerTitle{
+	display: inline-flex;
+	width: 1800px;
+	background-color: #FAFAFA;
+	border-bottom: 1px solid #E8E8E8;
+}
+.listContainerContent{
+	display: inline-flex;
+	width: 1800px;
+	border-bottom: 1px solid #E8E8E8;
+}
+.date{
+	width: 600px;
+}
+.orderNumber{
+	width: 300px;
+}
+.subject{
+	width: 600px;
+}
+.usepoint{
+	width: 300px;
+}

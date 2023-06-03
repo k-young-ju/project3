@@ -14,8 +14,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </delete>
 
 <update id="updateQty">
-	update selectoption set qty=#{qty} where ct_uid=#{ct_uid}
+	update selectoption set qty=#{qty} where s_uid=#{s_uid}
 </update>
 
+<update id="updateCartQty">
+	update cart set qty=#{qty} where ct_uid=#{ct_uid}
+</update>
+
+<update id="delete">
+	update member set pass='',name='',email='',level=1,zipcode='',zipcode1='',zipcode2='',zipcode3='',zipcode4='',phone='',signdate='',c_number='',delete_id='y' 
+	where id=#{id}
+</update>
 
 </mapper>

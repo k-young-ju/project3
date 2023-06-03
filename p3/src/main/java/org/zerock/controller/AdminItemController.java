@@ -43,7 +43,7 @@ public class AdminItemController {
 	
 	@GetMapping("/list")
 	public void adminItemListGet(Criteria cri, Model model) throws Exception{
-		String menu = "menu5";
+		String menu = "menu4";
 		
 		model.addAttribute("menu",menu);
 		model.addAttribute("list",sqlsession.selectList(namespace+".listAll",cri));
@@ -52,7 +52,7 @@ public class AdminItemController {
 	@GetMapping("/register")
 	public void registerGet(Model model) throws Exception{
 			logger.info("============= register : get ================");
-			String menu = "menu4";
+			String menu = "menu3";
 			model.addAttribute("menu",menu);
 	}
 
@@ -102,7 +102,7 @@ public class AdminItemController {
 		
 		
 		rttr.addFlashAttribute("msg","상품이 등록되었습니다.");
-		rttr.addFlashAttribute("menu","menu5");
+		rttr.addFlashAttribute("menu","menu4");
 		rttr.addFlashAttribute("option","itemList");
 
 		return "redirect:list";
@@ -111,7 +111,7 @@ public class AdminItemController {
 	@GetMapping("/modify")
 	public void modifyGet(int uid,Model model) throws Exception{
 		System.out.println(uid);
-		String menu = "menu5";
+		String menu = "menu4";
 		
 		model.addAttribute("menu",menu);
 		model.addAttribute("oneItem",sqlsession.selectOne(namespace+".oneItem",uid));
@@ -163,7 +163,7 @@ public class AdminItemController {
 	@GetMapping("/jjim_list")
 	public void jjimList(Criteria cri,Model model) throws Exception{
 		
-		String menu = "menu6";
+		String menu = "menu5";
 		
 		model.addAttribute("menu",menu);
 		model.addAttribute("list",sqlsession.selectList(namespace+".listJjim",cri));

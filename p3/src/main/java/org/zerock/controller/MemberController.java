@@ -6,6 +6,8 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,12 +34,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.CouponVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.dto.CouponNumberMaker;
 import org.zerock.service.MemberService;
 
+import com.mysql.cj.log.Log;
+
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 @RequestMapping("/member")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -45,21 +53,20 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
+	@Inject
+	SqlSession sqlsession;
+	
+	private static String namespace = "org.zerock.mapper.MemberMapper";
+	
+	private static String namespaceCoupon = "org.zerock.mapper.CouponMapper";
+	
+	private static String namespaceOrder = "org.zerock.mapper.OrderMapper";
+	
 		
 	@GetMapping("/login")
 	public void loginGet(HttpSession session,Model model) throws Exception{
 		
-		 String clientId = "snwIq2rIuigoLPb9h3Lk";//애플리케이션 클라이언트 아이디값";
-		    String redirectURI = URLEncoder.encode("http://localhost:8080/member/callback", "UTF-8");
-		    SecureRandom random = new SecureRandom();
-		    String state = new BigInteger(130, random).toString();
-		    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-		    apiURL += "&client_id=" + clientId;
-		    apiURL += "&redirect_uri=" + redirectURI;
-		    apiURL += "&state=" + state;
-		    session.setAttribute("state", state);
-		    
-		    model.addAttribute("url",apiURL);
+		 
 	}
 	
 	
@@ -76,13 +83,29 @@ public class MemberController {
 		java.util.Date today = new java.util.Date();
 		SimpleDateFormat cal = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String signdate = cal.format(today);
-
+		
+		SimpleDateFormat cal2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String signdate2 = cal2.format(today);
 		m.setSigndate(signdate);
 		
 		if(member_type.equals("s")) {
 			m.setLevel(5);
 			System.out.println("level="+m.getLevel());
 		}
+		
+		 String randomString = CouponNumberMaker.generateRandomString(14);
+         StringBuilder sb = new StringBuilder();
+         for(int i=0;i<signdate2.length();i++) {
+        	 sb.append(signdate2.charAt(i));
+        	 sb.append(randomString.charAt(i));
+         }
+        String cp_number = sb.toString();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cp_number", cp_number);
+		map.put("id", m.getId());
+		
+		//회원가입 3000원 쿠폰 지급
+		sqlsession.insert(namespace+".insertJoinCoupon",map);
 		
 		System.out.println(m);
 		if(m.getId().matches("[A-Zㄱ-ㅎ]+") || Character.isDigit(m.getId().charAt(0)) ||m.getId().getBytes().length < 4){
@@ -105,8 +128,7 @@ public class MemberController {
 	//메일인증 문자 발송
 	@RequestMapping(value="/mailSend", produces = "text/plain;charset=UTF-8",method = RequestMethod.POST )
 	public void mailSendGO(String num, String email,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		logger.info(num+"||"+email);
+		//logger.info(num+"||"+email);
 		String subject ="인증번호 확인하세요";
 		String content = "인증번호 :"+num;
 		
@@ -183,8 +205,49 @@ public String logout(HttpSession session) throws Exception{
 
 //마이페이지 이동
 @GetMapping("/myPage")
-public void myPageGet() throws Exception{
+public void myPageGet(HttpSession session,Model model) throws Exception{
+	String id =(String)session.getAttribute("m_id");
+	//쿠폰 수 조회
+	int countCoupon = sqlsession.selectOne(namespaceCoupon+".countCoupon",id);
 	
+	//주문 상태별 개수 1:입금확인중,2.배송준비중,3.배송중,4.배송완료,5.취소
+	int countOrder1 =sqlsession.selectOne(namespaceOrder+".countStatus1",id);
+	int countOrder2 =sqlsession.selectOne(namespaceOrder+".countStatus2",id);
+	int countOrder3 =sqlsession.selectOne(namespaceOrder+".countStatus3",id);
+	int countOrder4 =sqlsession.selectOne(namespaceOrder+".countStatus4",id);
+	int countOrder5 =sqlsession.selectOne(namespaceOrder+".countStatus5",id);
+	
+	//총 주문금액
+	Integer totalOrderPrice =sqlsession.selectOne(namespaceOrder+".totalOrderPrice",id);
+	if(totalOrderPrice ==null) {
+		totalOrderPrice=0;
+	}
+	//총 적립포인트
+	Integer totalOrderPoint =sqlsession.selectOne(namespaceOrder+".totalOrderPoint",id);
+	if(totalOrderPoint ==null) {
+		totalOrderPoint=0;
+	}
+	//보유 포인트
+	Integer memberPoint = sqlsession.selectOne(namespace+".havePoint",id);
+	if(memberPoint ==null) {
+		memberPoint=0;
+	}
+	//사용포인트
+	Integer usepoint =sqlsession.selectOne(namespaceOrder+".usedPoint",id);
+	if(usepoint ==null) {
+		usepoint=0;
+	}
+	
+	model.addAttribute("usepoint",usepoint);
+	model.addAttribute("memberPoint",memberPoint);
+	model.addAttribute("totalOrderPrice",totalOrderPrice);
+	model.addAttribute("totalOrderPoint",totalOrderPoint);
+	model.addAttribute("countOrder1",countOrder1);
+	model.addAttribute("countOrder2",countOrder2);
+	model.addAttribute("countOrder3",countOrder3);
+	model.addAttribute("countOrder4",countOrder4);
+	model.addAttribute("countOrder5",countOrder5);
+	model.addAttribute("countCoupon",countCoupon);
 	
 }
 
@@ -238,6 +301,13 @@ public void findIdGet() throws Exception{
 @PostMapping("/find_id")
 public String findIdPost(MemberVO m, Model model,RedirectAttributes rttr) throws Exception{
 	MemberVO member = new MemberVO();
+	
+	String name = m.getName().replace(",", "").trim();
+	String[] email_ch =m.getEmail().split(",");
+	String email = email_ch[0];
+	m.setEmail(email);
+	m.setName(name);
+	log.info(m.toString());
 	int idCount = 0;
 	if(m.getMember_type().equals("p")) {
 		if(m.getPhone().equals("--")) {
@@ -283,6 +353,14 @@ public void findPassGet() throws Exception{
 @PostMapping("/find_pass")
 public String findPassPost(MemberVO m,RedirectAttributes rttr, Model model) throws Exception{
 MemberVO member = new MemberVO();
+String id = m.getId().replace(",", "").trim();
+String name = m.getName().replace(",", "").trim();
+String[] email_ch =m.getEmail().split(",");
+String email = email_ch[0];
+m.setEmail(email);
+m.setName(name);
+m.setId(id);
+
 	logger.info(m.toString());
 	int passCount = 0;
 	
@@ -316,80 +394,53 @@ MemberVO member = new MemberVO();
 		return "/member/find_pass_result";
 	}
 }
-	@GetMapping("/callback")
-	public String navercallback(MemberVO m) throws Exception{
-		logger.info(m.toString());
-		return "index";
-	}
-//	@GetMapping("/callback")
-//	public void naverCallback(String code, String state,HttpSession session) throws Exception{
-//		 String clientId = "snwIq2rIuigoLPb9h3Lk";//애플리케이션 클라이언트 아이디값";
-//		    String clientSecret = "xXv3nlKR4G";//애플리케이션 클라이언트 시크릿값";
-//		     String redirectURI = URLEncoder.encode("http://localhost:8080/member/callback", "UTF-8");
-//		    String apiURL;
-//		    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-//		    apiURL += "client_id=" + clientId;
-//		    apiURL += "&client_secret=" + clientSecret;
-//		    apiURL += "&redirect_uri=" + redirectURI;
-//		    apiURL += "&code=" + code;
-//		    apiURL += "&state=" + state;
-//		    String access_token = "";
-//		    String refresh_token = "";
-//		    System.out.println("apiURL="+apiURL);
-//		    try {
-//		      URL url = new URL(apiURL);
-//		      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-//		      con.setRequestMethod("GET");
-//		      int responseCode = con.getResponseCode();
-//		      BufferedReader br;
-//		      System.out.print("responseCode="+responseCode);
-//		      if(responseCode==200) { // 정상 호출
-//		        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//		      } else {  // 에러 발생
-//		        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-//		      }
-//		      String inputLine;
-//		      StringBuffer res = new StringBuffer();
-//		      while ((inputLine = br.readLine()) != null) {
-//		        res.append(inputLine);
-//		      }
-//		      br.close();
-//		     
-//		      if(responseCode==200) {
-////		        out.println(res.toString());
-//		    	  logger.info(res.toString());
-//		    	  
-//		    	
-//		      }else {
-//		    	
-//		      }
-//		    	 
-//		    } catch (Exception e) {
-//		      System.out.println(e);
-//		    }
-//		    
-//		    // 사용자 정보를 가져올 API 엔드포인트 URL
-//		    String userInfoUrl = "https://openapi.naver.com/v1/nid/me";
-//		    
-//		    // 요청 헤더에 액세스 토큰을 포함
-//		    HttpHeaders headers = new HttpHeaders();
-//		    headers.set("Authorization", "Bearer " + access_token);
-//		    RequestEntity<Void> requestEntity = new RequestEntity<>(headers, HttpMethod.GET, new URI(userInfoUrl));
-//
-//		    // RestTemplate을 사용하여 API 요청
-//		    RestTemplate restTemplate = new RestTemplate();
-//		    ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
-//		    String userInfoJson = responseEntity.getBody();
-//
-//		    // JSON 데이터를 NaverUserInfoResponse 객체로 변환
-//		    ObjectMapper objectMapper = new ObjectMapper();
-//		    NaverUserInfoResponse userInfoResponse = objectMapper.readValue(userInfoJson, NaverUserInfoResponse.class);
-//
-//		    // 사용자 정보 추출
-//		    String nickname = userInfoResponse.getResponse().getNickname();
-//		    System.out.println(nickname);
-		    
-//		    return "redirect:/";
-//	}
 
+
+@GetMapping("/point_list")
+public void pointGet(HttpSession session,Model model) throws Exception{
+	String id =(String)session.getAttribute("m_id");
+	//사용포인트
+	Integer usepoint =sqlsession.selectOne(namespaceOrder+".usedPoint",id);
+	if(usepoint==null) {
+		usepoint=0;
+	}
+	
+	model.addAttribute("usepoint",usepoint);
+	model.addAttribute("point",sqlsession.selectOne(namespace+".point",id));
+	model.addAttribute("list",sqlsession.selectList(namespaceOrder+".usePointOrder",id));
+}
+
+@GetMapping("/callback")
+public void navercallback(MemberVO m) throws Exception{
+	logger.info(m.toString());
+	
+}
+
+@GetMapping("/naverLogin")
+public String naverLogin(String email,HttpSession session) throws Exception{
+	session.setAttribute("m_id", email);
+	
+	return "index";
+}
+
+@GetMapping("/kakaoLogin")
+public String kakaoLogin(String id,HttpSession session) throws Exception{
+	session.setAttribute("m_id", id);
+	return "index";
+}
+
+@PostMapping("/orderNon")
+public String orderNon(String orderName,String orderNum,RedirectAttributes rttr) throws Exception{
+	
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("od_number", orderNum);
+	map.put("name", orderName);
+	int count =sqlsession.selectOne(namespaceOrder+".findOrder",map);
+	if(count ==0) {
+		rttr.addFlashAttribute("msg","해당 정보와 동일한 주문내역은 존재하지 않습니다.");
+		return "redirect:login";
+	}else {
+		return "redirect:/order/orderResult?od_number="+orderNum;
+	}
+}
 }

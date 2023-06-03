@@ -1,0 +1,348 @@
+@charset "UTF-8";
+
+.benfitContainer{
+	width: 1800px;
+	height: 50px;
+	border:4px solid #E8E8E8;
+	display: inline-flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.benefitInfo{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.pointInfo{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.couponInfo{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.qtyChangeInfo{
+	margin-top: 15px;
+	width: 1780px;
+	background-color: #FFF8F5;
+	text-align: left;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+}
+.orderInfo{
+	width: 1780px;
+	height: 50px;
+	text-align: left;
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+	padding-bottom:10px;
+	border-bottom: 1px solid;
+}
+.itemTitleContainer{
+	width: 1800px;
+	height:50px;	
+	background-color: #FAFAFA;
+	border-top: 1px solid #E8E8E8;
+	border-bottom: 1px solid #E8E8E8;
+	display: inline-flex;
+	align-items: center;
+	
+}
+.itemContentContainer{
+	width: 1800px;
+	border-bottom: 1px solid #E8E8E8;
+	display: inline-flex;
+	align-items: center;
+}
+.imgStyle{
+	width: 200px;
+}
+.imgSize{
+	width: 150px;
+	height: 150px;
+}
+.itemInfo{
+	width: 600px;
+}
+.price{
+	width: 100px;
+}
+.qty{
+	width: 100px;
+}
+.point{
+	width: 100px;
+	
+}
+.delivery{
+	width: 200px;
+}
+.sumPrice{
+	width: 200px;
+}
+.sumCal{
+	width: 1800px;
+	text-align: right;
+	display: inline-flex;
+	justify-content: flex-end;
+	margin-top: 15px;
+}
+.sumStyle{
+	font-size: 18px;
+	font-weight: bold;
+}
+.addInfo{
+	width: 1800px;
+	display: inline-flex;
+	border-bottom: 1px solid #E8E8E8;
+}
+.addTitle{
+	width: 140px;
+	background-color: #FAFAFA;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.addrContent{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+.showAddr{
+	width: 100px;
+	height:40px; 
+	background-color: white;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-left: 15px;
+	cursor: pointer;
+}
+.nameInput{
+	width: 180px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+.addrContainer{
+	width: 500px;
+	display: inline-flex;
+	flex-wrap: wrap;
+	margin-left: 15px;
+}
+.addrInput{
+	width: 200px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	margin-right:10px;
+	margin-top:5px;
+	margin-bottom:5px;
+	border-radius: 5px;
+}
+.addrBtn{
+	width: 100px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-top:5px;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	
+}
+.phoneInput{
+	width: 120px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+.messageInput{
+	width: 300px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+.calpre{
+	width: 1800px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	text-align: left;
+}
+.preOrderContainer{
+	width: 1800px;
+	background-color: #FAFAFA;
+	height: 50px;
+	display: inline-flex;
+	border-bottom: 1px solid #E8E8E8;
+}
+.totalItemPrice{
+	width: 650px;
+	line-height: 50px;
+}
+.discount{
+	width: 500px;
+	line-height: 50px;
+}
+.totalOrderPrice{
+	width: 650px;
+	line-height: 50px;
+}
+.preOrderContainer2{
+	width: 1800px;
+	height: 50px;
+	display: inline-flex;
+	border-bottom: 1px solid #E8E8E8;
+}
+.totalItemPrice2{
+	width: 650px;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.discount2{
+	width: 500px;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.totalOrderPrice2{
+	width: 650px;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.discountContainer{
+	width: 1800px;
+	border-bottom: 1px solid #E8E8E8;
+	text-align: left;
+	display: inline-flex;
+}
+.discountSubject{
+	width: 145px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+.discountContent{
+	padding: 15px;
+}
+.pointInput{
+	width: 150px;
+	height: 40px;
+	border:1px solid #E8E8E8;
+	border-radius: 5px;
+}
+.pointShowBtn{
+	width: 100px;
+	height: 40px;
+	background-color: black;
+	color:white;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 10px;
+}
+.payOption{
+	display: inline-flex;
+	width: 1800px;
+	height:300px;
+	border:1px solid;
+}
+.payInfo{
+	width: 1450px;
+	border-right: 1px solid;
+	text-align: left;
+	padding: 15px;
+}
+.payRadio{
+	margin-bottom: 15px;
+}
+.bankPay{
+	
+}
+.backInfo{
+	display: flex;
+	
+}
+.bankInfoTitle{
+	width: 100px;
+	background-color: #FAFAFA;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+}
+.bankInfoContent{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 15px;
+}
+.bankName{
+	width: 145px;
+	height:40px;
+	border: 1px  solid #E8E8E8;
+	border-radius: 5px;
+	
+}
+.easyPay{
+	display:inline-flex;
+	text-align: left;
+	padding: 15px;
+	/* display: none; */
+}
+.payBtnContainer{
+	width:330px;
+	text-align: center;
+	/* border:1px solid; */
+	
+}
+.payBtnItem1{
+	width: 280px;
+	height: 40px;
+	text-align: right;
+	padding: 15px;
+}
+.finalPrice{
+	font-size: 25px;
+	font-weight: bold;
+	text-align: right;
+	width: 280px;
+	/* border:1px solid; */
+}
+.finalBtnDiv{
+	width: 290px;
+	display: flex;
+	justify-content: center;
+	padding:20px;
+}
+.finalPayBtn{
+	width: 250px;
+	height: 60px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.finalPointDiv{
+	margin-left:25px;
+	width:300px;
+	display: inline-flex;
+	justify-content: space-around;
+}
+#finalPoint{
+	text-align: right;
+}
+.kakaopayBtn{
+	background-color: white;
+	border: 0px;
+	cursor: pointer;
+}

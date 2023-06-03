@@ -15,7 +15,6 @@
 			<div onclick="img_ch('5')"><c:if test="${vo.file5 != null }"><img src="/upload/${vo.file5 }" class="detailImg"></c:if></div>
 		</div>
 	</div>
-	<form name="order">
 	<div class="itemInfo">
 		<div class="viewSubject">${vo.subject }</div>
 		<div class="viewComment">${vo.comment }</div>
@@ -30,7 +29,8 @@
 				<div class="viewInfoContainer">
 					<div class="viewPriceStyle">
 						<fmt:formatNumber value="${vo.price }" pattern="#,###"/>
-						<input type="hidden"  id="price" name="price"value="${vo.price }">	
+						<input type="hidden"  id="price" name="price" value="${vo.price }">
+						<input type="hidden" name="uid" value="${vo.uid }">	
 					</div>
 					<div class="orderInfo">국내배송</div>
 					<div class="orderInfo">택배</div>
@@ -51,16 +51,24 @@
 			</div>
 		</div>
 		</c:if>
+		<c:if test="${color_list ==null }">
+			<div class="orderSelect">
+				<div class="orderSelect2">컬러</div>
+				<div>${vo.color }</div>
+			</div>	
+		</c:if>
 		<div class="minQty">(최소주문수량 1개이상)</div>
-		<div class="introduceOption">위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</div>
+		<c:if test="${color_list != null }">
+			<div class="introduceOption">위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</div>
+		</c:if>
 		<c:set var = "number" value="${0 }"/>	
 		<c:forEach var="list" items="${list }">
-			<div class="selectContainer">
+			<div  class="selectContainer">
 				<div class="detailContainer">
 					<div class="detailSubject">
 						<div class="optionSelectSubject">${vo.subject }</div>
 						<div id ="optionColor" class="optionColor">
-							-${list.color}<input type="hidden" id="color" value="${list.color }">
+							-${list.color}<input type="hidden" id="color" name="color" value="${list.color }">
 						</div>
 					</div>
 					<div class="qtyContainer">
@@ -80,7 +88,8 @@
 		<c:set var="number" value="${number+1 }"/>
 		</c:forEach>
 		<div class="totalPrice">
-			<div class="totalPriceSubject">total Price</div>
+			<div class="totalPriceSubject">TOTAL PRICE</div>
+			<c:if test="${color_list !=null }">
 			<div class="wholePrice">
 				<span id="wholePriceSpan"></span>
 				<input name="wholePrice" id="wholePrice" class="wholePriceStyle" readonly>
@@ -88,18 +97,31 @@
 			<div class="totalQty">
 				(<input name="wholeQty" id="wholeQty" value="0" class="wholeQtyStyle" readonly>개)
 			</div>
+			</c:if>
+			<c:if test="${color_list ==null }">
+				<div>		
+					<span id="wholePrice2" class="wholePriceStyle">
+						<fmt:formatNumber value="${vo.price }" pattern="#,###"/>
+						<input  type="hidden" name="total_price" value="${vo.price }">
+					</span>
+					<span id="wholeQty2" class="wholwholeQtyStyleeQty">(1개)</span>
+				</div>
+			</c:if>
 		 </div>
-		 <div class="orderBtnContainer">
-		 		<div><button class="orderBtnBaro">바로 구매하기</button></div>
-		 		<div><input type="button" value="장바구니" class="orderBtnEtc" onclick="cart_go()"></div>
-		 		<div><input type="button" value="관심상품" class="orderBtnEtc" onclick="jjim_go()"></div>
-		 </div>
-		 <div class="payAPI">
-		 	<div class="naverPay">네이버페이</div>
-		 	<div class="kakaoPay">카카오페이</div>
-		 </div>
+		 <c:if test="${vo.qty !=0 }">
+			 <div class="orderBtnContainer">
+			 		<div><input type="button" value="바로 구매하기"  class="orderBtnBaro" onclick="order_go()"></div>
+			 		<div><input type="button" value="장바구니" class="orderBtnEtc" onclick="cart_go()"></div>
+			 		<div><input type="button" value="관심상품" class="orderBtnEtc" onclick="jjim_go()"></div>
+			 </div>
+		</c:if>
+		<c:if test="${vo.qty ==0 }">
+		 	<div class="orderBtnContainer">
+		 		<div class="soldOut">품절</div>
+		 	 </div>
+		</c:if>
 	</div>
-	</form>
+	
 	
 </div>
 <div style="height: 20px;"></div>
@@ -236,6 +258,8 @@
 </div>
 </center>
 <script>
+
+
 var msg = "${msg}";
 if(msg != ''){
 	alert(msg);
@@ -293,8 +317,8 @@ function itemSelect(color,uid){
 		//alert(colorCheck);
 		if(colorCheck == color){
 			alert("아래 리스트에서 이미 선택된 옵션을 삭제 후 다시 선택해 주세요");
-			break;
 		}
+	
 	}
 	
 	//alert(uid);
@@ -370,7 +394,7 @@ function qty_num(str,index,s_uid){
 			url: "/updateQty", //전송받을 페이지 경로
 			type: "post", //데이터 읽어오는 방식
 			dataType: "text", //데이터 방식
-			data: "qty="+num2+"&ct_uid="+ct_uid, //데이터 전달
+			data: "qty="+num2+"&s_uid="+s_uid, //데이터 전달
 			error:function(){ //실패일 경우
 				alert("실패");
 			},
@@ -406,12 +430,14 @@ function select_delete(s_uid){
 }
 
 function jjim_go(){
+	var pathname= $(location).attr('pathname');
+	//alert(pathname);
 	var m_id ="${m_id}";
 	//alert(m_id);
 	var uid = "${vo.uid}";
 	//alert(uid);
 	if(m_id != ""){
-		location.href="jjim_insert?uid="+uid;
+		location.href="jjim_insert?uid="+uid+"&pathname="+pathname;
 	}else{
 		var result =confirm(
 `회원만 이용가능합니다. 
@@ -434,13 +460,14 @@ function calWholePrice(){
 	var total_price = 0;
 	var qtys = "";
 	var stock = "";
-
+	
 	for(i=0;i<nums;i++){
 		var one_price = $("input[name=price]").val(); //1개 가격
 		var one_qty = $("input[name=qty]:eq("+i+")").val(); //수량
 		
 		
 		order_total += one_price * one_qty; //총 가격
+		
 		total_qty += Number(one_qty);
 		//$("input[name=total_price]:eq("+i+")").val(total_number);
 // 		uids += $("input[name=uid]:eq("+i+")").val()+",";
@@ -462,25 +489,67 @@ function cart_go(){
 	var colorList = "${color_list}";
 	var uid = "${vo.uid}";
 	var list = "${list}";
-	alert(colorList);
+	var num =${number};
+	var color ="${vo.color}";
+	//alert(colorList);
 	//alert(uid);
 	//alert(list);
+	//alert(num);
+	
+	var colorselect ="";
+	for(var i=0;i<num;i++){
+		 colorselect +=$("input[id=color]:eq("+i+")").val()+",";
+	
+	}
+	//alert(colorselect);
 	if(colorList ==''){
-		alert("c");
- 		location.href="/cart/insert?uid="+uid;
+		//alert("a");
+ 		location.href="/cart/insert?uid="+uid+"&color="+color+"&path=cart";
 	}else{
-		if(list == ''){
-			alert("b");
+		if(num ==0){
+			//alert("b");
 			alert("옵션을 선택해주세요");
 		}else{
-			alert("a");
-			location.href="/cart/list";
+			//alert("c");
+			location.href="/cart/insert2?uid="+uid+"&color="+colorselect+"&path=cart";
 		}
 	}
 
 }
 
-function isEmptyObject(obj) {
-	  return Object.keys(obj).length === 0;
+function order_go(){
+	var colorList = "${color_list}";
+	var uid = "${vo.uid}";
+	var list = "${list}";
+	var num =${number};
+	var color ="${vo.color}";
+	var qtys="";
+	var qty="${vo.qty}";
+	var colors = "";
+	//alert(colorList);
+	//alert(uid);
+	//alert(list);
+	//alert(num);
+	
+	var colorselect ="";
+	for(var i=0;i<num;i++){
+		colorselect +=$("input[id=color]:eq("+i+")").val()+",";
+					
 	}
+	
+	//alert(colorselect);
+	if(colorList ==''){
+		//alert("a");
+		location.href="/cart/insert?uid="+uid+"&color="+color+"&path=order";
+	}else{
+		if(num ==0){
+			//alert("b");
+			alert("옵션을 선택해주세요");
+		}else{
+			//alert("c");
+			location.href="/cart/insert2?uid="+uid+"&color="+colorselect+"&path=order";
+		}
+	}
+}
+
 </script>

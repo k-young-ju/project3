@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.zerock.mapper.CartMapper">
 
 <select id="cartAll" resultType="CartVO">
-	select * from cart where uid=#{uid} 
+	select * from cart where uid=#{uid}  and ct_status='준비' 
 	<include refid="idcheck"></include>
 </select>
 <sql id="idcheck">
@@ -18,23 +18,130 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
 </sql>
 
-<delete id="deleteCart">
-	delete from cart where ct_uid = #{ct_uid}
+<delete id="delete">
+	delete from cart where ct_uid = #{ct_uid} and ct_status='준비'
+	<include refid="idCheck2"></include>
 </delete>
+<select id="listCount" resultType="int">
+	select count(*) from cart where id=#{id}  and ct_status='준비' and ct_type='장바구니'
+</select>
 
 <select id="listCart" resultType="CartVO">
-	select * from cart where id=#{id}
+	select * from cart where id=#{id}  and ct_status='준비' and ct_type='장바구니'
 </select>
+
+<select id="listCountNon" resultType="int">
+	select count(*) from cart where o_id=#{o_id}  and ct_status='준비' and ct_type='장바구니'
+</select>
+
 <select id="listCartNon" resultType="CartVO">
-	select * from cart where o_id=#{o_id}
+	select * from cart where o_id=#{o_id}  and ct_status='준비' and ct_type='장바구니'
 </select>
 
 <select id="itemInfo" resultType="ItemVO">
 	select * from item where uid=#{uid}
 </select>
 
+<delete id="deleteBaro">
+	delete from cart where id=#{id} and ct_status='준비' and ct_type="바로구매"
+</delete>
+<select id="selectone" resultType="CartVO">
+	select * from selectoption where uid=#{uid}
+</select>
+
 <insert id="cartInsert">
-	insert into cart (o_id,id,s_id,uid,price,qty,point,signdate,file1,color,subject) values 
-	(#{o_id},#{id},#{s_id},#{uid},#{price},#{qty},#{point},#{signdate},#{file1},#{color},#{subject})
+	insert into cart (o_id,id,s_id,uid,price,qty,point,signdate,file1,color,subject,ct_type) values 
+	(#{o_id},#{id},#{s_id},#{uid},#{price},#{qty},#{point},#{signdate},#{file1},#{color},#{subject},#{ct_type})
 </insert>
+
+
+<update id="qtyUpdate">
+	update cart set qty=#{qty} where uid=#{uid} and id=#{id} and ct_status='준비'
+</update>
+
+<select id="cartCheck" resultType="int">
+	SELECT COUNT(*) FROM cart WHERE uid = #{uid} AND ct_status = '준비'
+	<if test="id !=null">
+		AND id = #{id}
+	</if>
+	<if test="id==null">
+		AND o_id = #{o_id}
+	</if>
+	<if test="ct_type == '바로구매'">
+		AND ct_type = '바로구매'
+	</if>
+	<if test="ct_type == '장바구니'">
+		AND ct_type = '장바구니'
+	</if>
+</select>
+
+
+<select id="checkColor" resultType="int">
+	select qty from selectoption where color=#{color}
+	<if test="id !=null">
+		AND id = #{id}
+	</if>
+	<if test="id==null">
+		AND o_id = #{o_id}
+	</if> 
+</select>
+
+<select id="cartCheck2" resultType="int">
+	select count(*) from cart where uid=#{uid} and color=#{color} and ct_status='준비'
+	<if test="id !=null">
+		AND id = #{id}
+	</if>
+	<if test="id==null">
+		AND o_id = #{o_id}
+	</if> 
+	<if test="c.ct_type == '바로구매'">
+		AND ct_type = '바로구매'
+	</if>
+	<if test="c.ct_type == '장바구니'">
+		AND ct_type = '장바구니'
+	</if>
+</select>
+
+<update id="qtyUpdate2">
+	update cart set qty=#{qty} where uid=#{uid} and id=#{id} and color=#{color} and ct_status='준비' 
+</update>
+
+<delete id="deleteSelect">
+	delete from selectoption where uid=#{uid} and color=#{color} and id=#{id} 
+</delete>
+
+<delete id="deleteAll">
+	delete from cart where ct_status='준비'
+	<include refid="idCheck2"></include>
+</delete>
+
+<select id="orderCartList" resultType="CartVO">
+	select * from cart where ct_uid=#{ct_uid}
+</select>
+
+<update id="updateOid">
+	update cart set o_id=#{o_id},ct_status='주문' where ct_uid=#{ct_uid}
+</update>
+
+<select id="itemUid" resultType="int">
+	select uid from cart where ct_uid=#{ct_uid}
+</select>
+
+<select id="cartResult" resultType="CartVO">
+	select * from cart where o_id=#{o_id}
+</select>
+
+<select id="cartPrimaryKey" resultType="int">
+	select max(ct_uid) from cart where(1)
+	<include refid="idCheck2"></include>
+</select>
+
+<sql id="idCheck2">
+	<if test="id !=null">
+		and id=#{id}
+	</if>
+	<if test="id==null">
+		and o_id=#{o_id}
+	</if>
+</sql>
 </mapper>

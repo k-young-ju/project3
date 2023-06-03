@@ -12,8 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into jjim (uid,id,signdate) values (#{uid},#{id},#{signdate})
 </insert>
 
-<select id="listAll">
-	select * from jjim 
+<select id="listAll" resultType="ItemVO">
+	select * from jjim join item on jjim.uid = item.uid where id=#{id}
+
 </select>
 
+<delete id="delete">
+	delete from jjim where j_uid=#{j_uid} and id=#{id}
+</delete>
+
+<delete id="deleteAll">
+	delete from jjim where id=#{id}
+</delete>
 </mapper>

@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<select id="listAll" resultType="ReviewVO">
-		select * from review  limit #{pageStart}, #{perPageNum}
+		select * from review order by r_uid desc limit #{pageStart}, #{perPageNum}
 	</select>
 
 	<select id="view" resultType="ReviewVO">

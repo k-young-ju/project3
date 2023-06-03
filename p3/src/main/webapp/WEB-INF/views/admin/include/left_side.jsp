@@ -6,25 +6,25 @@
 	<dl>
 		<dt>회원관리</dt>
 			<li onclick="location.href='/admin/member/join'" id="menu1">회원추가</li>
-			<li onclick="location.href='/admin/member/list'" id="menu2">회원목록</li>
-			<li onclick="" class="liInfo" id="menu3" id="menu3">회원별 포인트</li>
-	</dl>
+			<li onclick="location.href='/admin/member/list?option=all'" id="menu2">회원목록</li>
+		</dl>
 </div>
 <div class="menuList">
 	<dl>
 		<dt>상품관리</dt>
-			<li onclick="location.href='/admin/item/register'" id="menu4">상품등록</li>
-			<li onclick="location.href='/admin/item/list'" id="menu5">상품목록</li>
-			<li onclick="location.href='/admin/item/jjim_list'"  id="menu6" >관심상품목록</li>
+			<li onclick="location.href='/admin/item/register'" id="menu3">상품등록</li>
+			<li onclick="location.href='/admin/item/list'" id="menu4">상품목록</li>
+			<li onclick="location.href='/admin/item/jjim_list'"  id="menu5" >관심상품목록</li>
 	</dl>
 </div>
 <div class="menuList">
 	<dl>
 		<dt>주문관리</dt>
-			<li onclick=""  id="menu7">주문처리</li>
-			<li onclick=""  id="menu8">배송처리</li>
-			<li onclick=""  id="menu9">배송완료 처리</li>
-			<li onclick="" id="menu10">주문취소 처리</li>
+			<li onclick="location.href='/admin/order/list?path=order'"  id="menu6">입금확인 목록</li>
+			<li onclick="location.href='/admin/order/list?path=orderComplete'"  id="menu7">입금완료 목록</li>
+			<li onclick="location.href='/admin/order/list?path=delivery'"  id="menu8">배송 처리목록</li>
+			<li onclick="location.href='/admin/order/list?path=deliveryComplete'"  id="menu9">배송완료 목록</li>
+			<li onclick="location.href='/admin/order/list?path=cancel'" id="menu10">주문취소 목록</li>
 	</dl>
 </div>
 <div class="menuList">
@@ -51,16 +51,22 @@
 <div class="menuList">
 	<dl>
 		<dt>배송주소록관리</dt>
-			<li onclick="" id="menu16">고객별 주소록</li>
+			<li onclick="location.href='/admin/addr/list'" id="menu16">고객별 주소록</li>
 	</dl>
 </div>
 <div class="menuList">
 	<dl>
 		<dt>쿠폰 관리</dt>
-			<li onclick="" id="menu17">쿠폰목록</li>
+			<li onclick="location.href='/admin/coupon/list'" id="menu17">쿠폰목록</li>
 	</dl>
 </div>
 <script>
+
+var msg = "${msg}";
+
+if(msg != ''){
+	alert(msg);
+}
 
 $(function(){
 	$('li').click(function(){

@@ -10,5 +10,6 @@ public class SelectVO {
 	private int price;
 	private String color;
 	private String id;
+	private String o_id;
 	private int uid;
 }

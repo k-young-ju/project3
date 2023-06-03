@@ -3,10 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
-
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
  <link rel="stylesheet" type="text/css" href ="/css/index.css">
+ 
 <script src="https://unpkg.com/youtube-background@1.0.14/jquery.youtube-background.min.js"></script>
 
 <script>

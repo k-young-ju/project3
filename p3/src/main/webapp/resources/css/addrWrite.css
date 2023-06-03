@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+.menuContainer{
+	display: inline-flex;
+	width: 1800px;
+	border-top: 1px solid #E8E8E8;
+	border-bottom: 1px solid #E8E8E8;
+}	
+.itemTitle{
+	width: 122px;
+	background-color: #FAFAFA;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	
+}
+.subject{
+	width: 180px;
+	height: 40px;
+	margin: 15px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+}
+.addrContainer{
+	display: inline-flex;
+	flex-wrap: wrap;
+	width: 400px;
+	/* border: 1px solid; */
+	
+}
+.addrInput{
+	width: 150px;
+	height: 40px;
+	margin-right: 10px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-left: 15px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	margin-right: 8px;
+}
+.addrBtn{
+	width: 100px;
+	background-color: black;
+	color:white;
+	border-radius: 5px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	margin-left: 15px;
+	cursor: pointer;
+
+}
+.phone{
+	width: 100px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin: 15px;
+}
+.listBtnContainer{
+	
+}
+.listBtn{
+	width: 120px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-top: 10px;
+	background-color: white;
+	margin-left: 15px;
+}
+.registerBtn{
+	width: 120px;
+	height: 40px;
+	background-color: black;
+	color:white; 
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.deleteBtn{
+	width: 120px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+	border-radius: 5px;
+	margin-top: 10px;
+	background-color: white;
+	margin-left: 15px;
+}
+.btnConatainer{
+	width:1800px;
+	display: flex;
+	justify-content: space-between;
+}

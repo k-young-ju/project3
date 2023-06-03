@@ -60,8 +60,17 @@ function login_go(){
 	<div  class ="snsLogin">
 		<div style="margin-bottom: 10px;">SNS 계정 로그인</div>
 		<div>
-			<span id="naverIdLogin_loginButton" ><a href="${url}"><img src = "/img/naverLogo.png"  class="apiImg"></a></span>
-			<span onclick="kakaoLogin()"><img src = "/img/kakaoLogo.png" class="apiImg" onclick=""></span>
+			<span id="naver_id_login" ><a href="${url}"><img src = "/img/naverLogo.png"  class="apiImg"></a></span>
+			<script type="text/javascript">
+			  	var naver_id_login = new naver_id_login("snwIq2rIuigoLPb9h3Lk", "http://192.168.0.16:8080/member/callback");
+			  	var state = naver_id_login.getUniqState();
+			  	naver_id_login.setButton("green", 1,50);
+			   	naver_id_login.setDomain("http://192.168.0.16:8080");
+			  	naver_id_login.setState(state);
+			  	naver_id_login.setPopup();
+			  	naver_id_login.init_naver_id_login();
+		  </script>
+			<span onclick="javascript:kakaoLogin();"><img src = "/img/kakaoLogo.png" class="apiImg" onclick=""></span>
 		</div>
 	</div>
 	<div class="join">
@@ -72,7 +81,7 @@ function login_go(){
 	</div>
 	<div class="nonMemberLine">
 		<div style="height:40px">비회원의 경우, 주문시의 주문번호로 주문조회가 가능합니다.</div>
-		<form method="post">
+		<form method="post" action="orderNon">
 		<div class="nonMemberOrder">
 			<div class="container3">
 				<div class="container_item_name">주문자명</div><div class="container_item_input"><input name="orderName" class="nonOdOrder"></div>
@@ -86,64 +95,37 @@ function login_go(){
 	</div>
 	<div style="height:100px;"></div>
 </center>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+ <script>
 
-<script>
+Kakao.init('b1c205967d7b8b38d1e072e593b2b11a'); // 발급받은 키 중 javascript 키를 사용
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
-// var naverLogin = new naver.LoginWithNaverId(
-// 	{
-// 		clientId: "snwIq2rIuigoLPb9h3Lk", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-// 		callbackUrl: "http://localhost:8080", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-// 		isPopup: false,
-// 		callbackHandle: true
-// 	}
-// );	
-// naverLogin.init();
-
-// window.addEventListener('load', function () {
-// 	naverLogin.getLoginStatus(function (status) {
-// 		//alert(status);
-// 		if (status) {
-// 			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
-    		
-// 			console.log(naverLogin.user); // 체크된 항목 객체로 전달
-
-// 			console.log(naverLogin.user.id); // 네이버에서 제공하는 식별 아이디
-// 			console.log(naverLogin.user.nickname); // 닉네임
-// 			console.log(naverLogin.user.email); // 이메일  
-
-// 			location.href="callback?id="+naverLogin.user.id+"&email="+naverLogin.user.email;
-// 			if( email == undefined || email == null) {
-// 				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
-// 				naverLogin.reprompt();
-// 				return;
-// 			}
-// 		} else {
-// 			console.log("callback 처리에 실패하였습니다.");
-// 		}
-		
-// 	});
-// });
-
-
-// function openPopUp() {
-//     testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-// }
-// function closePopUp(){
-//     testPopUp.close();
-// }
-// function naverLogout() {
-// 	openPopUp();
-// 	setTimeout(function() {
-// 		closePopUp();
-// 	}, 1000);
-// }
+//카카오로그인
+function kakaoLogin() {
+	Kakao.Auth.login({
+		success: function (response) {
+			Kakao.API.request({
+				url: '/v2/user/me',
+				success: function (response) {
+					console.log(response); //회원정보
+					console.log("식별 아이디:"+response.id);
+					//console.log("닉네임:"+response.properties.nickname); 
+					console.log("이메일:"+response.kakao_account.email); 
+					// 세션에 값 저장
+					//sessionStorage.setItem("m_id", response.id);
+					location.href="kakaoLogin?id="+response.id;
+					
+				},
+				fail: function (error) {
+					console.log(error)
+				},
+			})
+		},
+		fail: function (error) {
+			console.log(error)
+		},
+	})
+}
 </script>
-<script>
-  		function naver_login() {
-			
-  			location.href="naverLogin.inc";
-		} 
-   
-   </script>
-
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.zerock.mapper.AdminItemMapper">
 	<insert id="register">
 		insert into item 
-		(subject,comment,file1,file2,file3,file4,file5,qty,s_id,price,itemtype,deliveryfee) 
+		(subject,comment,file1,file2,file3,file4,file5,qty,s_id,price,itemtype,deliveryfee,color) 
 		values 
-		(#{subject},#{comment},#{file1},#{file2},#{file3},#{file4},#{file5},#{qty},#{s_id},#{price},#{itemtype},#{deliveryfee})
+		(#{subject},#{comment},#{file1},#{file2},#{file3},#{file4},#{file5},#{qty},#{s_id},#{price},#{itemtype},#{deliveryfee},#{color})
 	</insert>
 	
 	<select id="listAll" resultType="ItemVO">

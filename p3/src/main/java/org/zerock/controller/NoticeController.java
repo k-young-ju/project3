@@ -36,7 +36,7 @@ public class NoticeController {
 	@Inject
 	SqlSession sqlsession;
 	
-	private static String namespace = "org.zerock.mapper.AdminNoticeMapper";
+	private static String namespace = "org.zerock.mapper.NoticeMapper";
 	
 	@GetMapping("/list")
 	public void listGet(String option,String faq_type,Criteria cri, Model model) throws Exception{
@@ -46,6 +46,7 @@ public class NoticeController {
 		map.put("gongji",option);
 		map.put("faq_type",faq_type);
 		
+		model.addAttribute("gongji",option);
 		model.addAttribute("faq_type",faq_type);
 		model.addAttribute("option",option);
 		model.addAttribute("list",service.listAll(map));
@@ -58,7 +59,7 @@ public class NoticeController {
 	}
 	@PostMapping("/write")
 	public String writePost(NoticeVO vo,HttpSession session,RedirectAttributes rttr) throws Exception{
-		
+		log.info(vo.toString());
 		String id= (String)session.getAttribute("m_id");
 		String name = (String)session.getAttribute("m_name");
 		
@@ -91,6 +92,9 @@ public class NoticeController {
 		map.put("gongji", gongji);
 		
 		NoticeVO vo= service.oneItemService(map);
+		
+		int fid = vo.getFid();
+		map.put("fid", fid);
 		NoticeVO front= service.frontWriteService(map);
 		NoticeVO next = service.nextWriteService(map);
 		//log.info("front"+front.toString());
@@ -101,6 +105,16 @@ public class NoticeController {
 		model.addAttribute("vo",vo);
 		model.addAttribute("front",front);
 		model.addAttribute("next",next);
+	}
+	@GetMapping("/my_notice")
+	public void myNotice(HttpSession session,Model model) throws Exception{
+		String id=(String)session.getAttribute("m_id");
+		String gongji = "qna";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("gongji", gongji);
+		map.put("id", id);
+		
+		model.addAttribute("list",sqlsession.selectList(namespace+".myListAll",map));
 	}
 	
 }

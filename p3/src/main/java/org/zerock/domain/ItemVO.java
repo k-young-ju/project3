@@ -18,7 +18,7 @@ public class ItemVO {
 	private String s_id;
 	private int qty;
 	private String useyn;
-	private int mileage;
+	private int point;
 	private String signdate;
 	private int sellqty;
 	private int ref;
@@ -26,7 +26,7 @@ public class ItemVO {
 	private int deliveryfee;
 	private String color;
 	private String id;
-	
+	private int j_uid;
 	
 	
 }

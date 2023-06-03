@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.addrTitleContainer{
+	display:inline-flex;
+	width:1400px; 
+	background-color: #FAFAFA;
+	align-items: center;
+	border-top: 1px solid #E8E8E8;
+	border-bottom: 1px solid #E8E8E8;
+	
+}
+.addrItemContainer{
+	display:inline-flex;
+	width:1400px; 
+	border-bottom: 1px solid #E8E8E8;
+	align-items: center;
+}
+.id{
+	width: 150px;
+	
+}
+.subject{
+	width: 100px;
+}
+.name{
+	width: 100px;
+}
+.phone{
+	width: 150px;
+}
+
+.addrTitle{
+width:800px; 
+}
+.addritem1{
+width: 100px; 
+}
+.addritem2{
+width: 175px; 
+}

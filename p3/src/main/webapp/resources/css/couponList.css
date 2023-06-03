@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+.menuContainer{
+	width: 1800px;
+	display:inline-flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.titleContainer{
+	display:inline-flex;
+	width: 1800px; 
+	background-color: #E8E8E8;
+	height: 40px;
+	align-items: center;
+}
+.itemContainer{
+	display:inline-flex;
+	width: 1800px; 
+	border-bottom: 1px solid #E8E8E8;
+	height: 40px;
+	align-items: center;
+}
+.number{
+	width: 100px;
+	font-size: 18px;
+}
+
+.cp_number{
+	width: 800px;
+	font-size: 18px;
+}
+
+.cp_point{
+	width: 100px;
+	font-size: 18px;
+}
+.date{
+	width: 800px;
+	font-size: 18px;
+}
+.intro{
+	margin-top:30px;
+	width:1800px;
+	padding-top:30px;
+	height: 50px;
+	text-align: left;
+	font-weight: bold;
+}
+.registerContainer{
+	width: 1800px;
+	height: 162px;
+	background-color: #E8E8E8;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.inputStyle{
+	width: 340px;
+	height: 50px;
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+.registerBtn{
+	width: 160px;
+	height: 50px;
+	background-color: black;
+	color:white; 
+	border-radius: 5px;
+}

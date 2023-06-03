@@ -103,7 +103,8 @@ function drop_down(num, fid) {
 
 function view_go(uid, id, secret,o_id) {
 	var m_id = "${m_id}";
-	var level = "${level}";
+	var level = ${level};
+	var gongji="${gongji}";
 	
 	if(secret == 'secret'){
 		//alert("a");
@@ -114,7 +115,7 @@ function view_go(uid, id, secret,o_id) {
 			return false;
 		}
 	}
-	location.href = "view?n_uid=" + uid;
+	location.href = "view?n_uid=" + uid+"&gongji="+gongji;
 }
 
 </script>

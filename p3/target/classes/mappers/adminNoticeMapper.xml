@@ -14,8 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="write">
-	insert into notice (subject,comment,id,m_name,file1,fid,gongji,signdate,faq_type) 
-	values (#{subject},#{comment},#{id},#{m_name},#{file1},#{fid},#{gongji},#{signdate},#{faq_type})
+	insert into notice (subject,comment,id,name,file1,fid,gongji,signdate,faq_type) 
+	values (#{subject},#{comment},#{id},#{name},#{file1},#{fid},#{gongji},#{signdate},#{faq_type})
 </insert>
 
 <select id="view" resultType="NoticeVO">
@@ -43,6 +43,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 <update id="updateStatus">
-	update notice set status='답변완료' where fid=#{fid}
+	update notice set status='답변완료',re_date=#{re_date} where fid=#{fid}
 </update>
 </mapper>

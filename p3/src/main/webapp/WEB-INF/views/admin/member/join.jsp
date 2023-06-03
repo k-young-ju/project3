@@ -80,7 +80,7 @@ function join_go(){
 		<div id="cname" style="display: none;">
 			<div class="joinContainerInfo">
 				<div class="memberType">법인명</div>
-				<div><input id="name" name="name" class="joinInput" ></div>
+				<div><input id="c_name" name="name" class="joinInput" ></div>
 			</div>
 		</div>
 		<div id="cnumber" style="display: none;">

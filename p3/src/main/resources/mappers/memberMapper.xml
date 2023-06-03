@@ -11,9 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <insert id="join">
 	insert into member 
-		(id,pass,m_name,email,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,phone,signdate,member_type,c_number) 
+		(id,pass,name,email,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,phone,signdate,member_type,c_number) 
 		values 
-		(#{id},#{pass},#{m_name},#{email},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{phone},#{signdate},#{member_type},#{c_number})
+		(#{id},#{pass},#{name},#{email},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{phone},#{signdate},#{member_type},#{c_number})
 </insert>
 
 <select id="loginCount" resultType="int">
@@ -29,60 +29,85 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <update id= "modify">
-	update member set pass=#{pass},m_name=#{m_name},email=#{email},zipcode=#{zipcode},zipcode1=#{zipcode1},zipcode2=#{zipcode2},zipcode3=#{zipcode3},zipcode4=#{zipcode4},phone=#{phone},c_number=#{c_number} 
+	update member set pass=#{pass},name=#{name},email=#{email},zipcode=#{zipcode},zipcode1=#{zipcode1},zipcode2=#{zipcode2},zipcode3=#{zipcode3},zipcode4=#{zipcode4},phone=#{phone},c_number=#{c_number} 
 	where id=#{id}
 </update>
 
 <update id="delete">
-	update member set pass='',m_name='',email='',level='1',zipcode='',zipcode1='',zipcode2='',zipcode3='',zipcode4='',phone='',signdate='',c_number=#{c_number}delete_id='y' 
+	update member set pass='',name='',email='',level='1',zipcode='',zipcode1='',zipcode2='',zipcode3='',zipcode4='',phone='',signdate='',c_number=#{c_number}delete_id='y' 
 	where id=#{id}
 </update>
 
 <select id="findIdEmailCount" resultType="int">
-	select count(*) from member where member_type=#{member_type} and m_name=#{m_name} and email=#{email}
+	select count(*) from member where member_type=#{member_type} and name=#{name} and email=#{email}
 </select>
 
 <select id="findIdEmail" resultType="MemberVO">
-	select * from member where member_type=#{member_type} and m_name=#{m_name} and email=#{email}
+	select * from member where member_type=#{member_type} and name=#{name} and email=#{email}
 </select>
 
 <select id="findIdPhoneCount" resultType="int">
-	select count(*) from member where member_type=#{member_type} and m_name=#{m_name} and phone=#{phone}
+	select count(*) from member where member_type=#{member_type} and name=#{name} and phone=#{phone}
 </select>
 
 <select id="findIdCnumberCount" resultType="int">
-	select count(*) from member where member_type=#{member_type} and m_name=#{m_name} and c_number=#{c_number}
+	select count(*) from member where member_type=#{member_type} and name=#{name} and c_number=#{c_number}
 </select>
 
 <select id="findIdPhone" resultType="MemberVO">
-	select * from member where member_type=#{member_type} and m_name=#{m_name} and phone=#{phone}
+	select * from member where member_type=#{member_type} and name=#{name} and phone=#{phone}
 </select>
 
 <select id="findIdCnumber" resultType="MemberVO">
-	select * from member where member_type=#{member_type} and m_name=#{m_name} and c_number=#{c_number}
+	select * from member where member_type=#{member_type} and name=#{name} and c_number=#{c_number}
 </select>
 
 <select id="findPassEmailCount" resultType="int">
-	select count(*) from member member_type=#{member_type} and where id=#{id} and m_name=#{m_name} and email=#{email}
+	select count(*) from member where member_type=#{member_type} and id=#{id} and name=#{name} and email=#{email}
 </select>
 
 <select id="findPassEmail" resultType="MemberVO">
-	select * from member where member_type=#{member_type} and id=#{id} and m_name=#{m_name} and email=#{email}
+	select * from member where member_type=#{member_type} and id=#{id} and name=#{name} and email=#{email}
 </select>
 
 <select id="findPassPhoneCount" resultType="int">
-	select count(*) from member where member_type=#{member_type} and id=#{id} and m_name=#{m_name} and phone=#{phone}
+	select count(*) from member where member_type=#{member_type} and id=#{id} and name=#{name} and phone=#{phone}
 </select>
 
 <select id="findPassPhone" resultType="MemberVO">
-	select * from member where member_type=#{member_type} and id=#{id} and m_name=#{m_name} and phone=#{phone}
+	select * from member where member_type=#{member_type} and id=#{id} and name=#{name} and phone=#{phone}
 </select>
 
 <select id="findPassCnumberCount" resultType="int">
-	select count(*) from member where member_type=#{member_type} and id=#{id} and m_name=#{m_name} and  c_number=#{c_number}
+	select count(*) from member where member_type=#{member_type} and id=#{id} and name=#{name} and  c_number=#{c_number}
 </select>
 
 <select id="findPassCnumber" resultType="int">
-	select * from member where member_type=#{member_type} and id=#{id} and m_name=#{m_name} and  c_number=#{c_number}
+	select * from member where member_type=#{member_type} and id=#{id} and name=#{name} and  c_number=#{c_number}
+</select>
+
+<insert id="insertJoinCoupon">
+	insert into coupon (cp_number,point,id) values (#{cp_number},3000,#{id})
+</insert>
+
+<insert id="autoInsert">
+	insert into coupon (cp_number,point) values (#{cp_number},#{point})
+</insert>
+
+
+<select id="point" resultType="int">
+	select point from member where id=#{id}
+</select>
+
+<update id="pointMinus">
+	update member set point = point -#{point} where id=#{id}
+</update>
+
+<update id="ordercancel">
+	update member set point = point +#{point} where id=#{id}
+</update>
+
+<select id="havePoint" resultType="int">
+	select point from member where id=#{id}
 </select>
 </mapper>

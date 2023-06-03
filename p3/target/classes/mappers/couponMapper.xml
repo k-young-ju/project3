@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.CouponMapper">
+
+<select id="countCoupon" resultType="int">
+	select count(*) from coupon where id=#{id} and useyn='n'
+</select>
+
+<select id="couponList" resultType="CouponVO">
+	select * from coupon where id=#{id} and useyn='n'
+</select>
+
+<select id="couponCheck" resultType="CouponVO">
+	select * from coupon where cp_number=#{cp_number}
+</select>
+<update id="registerCoupon">
+	update coupon set id=#{id} where cp_number=#{cp_number}
+</update>
+
+<update id="use">
+	update coupon set useyn='y',od_number=#{od_number} where cp_number=#{cp_number}
+</update>
+
+<select id="usecoupon" resultType="int">
+	select point from coupon where od_number=#{od_number}
+</select>
+
+<update id="cancel">
+	update coupon set useyn='n' where od_number=#{od_number}
+</update>
+</mapper>

@@ -16,4 +16,6 @@ public class CartVO {
 	String file1;
 	String color;
 	String subject;
+	String ct_status;
+	String ct_type;
 }

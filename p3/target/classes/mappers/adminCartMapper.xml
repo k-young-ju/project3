@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.AdminCartMapper">
+<select id="listAll" resultType="CartVO">
+	select * from cart where ct_status='준비' and ct_type='장바구니'  limit #{pageStart}, #{perPageNum}
+</select>
+
+<delete id="deleteCart">
+	delete from cart where ct_uid =#{ct_uid}
+</delete>
+
+<select id="cartResult" resultType="CartVO">
+	select * from cart where o_id=#{o_id}
+</select>
+</mapper>

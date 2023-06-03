@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.titleContainer{
+	display: inline-flex;
+	width: 1800px;
+	height: 50px;
+	background-color: #E8E8E8;
+	line-height: 50px;
+}
+.itemContainer{
+	display: inline-flex;
+	width: 1800px;
+	
+}
+.number{
+	width: 100px;
+}
+.gongji{
+	width: 200px;
+}
+.subject{
+	width: 900px;
+}
+.writer{
+	width: 200px;
+	
+}
+.date{
+	width: 300px;
+}
+.ref{
+	width: 100px;
+}

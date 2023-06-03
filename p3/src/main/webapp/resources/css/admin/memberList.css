@@ -1,26 +1,121 @@
 @charset "UTF-8";
 
 .listContainer{
-	width:1500px;
+	width:1400px;
 	border:1px solid #5055B1;
-	height:25px;
+	/* height:25px; */
 	display: inline-flex;
+	align-items: center;
 }
 
-.itemTitle{
+.memberType{
 	text-align: center;
-	width: 250px;
+	width: 100px;
 	background-color: black;
 	color:white; 
+}
+.memberType2{
+	text-align: center;
+	width: 100px;
 	
 }
-.itemContent{
+.id{
 	text-align: center;
-	width: 250px;
+	width: 100px;
+	background-color: black;
+	color:white; 
+}
+.id2{
+	text-align: center;
+	width: 100px;
+
+}
+.name{
+	text-align: center;
+	width: 100px;
+	background-color: black;
+	color:white; 
+}
+.name2{
+	text-align: center;
+	width: 100px;
+	
 }
 
+.level{
+	text-align: center;
+	width: 100px;
+	background-color: black;
+	color:white; 
+}
+.level2{
+	text-align: center;
+	width: 100px;
+
+}
+.point{
+	text-align: center;
+	width: 400px;
+	background-color: black;
+	color:white; 
+}
+.point2{
+	text-align: center;
+	width: 400px;
+
+}
+.pointBtn{
+	cursor: pointer;
+	width: 100px;
+	height: 25px;
+	background-color: white;
+	border: 1px solid;
+	margin: 5px;
+}
+.phone{
+	text-align: center;
+	width: 200px;
+	background-color: black;
+	color:white; 
+}
+.phone2{
+	text-align: center;
+	width: 200px;
+	
+}
+.email{
+	text-align: center;
+	width: 200px;
+	background-color: black;
+	color:white; 
+}
+.email2{
+	text-align: center;
+	width: 200px;
+	
+}
+.mode{
+	text-align: center;
+	width: 200px;
+	background-color: black;
+	color:white; 
+}
+.mode2{
+	text-align: center;
+	width: 200px;
+	
+}
+.modifyBtn{
+	width: 100px;
+	height: 25px;
+	margin: 5px;
+	background-color: black;
+	color: white;
+	cursor:pointer; 
+	
+}
 .selectContainer{
-	width:700px;
+	width:600px;
 	display: inline-flex;
 	
 }
@@ -48,7 +143,7 @@
 	text-align: center;
 }
 .memberCount{
-	width: 1500px;
+	width: 1400px;
 	text-align: left;
 	height: 30px;
 }

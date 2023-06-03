@@ -60,11 +60,11 @@ public class AdminNoticeController {
 		String menu ="";
 		
 		if(option.equals("faq")) {
-			menu="menu12";
-		}else if(option.equals("qna")) {
 			menu="menu13";
-		}else if(option.equals("gongji")) {
+		}else if(option.equals("qna")) {
 			menu="menu14";
+		}else if(option.equals("gongji")) {
+			menu="menu15";
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cri",cri);
@@ -182,7 +182,7 @@ public class AdminNoticeController {
 		
 		log.info(vo.toString());
 		sqlsession.insert(namespace+".reply",vo);
-		sqlsession.update(namespace+".updateStatus",vo.getFid());
+		sqlsession.update(namespace+".updateStatus",vo);
 		
 		
 		return "redirect:list?option=qna";

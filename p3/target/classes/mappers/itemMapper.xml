@@ -49,9 +49,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="sorted == 'highPrice'.toString()">
 			order by price desc
 		</if>
-		<!-- <if test="sorted == 'review'.toString()">
-			order by reviewcount desc
-		</if> -->
 	</if>
 	
 </sql>
@@ -111,7 +108,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 	
 <select id="countColor" resultType="int">
-	select count(*) from cart where uid=#{uid} and color=#{color} and id=#{id}
+	select count(*) from selectoption where uid=#{uid} and color=#{color} 
+	<if test="id !=null">
+		and id=#{id}
+	</if>
+	<if test="id==null">
+		and o_id=#{o_id}
+	</if>
+	
 </select>
 
 <insert id="insertCart">
@@ -120,16 +124,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>	
 
 <insert id="insertSelect">
-	insert into selectoption (id,uid,price,qty,color,subject) values 
-	(#{id},#{uid},#{price},#{qty},#{color},#{subject})
+	insert into selectoption (id,o_id,uid,price,qty,color,subject) values 
+	(#{id},#{o_id},#{uid},#{price},#{qty},#{color},#{subject})
 </insert>
 
 <select id="selectAll" resultType="SelectVO">
-	select * from selectoption where uid=#{uid} and id=#{id}
-	
+	select * from selectoption where uid=#{uid} 
+	<if test="id !=null">
+		and id=#{id}
+	</if>
+	<if test="id==null">
+		and o_id=#{o_id}
+	</if>
 </select>
 
 <delete id="deleteCart">
 	delete from selectoption where s_uid = #{s_uid}
 </delete>
+
+<update id="orderQtyChange">
+	update item set qty=qty-#{qty},sellqty=sellqty+#{qty} where uid=#{uid}
+</update>
 </mapper>

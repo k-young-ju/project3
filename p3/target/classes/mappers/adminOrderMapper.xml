@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.AdminOrderMapper">
+
+<select id="listAll" resultType="OrderVO">
+	select * from order1
+	<include refid="orderStatus"></include>
+	limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+<sql id="orderStatus">
+	<if test="path=='order'">
+		where od_status ='입금확인중'
+	</if>
+	<if test="path=='orderComplete'">
+		where od_status ='배송 준비중'
+	</if>
+	<if test="path=='delivery'">
+		where od_status ='배송중'
+	</if>
+	<if test="path=='deliveryComplete'">
+		where od_status ='배송완료'
+	</if>
+	<if test="path=='cancel'">
+		where od_status ='취소'
+	</if>
+</sql>
+
+<update id="statusUpdate">
+	update order1 set
+	<include refid="statusChange"></include>
+	where od_number=#{od_number}
+</update>
+<sql id="statusChange">
+	<if test="path=='order'">
+		od_status = '배송 준비중'
+	</if>
+	<if test="path=='orderComplete'">
+		od_status = '배송중'
+	</if>
+	<if test="path=='delivery'">
+		od_status = '배송완료'
+	</if>
+	<if test="path=='cancel'">
+		od_status = '취소'
+	</if>
+</sql>
+
+<select id="result" resultType="OrderVO">
+	select * from order1 where od_number=#{od_number}
+</select>
+
+<select id="usepoint" resultType="int">
+	select usepoint from order1 where od_number=#{od_number}
+</select>
+
+<select id="usepointList" resultType="OrderVO">
+	<![CDATA[
+	select * from order1 where usepoint >0 and id=#{id}
+		]]>
+</select>
+
+<select id="pointGet" resultType="int">
+	select point from order1 where od_number=#{od_number}
+</select>
+</mapper>

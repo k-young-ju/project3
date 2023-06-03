@@ -1,9 +1,6 @@
 package org.zerock.controller;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,7 +61,7 @@ public class ItemController {
 		model.addAttribute("map",map);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("list",sqlsession.selectList(namespace+".listAll",map));
-		//model.addAttribute("list",service.listAllService(map));
+
 		
 	}
 	@GetMapping("/view")
@@ -72,21 +69,16 @@ public class ItemController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		ItemVO vo = service.viewService(uid);
 		String id = (String)session.getAttribute("m_id");
+		String o_id = (String)session.getAttribute("cart");
 		if(id == null) {
-			String o_id = (String)session.getAttribute("cart");
-			map.put("id", o_id);
+			map.put("o_id", o_id);
 		}else {
 			map.put("id", id);
 		}
 		
 		map.put("uid", uid);
 		map.put("cri", cri);
-		
-	
-		//금액처럼 변환
-		DecimalFormat formatter = new DecimalFormat("###,###");
-		//String price1 = formatter.format(vo.getPrice());
-				
+						
 		//색상이 여러개 존재한다면
 		if(vo.getColor().contains(",")) {
 			String[] color_ch = vo.getColor().split(",");
@@ -118,19 +110,15 @@ public class ItemController {
 	@PostMapping("/color_select")
 	public void colorSelect(String color, int uid,HttpSession session,Model model,RedirectAttributes rttr) throws Exception{
 		log.info("=====color_select=====");
-		
-		Date today = new Date();
-		SimpleDateFormat cal = new SimpleDateFormat("yyyy-MM-dd- hh:mm:ss");
-		String signdate = cal.format(today);
-		
+				
 		SelectVO svo = new SelectVO();
 		String id = "";
-		String cart = (String)session.getAttribute("cart");
+		String o_id = (String)session.getAttribute("cart");
 		if(session.getAttribute("m_id") != null) {
 			id=(String)session.getAttribute("m_id");
 			svo.setId(id);
 		}else {
-			svo.setId(cart);
+			svo.setO_id(o_id);
 		}
 		ItemVO vo = service.viewService(uid);
 				
@@ -147,8 +135,10 @@ public class ItemController {
 		if(count ==0) {
 			service.insertSelectService(svo);
 		}
+			
 	
 	}
+	
 	@GetMapping("/itemSearch")
 	public void searchGet(SearchCriteria cri,Model model) throws Exception{
 		log.info("==================searchGet=====");	
@@ -166,4 +156,5 @@ public class ItemController {
 		}	
 		
 	}
+	
 }

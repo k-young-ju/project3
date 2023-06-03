@@ -7,6 +7,7 @@
 	background-color: #E8E8E8;
 	font-weight: bold;
 }
+
 .itemContainer{
 	display: inline-flex;
 	width: 1800px;
@@ -52,6 +53,7 @@
 	border-radius: 5px;
 	margin-top:15px;
 	margin-bottom: 5px;
+	
 }
 .jjimBtn{
 	width: 100px;
@@ -70,4 +72,130 @@
 	border:1px solid #E8E8E8;
 	border-radius: 5px;
 	margin-bottom: 15px;
+}
+.qtyContainer{
+	display: inline-flex;
+/* 	align-items:flex-start; */
+	justify-content:center;
+	width: 100px;
+}
+.qtyStyle{
+	width: 27px;
+}
+.qtyBtn{
+	height: 22px;
+}
+.btnSize{
+	margin-top:0px;
+	padding-top:0px;
+	height: 10px;
+	border: 1px solid;
+}
+.qtyBtnStyle{
+	width: 20px;
+	height: 10px;
+	cursor: pointer;
+	/* border: 1px solid; */
+	transform:translateY(-8px);
+}
+.cartCheck{
+	width: 1800px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.totalProductContainer{
+	display:inline-flex;
+	width: 1800px;
+	height: 60px;
+	background-color: #FAFAFA;
+	color: gray;
+	border-bottom: 1px solid #E8E8E8;
+	border-top: 1px solid #E8E8E8;
+	margin-top: 40px;
+}
+.totalProductValue{
+	display:inline-flex;
+	width: 1800px;
+	height: 70px;
+	border-bottom: 1px solid #E8E8E8;
+}
+.allproductPrice{
+	width: 300px;
+	line-height: 60px;
+}
+.alldelivery{
+	width: 300px;
+	line-height: 60px;
+}
+.wholePrice1{
+	width: 1200px;
+	line-height: 60px;
+}
+.allproductPrice2{
+	width: 300px;
+	line-height: 60px;
+	font-weight: bold;
+	font-size: 30px;
+	
+}
+.alldelivery2{
+	width: 300px;
+	line-height: 60px;
+	font-weight: bold;
+	font-size: 30px;
+}
+.wholePrice2{
+	width: 1200px;
+	line-height: 60px;
+
+}
+.wholePrice{
+	outline: none;
+	border:0px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+.bottomBtnContainer{
+	margin-top:40px;
+	width: 1800px;
+	display: inline-flex;
+}
+.cartAllDelete{
+	width: 120px;
+	height: 50px;
+	background-color: white;
+	border:1px solid #E8E8E8;
+	border-radius: 5px;
+	justify-content: flex-start;
+	margin-right: 650px;
+	cursor: pointer;
+	
+}
+.allOrderBtn{
+	width: 160px;
+	height: 50px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.selectOrderBtn{
+	width: 160px;
+	height: 50px;
+	background-color: white;
+	border:1px solid #E8E8E8;
+	border-radius: 5px;
+	cursor: pointer;
+	
+}
+.total_priceInput{
+	outline: none;
+	border: 0px;
+	text-align: center;
+	font-size: 17px;
+	
 }

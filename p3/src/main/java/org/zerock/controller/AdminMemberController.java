@@ -1,6 +1,8 @@
 package org.zerock.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +21,10 @@ import org.zerock.domain.Criteria;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.PageMaker;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 @RequestMapping("/admin/member")
 public class AdminMemberController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
@@ -30,6 +35,8 @@ public class AdminMemberController {
 	
 	private static String namespace = "org.zerock.mapper.AdminMemberMapper";
 	
+	private static String namespaceOrder = "org.zerock.mapper.AdminOrderMapper";
+	
 	@GetMapping("/join")
 	public void joinGet(Model model) throws Exception{
 	String menu = "menu1";
@@ -39,6 +46,10 @@ public class AdminMemberController {
 	
 	@PostMapping("/join")
 	public String joinPost(MemberVO m,String member_type, RedirectAttributes rttr) throws Exception{
+		String name =m.getName().replace(",","").trim();
+		log.info(m.toString());
+		m.setName(name);
+		
 		
 		java.util.Date today = new java.util.Date();
 		SimpleDateFormat cal = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -49,6 +60,8 @@ public class AdminMemberController {
 		if(member_type.equals("s")) {
 			m.setLevel(5);
 			System.out.println("level="+m.getLevel());
+		}else {
+			m.setLevel(1);
 		}
 		
 	
@@ -72,11 +85,11 @@ public class AdminMemberController {
 		
 		rttr.addFlashAttribute("msg","회원추가 되었습니다.");
 		
-		return "redirect:list";
+		return "redirect:list?option=all";
 	}
 	
 	@GetMapping("/list")
-	public void listGet(Model model, Criteria cri) throws Exception{
+	public void listGet(String option,Model model, Criteria cri) throws Exception{
 		String menu = "menu2";
 		cri.setPerPageNum(10);
 		
@@ -84,13 +97,22 @@ public class AdminMemberController {
 		
 		pageMaker.setCri(cri);
 //		pageMaker.setTotalCount(131);
+		if(option.equals("all")) {
+			pageMaker.setTotalCount(sqlsession.selectOne(namespace+".countMember",cri)); //총 회원수
+			model.addAttribute("list", sqlsession.selectList(namespace+".listAll",cri));
+		}else if(option.equals("remain")) {
+			pageMaker.setTotalCount(sqlsession.selectOne(namespace+".countMemberRemain",cri)); //총 회원수
+			model.addAttribute("list", sqlsession.selectList(namespace+".listRemain",cri));
+		}else if(option.equals("delete")) {
+			pageMaker.setTotalCount(sqlsession.selectOne(namespace+".countMemberDelete",cri)); //총 회원수
+			model.addAttribute("list", sqlsession.selectList(namespace+".listDelete",cri));
+		}
 		
-		pageMaker.setTotalCount(sqlsession.selectOne(namespace+".countMember",cri)); //총 회원수
-
+		model.addAttribute("option",option);	
 		model.addAttribute("menu",menu);
 		model.addAttribute("cri",cri);
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("list", sqlsession.selectList(namespace+".listAll",cri));
+		
 	}
 	
 	@GetMapping("/modify")
@@ -104,9 +126,15 @@ public class AdminMemberController {
 		String email1 = email_ch[0];
 		String email2 = email_ch[1];
 		
-		String[] c_number_ch =m.getC_number().split("-");
-		String c_number1 = c_number_ch[0];
-		String c_number2 = c_number_ch[1];
+		if(m.getC_number() !=null) {
+			String[] c_number_ch =m.getC_number().split("-");
+			String c_number1 = c_number_ch[0];
+			String c_number2 = c_number_ch[1];
+			
+			model.addAttribute("c_number1",c_number1);
+			model.addAttribute("c_number2",c_number2);
+		}
+		
 		String[] phone_ch = m.getPhone().split("-");
 		String phone1 = phone_ch[0];
 		String phone2 = phone_ch[1];
@@ -119,9 +147,7 @@ public class AdminMemberController {
 		model.addAttribute("phone1",phone1);
 		model.addAttribute("phone2",phone2);
 		model.addAttribute("phone3",phone3);
-		model.addAttribute("c_number1",c_number1);
-		model.addAttribute("c_number2",c_number2);
-		
+			
 	}
 	
 	@PostMapping("/modify")
@@ -139,7 +165,24 @@ public class AdminMemberController {
 	public String deleteMember(String id) throws Exception{
 		sqlsession.update(namespace+".delete",id);
 		
-		return "redirect:list";
+		return "redirect:list?option=all";
+	}
+	@GetMapping("level_ch")
+	public String levelChange(int level,String id) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id",id);
+		map.put("level", level);
+		sqlsession.update(namespace+".levelChange",map);
+		return "redirect:list?option=all";
+	}
+	
+	@GetMapping("/viewPoint")
+	public void viewPoint(String id,Model model) throws Exception{
+		String menu = "menu2";
+		
+		model.addAttribute("menu",menu);
+		model.addAttribute("list",sqlsession.selectList(namespaceOrder+".usepointList",id));
+		model.addAttribute("vo",sqlsession.selectOne(namespace+".onemember",id));
 	}
 	
 }

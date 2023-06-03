@@ -5,6 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="org.zerock.mapper.NoticeMapper">
 
+<select id="fidCheck" resultType="int">
+	select max(fid) as fid_max from notice
+</select>
+
 <insert id="insertNotice">
 	insert into notice (subject,uid,id,name,comment,gongji,fid,thread,file1,signdate,secretset,o_id) 
 	values 
@@ -53,5 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update notice set ref= ref+1 where n_uid=#{n_uid}
 </update>
 
+<select id="myListAll" resultType="NoticeVO">
+	select * from notice where gongji=#{gongji} and id=#{id} 
+</select>
 
 </mapper>
