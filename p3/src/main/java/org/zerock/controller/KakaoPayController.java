@@ -46,16 +46,9 @@ public class KakaoPayController {
     public String kakaoPayGet(@RequestParam("data") String data,HttpSession session) {
     	 log.info("kakaoPay get............................................");
     	log.info("sss"+data);
-    	
-    	JSONObject json = new JSONObject(data);
-
-    	String price =json.getString("total_price");
- 		int qty = json.getInt("total_qty");
- 	   	String subject = json.getString("subject");
-    	
+    	    	    	
     	session.setAttribute("jsonData",data);
- 		
- 		
+ 	 		
     	 return "redirect:kakaoPaySuccess";
     }
     
