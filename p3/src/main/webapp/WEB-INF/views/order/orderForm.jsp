@@ -488,20 +488,7 @@ function order_go(){
  				var url = "/kakaoPay?data=" + data;
  				location.href = url;
 
-				$.ajax({
-					url: "/kakaoPay", //페이지 경로
-					type: "get", //전송 방식
-					dataType: "text", //데이터 방식
-					data: "data="+data, //데이터 전달
-					error:function(){ //실패일 경우
-						alert("실패");
-					},
-					success:function(text){ //성공일 경우
-						location.href="/kakaoPaySuccess"
-						console.log("성공");
-					}
-				});
-								
+												
 				// success.submit();
 				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 				// 자세한 설명은 구글링으로 보시는게 좋습니다.
