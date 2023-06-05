@@ -1,7 +1,9 @@
 package org.zerock.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -39,6 +41,8 @@ public class HomeController {
 	
 	private static String namespace = "org.zerock.mapper.MemberMapper";
 	
+	private static String namespaceCoupon = "org.zerock.mapper.CouponMapper";
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home( Model model) throws Exception{
 		logger.info("Welcome home! ");
@@ -50,6 +54,22 @@ public class HomeController {
 		java.util.Date today = new java.util.Date();
 		SimpleDateFormat cal = new SimpleDateFormat("yyyyMMddHHmmss");
 		String signdate = cal.format(today);
+		
+		java.util.Date today2 = new java.util.Date();
+		SimpleDateFormat cal2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String signdate2 = cal2.format(today2);
+		
+		//모든 쿠폰 등록일 기준 7일 후 	
+		List<String> date_list = sqlsession.selectList(namespaceCoupon+".sevendayList");
+		
+		//log.info(date_list);
+		
+		for(String date : date_list) {
+			Date signDate = cal2.parse(date);
+			log.info("parse:"+signDate);
+			sqlsession.delete(namespaceCoupon+".deleteAfter7days",signDate);
+			
+		}
 		
 		 // 임의의 문자열을 생성하는 메서드
         String randomString = CouponNumberMaker.generateRandomString(14);
@@ -65,6 +85,7 @@ public class HomeController {
         map.put("cp_number", cp_number);
         int point =3000;
         map.put("point", point);
+        map.put("signdate", signdate2);
         sqlsession.insert(namespace+".autoInsert",map); //3000원 쿠폰 자동생성
          
 		return "index";
