@@ -46,6 +46,7 @@ public class NoticeController {
 		map.put("gongji",option);
 		map.put("faq_type",faq_type);
 		
+		model.addAttribute("LF", "\n");
 		model.addAttribute("gongji",option);
 		model.addAttribute("faq_type",faq_type);
 		model.addAttribute("option",option);
