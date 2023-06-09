@@ -23,7 +23,7 @@
 			<div class="faqContainer"  onclick="drop_down(${n},${list.fid })">
 				<div><b>${list.subject }</b></div>
 			</div>
-			<div id="drop" name="drop"  class="drop" >${list.comment }</div>
+			<div id="drop" name="drop"  class="drop" >${fn:replace(list.comment, LF, '<br>')}</div>
 		<c:set var="n" value="${n+1 }"/>
 		</c:forEach>
 	</div>
