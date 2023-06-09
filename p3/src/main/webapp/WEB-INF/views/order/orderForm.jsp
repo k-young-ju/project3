@@ -149,7 +149,7 @@
 <div class="discountContainer">
 	<div class="discountSubject" >쿠폰</div>
 	<div class="discountContent">
-		<input name="coupon" id="coupon" class="pointInput"  onchange="couponCal(this.value)"  readonly>
+		<input name="coupon" id="coupon" class="pointInput"  onchange="couponCal()"  readonly>
 		<input type="button" value="조회" class="pointShowBtn" onclick="couponPopUp()">
 		<input type="hidden" id="cp_number" name="cp_number">
 	</div>
@@ -171,8 +171,8 @@
 		</div>
 		<div class="easyPay" id="easyPay">
 		 	<div class="kakaoPay" >
-		 	 		<button type="button" id="check_module" type="button"  class="kakaopayBtn">
-		 	 			<img src="/img/kakaoPayLogo.png"">
+		 	 		<button type="button" id="check_module"  class="kakaopayBtn">
+		 	 			<img src="/img/kakaoPayLogo.png">
 		 	 		</button>
 		 	</div>
 		</div>	
@@ -203,23 +203,18 @@ function calSum(){
 		var one_qty = $("input[id=qty]:eq("+i+")").val();
 		var itemPrice = one_price*one_qty;
 		total_price += itemPrice;
-		
 	}
 	var total_price2 = total_price+3000;
 	
-	var regexp = /^[0-9]*$/;
-	total_priceStr = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	total_priceStr2 = total_price2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	
 	$("div[id=total_price]").text(total_price);
 	if(total_price >=30000){
-		$("div[id=sum]").text(total_priceStr);
-		$("div[id=totalItemPrice]").text(total_priceStr);
+		$("div[id=sum]").text(total_price.toLocaleString("ko-KR"));
+		$("div[id=totalItemPrice]").text(total_price.toLocaleString("ko-KR"));
 		$("input[name=totalItemPrice]").val(total_price);
 		$("div[id=delivery]").text(0)
 	}else{
-		$("div[id=sum]").text(total_priceStr2);
-		$("div[id=totalItemPrice]").text(total_priceStr2);
+		$("div[id=sum]").text(total_price2.toLocaleString("ko-KR"));
+		$("div[id=totalItemPrice]").text(total_price2.toLocaleString("ko-KR"));
 		$("input[name=totalItemPrice]").val(total_price2);
 		$("div[id=delivery]").text("3,000")
 	}
@@ -250,6 +245,7 @@ function addrOption(str){
 	}
 }
 addrOption('exist');
+
 function pay_option(str){
 	if(str=='b'){
 		$("#bankPay").show();
@@ -279,23 +275,27 @@ function couponPopUp(){
 	}
 }
 function pointCal(value2){
-	var point = ${point};
-	//alert("가용포인트="+point+",&사용포인트="+value2);
-	if(value2 >point){
-		alert("가용포인트보다 많은 포인트를 입력할 수 없습니다.");
-		$("#point").val("");
+	if(m_id !=''){
+		var point = "${point}";
+		if(point !=''){
+			point = Number(point);
+		}
+		//alert("가용포인트="+point+",&사용포인트="+value2);
+		if(value2 >point){
+			alert("가용포인트보다 많은 포인트를 입력할 수 없습니다.");
+			$("#point").val("");
 		
-	}else{
-		var totalDiscount = Number($("#point").val()) + Number($("#coupon").val());
-		$("#totalDiscount").text(totalDiscount.toLocaleString());
-		$("input[name=discount]").val(Number($("#point").val()) + Number($("#coupon").val()));
-		$("#discount").text("-"+totalDiscount.toLocaleString()); 
-		calOrder();
+		}else{
+			var totalDiscount = Number(value2) + Number($("#coupon").val());
+			$("#totalDiscount").text(totalDiscount.toLocaleString());
+			$("input[name=discount]").val(Number(value2) + Number($("#coupon").val()));
+			$("#discount").text("-"+totalDiscount.toLocaleString()); 
+			calOrder();
+		}
 	}
+ }
 
-}
-
-function couponCal(value){
+function couponCal(){
 	var totalDiscount = Number($("#point").val()) + Number($("#coupon").val());
 	$("#totalDiscount").text(totalDiscount.toLocaleString());
 	$("input[name=discount]").val(Number($("#point").val()) + Number($("#coupon").val()));
@@ -313,6 +313,11 @@ function calOrder(){
 	$("input[name=total_price]").val(totalOrderPrice);
 	
 	$("#finalPrice").text(totalOrderPrice.toLocaleString());	
+	var total_qty =0;
+	for(var i=0;i<num;i++){
+	     total_qty += Number($("input[name=qty]:eq("+i+")").val());
+	}
+	$("#total_qty").val(total_qty);
 	
 }
 calOrder();
@@ -322,22 +327,20 @@ function order_go(){
 	//alert(num);
 	var ct_uids ="";
 	var qtys ="";
-	var total_qty =0;
-	
+		
 	for(var i=0;i<num;i++){
 	    ct_uids += $("input[name=ct_uid]:eq("+i+")").val() + ",";
 	    qtys += $("input[name=qty]:eq("+i+")").val() + ",";
-	    total_qty = Number($("input[name=qty]:eq("+i+")").val());
+	  
 	}
 	$("#ct_uids").val(ct_uids);
 	$("#qtys").val(qtys);
-	$("#total_qty").val(total_qty);
+	
 	phone.value = phone1.value+"-"+phone2.value+"-"+phone3.value;
 	email.value = email1.value+"@"+email2.value;
 	
 	document.order.submit();
 }
-
 
 </script>
 
@@ -411,7 +414,7 @@ function order_go(){
  //alert(subjectName);
 	$("#check_module").click(function () {
 		var IMP = window.IMP; // 생략가능
-		IMP.init('impxxxxxxxxxx'); 
+		IMP.init('impxxxxxx'); 
 		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
 		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
 		
@@ -450,20 +453,17 @@ function order_go(){
 				
 				var num = ${number};
 				
-				var totalQty=1
+				var totalQty=0;
 				for(var i=0;i<num;i++){
 					totalQty +=Number($("input[id=qty]:eq("+i+")").val());
 				}
-												
 				var ctUids ="";
-				
 				for(var i=0;i<num;i++){
 				    ctUids += $("input[name=ct_uid]:eq("+i+")").val() + ",";
 				}
 				var emailsum = $("#email1").val()+"@"+$("#email2").val();
 				var phonesum = phone1.value+"-"+phone2.value+"-"+phone3.value;
-				
-				
+							
 				// 폼 데이터를 JSON 형식으로 변환
 				var formData = {
 				  subject: subjectName,
@@ -488,7 +488,6 @@ function order_go(){
  				var url = "/kakaoPay?data=" + data;
  				location.href = url;
 
-												
 				// success.submit();
 				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 				// 자세한 설명은 구글링으로 보시는게 좋습니다.
