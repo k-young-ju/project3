@@ -83,7 +83,7 @@
 <div style="height:10px;"></div>
 <div class="BtnStyle">
 	<button class="modifyOkBtn">회원정보수정</button>
-	<input type="button" value="취소" class="modifyCancelBtn" onclick = "location.href='/'">
+	<input type="button" value="취소" class="modifyCancelBtn" onclick="javascript:history.back()">
 	<input type="button" value="회원탈퇴" class="deleteMember" onclick="delete_go()">
 </div>
 </form>
