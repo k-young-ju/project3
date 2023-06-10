@@ -9,19 +9,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into order1 (od_number,id,o_id,od_status,od_date,point,total_price,total_qty,zipcode,zipcode1,zipcode2,zipcode3,zipcode4,name,phone,email,usepoint,message) values 
 	(#{od_number},#{id},#{o_id},'입금확인중',#{od_date},#{point},#{total_price},#{total_qty},#{zipcode},#{zipcode1},#{zipcode2},#{zipcode3},#{zipcode4},#{name},#{phone},#{email},#{usepoint},#{message});
 </insert>
+
 <select id="usePointOrder" resultType="OrderVO">
 	<![CDATA[
-	select *,(select subject from cart where cart.o_id=order1.od_number) as subject from order1 where usepoint >0 and id=#{id}
+	select * from order1 where usepoint >0 and id=#{id}
 		]]>
+</select>
+<select id="usepoint" resultType="int">
+	select usepoint from order1 where od_number=#{od_number}
 </select>
 
 <select id="countList" resultType="int">
 	select count(*) from order1 where id=#{id}
-
-</select>
-
-<select id="usepoint" resultType="int">
-	select usepoint from order1 where od_number=#{od_number}
 </select>
 
 <select id="listAll" resultType="OrderVO">
@@ -40,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
 	<if test="od_date2 != null">
 		<![CDATA[
-		and od_date <= #{od_date2}
+		 and od_date <= DATE_ADD(#{od_date2}, INTERVAL 1 DAY)
 			]]>	
 	</if>
 </sql>
