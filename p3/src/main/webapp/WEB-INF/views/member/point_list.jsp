@@ -10,27 +10,25 @@
 	<div style="height: 50px;"></div>
 	<div class="pointContainer">
 		<div class="pointSubject">
-			<div class="pointDetail">보유 적립금</div>
-			<div class="pointDetail">사용 적립금</div>
+			<div class="pointDetail">총 보유 적립금</div>
+			<div class="pointDetail">총 사용 적립금</div>
 		</div>
 		<div class="pointContent">
 			<div class="pointDetail">${point }</div>
-			<div class="pointDetail">0</div>
+			<div class="pointDetail">${usepoint }</div>
 		</div>
 	</div>
 	<div class="info">사용내역</div>
 	<div class="listContainerTitle">
 		<div class="date">주문날짜</div>
 		<div class="orderNumber">주문번호</div>
-		<div class="subject">상품명</div>
-		<div class="usepoint">사용포인트</div>
+		<div class="usepoint">사용적립금</div>
 	</div>
 	<c:set var="number" value="${0 }"/>
 	<c:forEach var="list" items="${list }">
 		<div class="listContainerContent">
 			<div class="date">${list.od_date }</div>
-			<div class="orderNumber">${list.od_number }</div>
-			<div class="subject">${list.subject }</div>
+			<div class="orderNumber"><a href="/order/orderResult?od_number=${list.od_number }">${list.od_number }</a></div>
 			<div class="usepoint">${list.usepoint }</div>
 		</div>
 		<c:set var="number" value="${number+1 }"/>
